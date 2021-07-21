@@ -13,10 +13,10 @@ const Content = styled.div<{ showQR?: boolean }>`
   width: 200px;
 `;
 
-const QRCard = ({ address, showQR, size }: { address: string, showQR: boolean, size: number }) => {
+const QRCard = ({ value, showQR, size }: { value: string, showQR: boolean, size?: number }) => {
     return (
         <Content showQR={showQR}>
-            <QRCode size={size} value={address} />
+            <QRCode size={size} value={value} />
         </Content>
     );
 };

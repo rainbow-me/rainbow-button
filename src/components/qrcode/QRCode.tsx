@@ -32,9 +32,9 @@ type Props = {
 
 const QRCode = ({
     ecl = 'M',
-    logoMargin = -5,
-    logoSize = 125,
-    size = 375,
+    logoMargin = 10,
+    logoSize = 50,
+    size = 200,
     value = 'QR Code',
 }: Props) => {
     const href = '/rainbow-og.png';
@@ -109,7 +109,7 @@ const QRCode = ({
         return dots;
     }, [ecl, logoSize, size, value]);
 
-    const logoPosition = size / 2 - logoSize / 2 - logoMargin - 5;
+    const logoPosition = size / 2 - logoSize / 2;
     const logoWrapperSize = logoSize + logoMargin * 2;
 
     return (
@@ -119,7 +119,7 @@ const QRCode = ({
                     height: 0,
                     position: 'relative',
                     top: logoPosition,
-                    left: logoPosition,
+                    left: 0,
                 }}
             >
                 <img height={logoSize} src={href} width={logoSize} />

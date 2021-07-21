@@ -6,7 +6,7 @@ import '../App.css';
 import { constructDeeplink } from '../helpers/deeplink';
 import { PairingTypes } from '@walletconnect/typesv2';
 
-import rainbowOg from '../images/rainbow-og.png'
+import QRCard from './qrcode/QRCard';
 
 function ConectButtonV2({
     chainId,
@@ -15,11 +15,16 @@ function ConectButtonV2({
     onClientInitialized,
     relayProvider,
 }: { chainId: string, relayProvider: string, metadata: object, methods: string[], onClientInitialized: (client: WalletConnectClient) => void }) {
-    const [uri, setUri] = useState<string>();
+    const [uri, setUri] = useState<string>('');
+    const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
     const connectToRainbow = useCallback(() => {
         if (!uri) return
-        window.location.href = uri!
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent)) {
+            window.location.href = uri!
+        } else {
+            setShowQRCode(true)
+        }
     }, [uri])
 
     useEffect(() => {
@@ -53,6 +58,7 @@ function ConectButtonV2({
     }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
     return (
         <div className="App" >
+            {showQRCode && <QRCard value={uri} showQR />}
             <a
                 className="button"
                 onClick={connectToRainbow}

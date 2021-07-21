@@ -2,7 +2,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useCallback, useEffect, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnect/clientv2";
-import './App.css';
+import '../App.css';
+import { constructDeeplink } from '../helpers/deeplink';
 
 
 const SUPPORTED_MAIN_CHAINS_NAMES = {
@@ -13,43 +14,25 @@ const SUPPORTED_MAIN_CHAINS_NAMES = {
 };
 
 function ConectButtonV2({
-    chainId = 'eip155:1'
+    chainId,
+    relayProvider,
+    metadata
 }) {
-
     const [uri, setUri] = useState(null);
     const [client, setClient] = useState(null)
-    const [session, setSession] = useState(null)
 
-    const goToApp = useCallback(() => {
-        const baseUrl = 'https://rnbwapp.com';
-        console.log('window.location', window.location)
-        window.location.href = uri;
-    }, [uri])
+    const goToApp = useCallback(() => window.location.href = uri, [uri])
 
-    const connectToRainbow = useCallback(async () => {
-        goToApp()
-
-        console.log('session', session)
-    }, [goToApp, session]);
-
-    useEffect(() => {
-        if (uri) {
-            console.log('useEffect', uri)
-            // goToApp()
-        }
-    }, [goToApp, uri])
+    const connectToRainbow = useCallback(async () => goToApp(), [goToApp]);
 
     useEffect(() => {
         if (!client) return
-        console.log('client set')
         client.on(
             CLIENT_EVENTS.pairing.proposal,
             async (proposal) => {
                 const { uri } = proposal.signal.params;
-                const baseUrl = 'https://rnbwapp.com';
-                const encodedUri = encodeURIComponent(uri);
-                const fullUrl = `${baseUrl}/wc?uri=${encodedUri}`;
-                setUri(fullUrl)
+                const deeplink = constructDeeplink(uri)
+                setUri(deeplink)
             },
         );
 
@@ -67,16 +50,11 @@ function ConectButtonV2({
     useEffect(() => {
         const walletConnectInit = async () => {
             const client = await WalletConnectClient.init({
-                relayProvider: "wss://relay.walletconnect.org",
-                metadata: {
-                    name: "🌈 Rainbow Button",
-                    description: "Rainbow Button",
-                    url: 'https://rainbow.me',
-                    icons: ['https://avatars2.githubusercontent.com/u/48327834?s=200&v=4'],
-                },
+                relayProvider,
+                metadata
             });
             setClient(client);
-            const session = await client.connect({
+            await client.connect({
                 permissions: {
                     blockchain: {
                         chains: [chainId],
@@ -86,10 +64,9 @@ function ConectButtonV2({
                     },
                 },
             });
-            setSession(session)
         }
         walletConnectInit()
-    }, [chainId]);
+    }, [chainId, metadata, relayProvider]);
 
     return (
         <div className="App">

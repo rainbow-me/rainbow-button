@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { Fragment, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnect/clientv2";
-import { PairingTypes, SessionTypes } from "@walletconnect/typesv2";
 import './App.css';
 
 
@@ -51,7 +50,6 @@ function ConectButtonV2({
                 const encodedUri = encodeURIComponent(uri);
                 const fullUrl = `${baseUrl}/wc?uri=${encodedUri}`;
                 setUri(fullUrl)
-                // goToApp()
             },
         );
 

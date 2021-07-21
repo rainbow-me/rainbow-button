@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
-import ConnectV1 from './ConnectV1'
 import ConnectV2 from './ConnectV2'
 import './App.css';
 

@@ -4,11 +4,12 @@ import React, { useCallback, useEffect, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnect/clientv2";
 import '../App.css';
 import { constructDeeplink } from '../helpers/deeplink';
+import { userAgentIsMobile } from '../helpers/userAgent';
 import { PairingTypes } from '@walletconnect/typesv2';
-
 import QRCard from './qrcode/QRCard';
+import QRExpandedState from './QRExpandedState';
 
-function ConectButtonV2({
+function ConnectButtonV2({
     chainId,
     metadata,
     methods,
@@ -20,7 +21,7 @@ function ConectButtonV2({
 
     const connectToRainbow = useCallback(() => {
         if (!uri) return
-        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(window.navigator.userAgent)) {
+        if (userAgentIsMobile()) {
             window.location.href = uri!
         } else {
             setShowQRCode(true)
@@ -58,7 +59,7 @@ function ConectButtonV2({
     }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
     return (
         <div className="App" >
-            {showQRCode && <QRCard value={uri} showQR />}
+            {showQRCode && <QRExpandedState value={uri} />}
             <a
                 className="button"
                 onClick={connectToRainbow}
@@ -71,4 +72,4 @@ function ConectButtonV2({
     );
 }
 
-export default ConectButtonV2;
+export default ConnectButtonV2;

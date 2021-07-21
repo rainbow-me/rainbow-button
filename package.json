@@ -11,6 +11,7 @@
     "@walletconnect/clientv2": "npm:@walletconnect/client@experimental",
     "@walletconnect/typesv2": "npm:@walletconnect/types@experimental",
     "detect-browser": "^5.2.0",
+    "framer-motion": "^4.1.17",
     "qrcode": "^1.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

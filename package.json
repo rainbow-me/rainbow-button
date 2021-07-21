@@ -6,10 +6,12 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/styled-components": "^5.1.11",
     "@walletconnect/browser": "^1.0.0",
     "@walletconnect/clientv2": "npm:@walletconnect/client@experimental",
     "@walletconnect/typesv2": "npm:@walletconnect/types@experimental",
     "detect-browser": "^5.2.0",
+    "qrcode": "^1.4.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
@@ -36,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.4.1"
   }
 }

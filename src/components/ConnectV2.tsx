@@ -6,6 +6,8 @@ import '../App.css';
 import { constructDeeplink } from '../helpers/deeplink';
 import { PairingTypes } from '@walletconnect/typesv2';
 
+import rainbowOg from '../images/rainbow-og.png'
+
 function ConectButtonV2({
     chainId,
     metadata,
@@ -15,12 +17,10 @@ function ConectButtonV2({
 }: { chainId: string, relayProvider: string, metadata: object, methods: string[], onClientInitialized: (client: WalletConnectClient) => void }) {
     const [uri, setUri] = useState<string>();
 
-    const goToDeeplink = useCallback(() => {
+    const connectToRainbow = useCallback(() => {
         if (!uri) return
         window.location.href = uri!
     }, [uri])
-
-    const connectToRainbow = useCallback(() => goToDeeplink(), [goToDeeplink]);
 
     useEffect(() => {
         const walletConnectInit = async () => {
@@ -51,7 +51,6 @@ function ConectButtonV2({
         }
         walletConnectInit()
     }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
-
     return (
         <div className="App" >
             <a
@@ -59,7 +58,8 @@ function ConectButtonV2({
                 onClick={connectToRainbow}
                 rel="noopener noreferrer"
             >
-                {`🌈  Connect to Rainbow`}
+                <img height={25} src={'/rainbow-logo.png'} width={25} />
+                {`Connect to Rainbow`}
             </a>
         </div>
     );

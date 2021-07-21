@@ -7,9 +7,15 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@walletconnect/browser": "^1.0.0",
+    "@walletconnect/clientv2": "npm:@walletconnect/client@experimental",
+    "@walletconnect/typesv2": "npm:@walletconnect/types@experimental",
+    "detect-browser": "^5.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.3"
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "safe-json-utils": "^1.1.1",
+    "window-getters": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

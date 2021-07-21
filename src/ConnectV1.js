@@ -74,7 +74,7 @@ function ConectButtonV1() {
     const encodedUri = encodeURIComponent(uri);
     const fullUrl = `${baseUrl}/wc?uri=${encodedUri}`;
     console.log('full url', fullUrl);
-    window.location.href = fullUrl;
+    window.location.href = baseUrl;
   }, [uri]);
 
   const disconnectFromRainbow = useCallback(() => {

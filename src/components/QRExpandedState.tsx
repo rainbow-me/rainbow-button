@@ -61,12 +61,6 @@ export const UniqueTokenExpandedStateContent = styled.div`
   > div {
     height: 100%;
   }
-  ${({ theme: { isMobile } }) =>
-        isMobile &&
-        `> div {
-    width: 100%;
-    position: absolute
-    `}
 `;
 
 export const ExpandedState = styled(motion.div) <{ qr?: boolean }>`
@@ -80,10 +74,8 @@ export const ExpandedState = styled(motion.div) <{ qr?: boolean }>`
   margin: 0 42px;
   pointer-events: none;
   width: 1000px;
-  z-index: 40;
   @media (max-width: 850px) {
     box-sizing: border-box;
-    ${({ qr }) => !qr && 'display: block;'}
     flex-direction: column;
     margin: 0;
     max-width: 460px;
@@ -121,7 +113,7 @@ const ExpandedStateBackground = styled.div<{
     transition: 0.125s ease;
     width: ${({ theme: { isMobile } }) => (isMobile ? '100%' : '250vw')};
     height: 100%;
-    z-index: ${({ popover }) => (popover ? 30 : -1)};
+    z-index: -100;
   `;
 
 const easingConfig = {

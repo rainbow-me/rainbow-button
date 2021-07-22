@@ -72,7 +72,7 @@ const QRCode = ({
         const matrixMiddleEnd = matrix.length / 2 + clearArenaSize / 2 - 1;
 
         matrix.forEach((row: QRCodeUtil.QRCode[], i: number) => {
-            row.forEach((column: any, j: number) => {
+            row.forEach((_: any, j: number) => {
                 if (matrix[i][j]) {
                     if (
                         !(

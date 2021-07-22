@@ -59,7 +59,7 @@ function ConnectButtonV2({
     }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
     return (
         <div className="App" >
-            {showQRCode && <QRExpandedState value={uri} />}
+            {showQRCode && <QRExpandedState setIsQRCodeOpen={setShowQRCode} value={uri} />}
             <a
                 className="button"
                 onClick={connectToRainbow}

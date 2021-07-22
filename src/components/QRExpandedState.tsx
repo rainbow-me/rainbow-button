@@ -1,21 +1,19 @@
 import { AnimatePresence, motion } from 'framer-motion';
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 // import { isQRCodeOpenAtom } from '../../utils/useNavigation';
 import LogoAppStore from '../icons/LogoAppStore';
 import XButton from '../icons/XButton';
 import QRCode from './qrcode/QRCode';
 
-const XButtonWrapper = styled.div<{
-    isNFTZoomed?: boolean;
-}>`
+const XButtonWrapper = styled.div`
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
     height: 27px;
-    opacity: ${({ isNFTZoomed }) => (isNFTZoomed ? 0 : 1)};
+    opacity: 1;
     overflow: visible;
     padding: 30px;
-    pointer-events: ${({ isNFTZoomed }) => (isNFTZoomed ? 'none' : 'auto')};
+    pointer-events: 'auto';
     position: fixed;
     top: 0;
     right: 0;
@@ -104,18 +102,15 @@ export const ExpandedState = styled(motion.div) <{ qr?: boolean }>`
 
 
 const ExpandedStateBackground = styled.div<{
-    isNFTZoomed?: boolean;
     isPopoverVisible?: boolean;
     popover?: boolean;
     opacity?: number;
 }>`
     background-color: #000000;
-    cursor: ${({ isNFTZoomed, isPopoverVisible, popover }) =>
-        isNFTZoomed
-            ? 'zoom-out'
-            : popover && isPopoverVisible
-                ? 'auto'
-                : 'default'};
+    cursor: ${({ isPopoverVisible, popover }) =>
+        popover && isPopoverVisible
+            ? 'auto'
+            : 'default'};
     ${({ theme: { isMobile } }) => !isMobile && 'left: -50vh;'}
     opacity: ${({ isPopoverVisible, opacity, popover }) =>
         opacity || (popover && isPopoverVisible ? 0.1 : 0)};
@@ -176,7 +171,7 @@ const Container = styled.div`
 `;
 
 const TitleText = styled.div<{ subtitle?: boolean }>`
-  color: #12131A;
+  color: white;
   font-size: 20px;
   font-weight: 800;
   margin-bottom: ${({ subtitle }) => (subtitle ? 0 : '24px')};
@@ -194,6 +189,7 @@ const DownloadContainer = styled.div`
   margin: 0 auto 41px;
   position: absolute;
   right: 0;
+  z-index: 100;
 `;
 
 const DownloadButton = styled.a`
@@ -201,7 +197,7 @@ const DownloadButton = styled.a`
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
   border-radius: 38px;
   box-sizing: border-box;
-  color: #12131A;
+  color: white;
   cursor: pointer;
   display: flex;
   height: 46px;
@@ -212,7 +208,8 @@ const DownloadButton = styled.a`
   text-align: center;
   transition: 0.125s ease;
   will-change: transform;
-
+  text-decoration: none;
+  z-index: 100;
   :hover {
     transform: scale(1.05);
   }
@@ -221,9 +218,8 @@ const DownloadButton = styled.a`
   }
 `;
 
-const setIsQRCodeOpen = (bool: boolean) => null
 
-const QRExpandedState = ({ value }: { value: string }) => {
+const QRExpandedState = ({ value, setIsQRCodeOpen }: { value: string, setIsQRCodeOpen: Dispatch<SetStateAction<boolean>> }) => {
 
     return (
         <AnimatePresence>
@@ -235,7 +231,6 @@ const QRExpandedState = ({ value }: { value: string }) => {
                     transition={easingConfig}
                 >
                     <ExpandedStateBackground
-                        onClick={() => setIsQRCodeOpen(false)}
                         opacity={0.8}
                     />
                 </motion.div>
@@ -245,34 +240,33 @@ const QRExpandedState = ({ value }: { value: string }) => {
                     exit={{ scale: 0.8, y: '200vh' }}
                     initial={{ scale: 0.8, y: '100vh' }}
                     qr
-                    // style={{ pointerEvents: !isMobile && 'auto' }}
                     transition={springConfig}
                 >
                     <Column
-                        onClick={() => setIsQRCodeOpen(false)}
                         style={{ justifyContent: 'center', height: '100%' }}
                     >
-                        <TitleText>📲 Scan to open in Rainbow</TitleText>
+                        <TitleText>📲 Scan to connect to Rainbow</TitleText>
                         <Container onClick={proxy => proxy.stopPropagation()}>
-                            <QRCode value={value} size={380} />
+                            <QRCode value={value} size={380} logoSize={100} />
                         </Container>
-                        <DownloadContainer>
-                            <TitleText subtitle>👇 Don’t have the app yet? 👇</TitleText>
-                            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                                <DownloadButton
-                                    href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
-                                    onClick={proxy => proxy.stopPropagation()}
-                                    target="_blank"
-                                >
-                                    <div style={{ marginRight: 6 }}>
-                                        <LogoAppStore />
-                                    </div>
-                                    App Store
-                                </DownloadButton>
-                            </div>
-                        </DownloadContainer>
+
                     </Column>
                 </ExpandedState>
+                <DownloadContainer>
+                    <TitleText subtitle>👇 Don’t have the app yet? 👇</TitleText>
+                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                        <DownloadButton
+                            href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
+                            onClick={proxy => proxy.stopPropagation()}
+                            target="_blank"
+                        >
+                            <div style={{ marginRight: 6 }}>
+                                <LogoAppStore />
+                            </div>
+                            App Store
+                        </DownloadButton>
+                    </div>
+                </DownloadContainer>
             </UniqueTokenExpandedStateContent>
             <XButtonWrapper onClick={() => setIsQRCodeOpen(false)}>
                 <motion.div

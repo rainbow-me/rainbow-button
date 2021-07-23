@@ -2,10 +2,12 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { RainbowButton } from '../.';
+import './App.css';
 
 const App = () => {
   return (
-    <div>
+      <div>
+        <h1 className="text-center">Best dapp in the world</h1>
       <RainbowButton chainId={'eip155:10'}
         relayProvider={"wss://relay.walletconnect.org"}
         metadata={{
@@ -19,7 +21,8 @@ const App = () => {
         ]}
         onClientInitialized={() => console.log('Client initialized!')}
       />
-    </div>
+      </div>
+
   );
 };
 

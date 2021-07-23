@@ -1,7 +1,6 @@
 import QRCodeUtil from 'qrcode';
 import React, { ReactElement, useMemo } from 'react';
 import styled from 'styled-components';
-import LogoAppStore from '../../icons/LogoAppStore';
 
 const QRContainer = styled.div`
   height: 375px;
@@ -119,11 +118,10 @@ const QRCode = ({
                     height: 0,
                     position: 'relative',
                     top: logoPosition,
-                    left: 0,
+                    left: logoPosition,
                 }}
             >
-
-                <LogoAppStore />
+                <img height={logoSize} width={logoSize} src="https://github.com/rainbow-me/rainbow/blob/develop/src/assets/rainbow-og.png?raw=true" alt=""  />
             </div>
             <svg height={size} width={size}>
                 <defs>

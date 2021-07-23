@@ -1,0 +1,130 @@
+html, body {
+		-webkit-font-smoothing: antialiased;
+		/* background: #000000; */
+		/* background: #131415; */
+		/* background: #222222; */
+		background: #ffffff;
+    height: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	body {
+		align-items: center;
+	  display: flex;
+		height: 100%;
+	  justify-content: center;
+	}
+	#content {
+		align-items: center;
+		display: flex;
+		height: 100%;
+		justify-content: center;
+		overflow: hidden;
+		position: absolute;
+		width: 100%;
+	}
+	#rainbow-button {
+		transition: 0.125s ease;
+		will-change: transform;
+	}
+	#rainbow-button:hover {
+		transform: scale(1.05);
+	}
+	#rainbow-button:active {
+		transform: scale(0.95) !important;
+	}
+	#rainbow-button-inner {
+		-webkit-user-select: none;
+		align-items: center;
+		background: #000000;
+		border-radius: 16px;
+		color: #ffffff;
+		cursor: pointer;
+	  display: flex;
+		font-family: 'SFProRounded';
+		font-size: 18px;
+		font-weight: 700;
+	  height: 44px;
+		letter-spacing: 0.5px;
+		padding: 0 16px 2px 0;
+		position: relative;
+		text-align: center;
+		transition: 0.125s ease;
+	}
+	#rainbow-button-inner:before {
+		background: rgba(255, 255, 255, 0.05);
+		background-size: 1200% 1200%;
+		border-radius: 17px;
+		content: '';
+		height: calc(100% + 2px);
+		left: -1px;
+		opacity: 1;
+		position: absolute;
+		top: -1px;
+		transition: 0.125s ease;
+		width: calc(100% + 2px);
+		z-index: -1;
+	}
+	#rainbow-button:hover #rainbow-button-inner:before {
+		opacity: 0;
+	}
+	#rainbow-button-inner:after {
+		animation: animatedgradient 80s ease-in-out alternate infinite;
+		background: linear-gradient(270deg, #174299 0%, #1EDBAE 9.09%, #00B2FF 18.18%, #9F4CED 27.27%, #D04C74 36.36%, #00B5D5 45.45%, #174299 54.54%, #00B6CF 63.63%, #00D56F 72.72%, #174299 81.81%, #01BCD5 90.9%, #174299 100%);
+		background-size: 1200% 1200%;
+		border-radius: 18px;
+		content: '';
+		height: calc(100% + 4px);
+		left: -2px;
+		opacity: 0;
+		position: absolute;
+		top: -2px;
+		transition: 0.125s ease;
+		width: calc(100% + 4px);
+		z-index: -1;
+	}
+	#rainbow-button:hover #rainbow-button-inner:after {
+		opacity: 1;
+	}
+	#rainbow-button img {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		border-radius: 11px;
+		margin-left: 6px;
+		margin-right: 10px;
+		margin-top: 2px;
+	}
+	#rainbow-button-label {
+		background: url(button-label.svg) no-repeat;
+		background-size: 100% 100%;
+		height: 14px;
+		width: 175px;
+	}
+	
+	@keyframes animatedgradient {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+	
+	@media (max-width: 414px) {
+		#rainbow-button:hover {
+			transform: scale(1);
+		}
+		#rainbow-button:active {
+			transform: scale(0.92) !important;
+		}
+	}
+	
+	@media (color-gamut: p3) {
+		#rainbow-button-inner:after { {
+			background: linear-gradient(270deg, color(display-p3 0.09020 0.25882 0.6) 0%, color(display-p3 0.11765 0.85882 0.68235) 9.09%, color(display-p3 0 0.69804 1) 18.18%, color(display-p3 0.62353 0.29804 0.92941) 27.27%, color(display-p3 0.81569 0.29804 0.65098) 36.36%, color(display-p3 0 0.70980 0.83529) 45.45%, color(display-p3 0.09020 0.25882 0.6) 54.54%, color(display-p3 0 0.71373 0.81176) 63.63%, color(display-p3 0 0.83529 0.43529) 72.72%, color(display-p3 0.0902 0.25882 0.6) 81.81%, color(display-p3 0.00392 0.73725 0.83529) 90.9%, color(display-p3 0.09020 0.25882 0.6) 100%);
+			background-size: 1200% 1200%;
+		}
+	}

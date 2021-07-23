@@ -8,6 +8,7 @@ import { userAgentIsMobile } from '../helpers/userAgent';
 import { PairingTypes, AppMetadata } from '@walletconnect/types';
 import QRExpandedState from './QRExpandedState';
 import styled, {keyframes} from 'styled-components';
+import Fountain from './EmojiPop'
 
 const animatedgradient = keyframes`
     0% {
@@ -93,23 +94,23 @@ const ButtonInner = styled.div`
 `;
 
 const Logo = styled.img`
--webkit-touch-callout: none;
--webkit-user-select: none;
-border-radius: 11px;
-box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-margin-left: 6px;
-margin-right: 10px;
-margin-top: 2px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    border-radius: 11px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 2px;
 `
 
 const Label = styled.div`
-background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg) no-repeat;
-background-size: 100% 100%;
-height: 14px;
-opacity: 1;
-transition: 0.125s ease;
-width: 175px;
-will-change: transform;
+    background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg) no-repeat;
+    background-size: 100% 100%;
+    height: 14px;
+    opacity: 1;
+    transition: 0.125s ease;
+    width: 175px;
+    will-change: transform;
 `
 
 function ConnectButton({
@@ -160,16 +161,21 @@ function ConnectButton({
         }
         walletConnectInit()
     }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
+    
+    useEffect(() => {
+        new Fountain()
+    }, [])
+
     return (
         <div >
             {showQRCode && <QRExpandedState setIsQRCodeOpen={setShowQRCode} value={uri} />}
-            <Content>
-            <Button onClick={connectToRainbow} >
-            <ButtonInner>
-                <Logo src="https://github.com/christianbaroni/rainbow-buttons/blob/main/1/rainbow-logo.png?raw=true" width="34" />
-                <Label id="rainbow-button-label" />
-            </ButtonInner>
-            </Button>
+            <Content id="content">
+                <Button id="rainbow-button" onClick={connectToRainbow} >
+                    <ButtonInner>
+                        <Logo src="https://github.com/christianbaroni/rainbow-buttons/blob/main/1/rainbow-logo.png?raw=true" width="34" />
+                        <Label id="rainbow-button-label" />
+                    </ButtonInner>
+                </Button>
             </Content>
 
         </div>

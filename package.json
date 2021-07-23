@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.7",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -13,6 +13,7 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
+    "buildandpack": "yarn build && cd dist && yarn pack && cd ..",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint",
     "prepare": "tsdx build",
@@ -50,6 +51,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.14.8",
+    "@rollup/plugin-image": "^2.0.6",
     "@size-limit/preset-small-lib": "^5.0.1",
     "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-info": "^5.3.21",

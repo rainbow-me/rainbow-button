@@ -1,0 +1,3 @@
+[submodule "rainbow-buttons"]
+	path = rainbow-buttons
+	url = https://github.com/christianbaroni/rainbow-buttons

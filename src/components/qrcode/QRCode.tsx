@@ -1,6 +1,7 @@
 import QRCodeUtil from 'qrcode';
 import React, { ReactElement, useMemo } from 'react';
 import styled from 'styled-components';
+import LogoAppStore from '../../icons/LogoAppStore';
 
 const QRContainer = styled.div`
   height: 375px;
@@ -37,7 +38,6 @@ const QRCode = ({
     size = 200,
     value = 'QR Code',
 }: Props) => {
-    const href = '/rainbow-og.png';
     const dots = useMemo(() => {
         const dots: ReactElement[] = [];
         const matrix = generateMatrix(value, ecl);
@@ -122,7 +122,8 @@ const QRCode = ({
                     left: 0,
                 }}
             >
-                <img height={logoSize} src={href} width={logoSize} />
+
+                <LogoAppStore />
             </div>
             <svg height={size} width={size}>
                 <defs>

@@ -5,7 +5,7 @@ import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnect/client";
 import './../style.module.css';
 import { constructDeeplink } from '../helpers/deeplink';
 import { userAgentIsMobile } from '../helpers/userAgent';
-import { PairingTypes, AppMetadata } from '@walletconnect/types';
+import { PairingTypes, AppMetadata, SessionTypes } from '@walletconnect/types';
 import QRExpandedState from './QRExpandedState';
 import styled, {keyframes} from 'styled-components';
 import Fountain from './EmojiPop'
@@ -117,9 +117,17 @@ function ConnectButton({
     chainId,
     metadata,
     methods,
+    onSessionStarted,
     onClientInitialized,
     relayProvider,
-}: { chainId: string, relayProvider: string, metadata: AppMetadata, methods: string[], onClientInitialized: (client: WalletConnectClient) => void }) {
+}: { 
+    chainId: string, 
+    relayProvider: string, 
+    metadata: AppMetadata, 
+    methods: string[], 
+    onSessionStarted: (client: SessionTypes.Settled) => void, 
+    onClientInitialized: (client: WalletConnectClient) => void, 
+}) {
     const [uri, setUri] = useState<string>('');
     const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
@@ -132,8 +140,13 @@ function ConnectButton({
         }
     }, [uri])
 
+    const callbackOnClientInitialized = useCallback((client) => {
+        onClientInitialized?.(client)
+    }, [onClientInitialized])
+
     useEffect(() => {
         const walletConnectInit = async () => {
+            console.log('WALLET CONNECT INIT')
             const client = await WalletConnectClient.init({
                 relayProvider,
                 metadata
@@ -146,8 +159,10 @@ function ConnectButton({
                     setUri(deeplink)
                 },
             );
-            onClientInitialized(client);
-            await client.connect({
+            console.log('callbackOnClientInitialized')
+            callbackOnClientInitialized(client);
+            console.log('callbackOnClientInitialized about to connect ', !!client)
+            const session = await client.connect({
                 permissions: {
                     blockchain: {
                         chains: [chainId],
@@ -157,14 +172,15 @@ function ConnectButton({
                     },
                 },
             });
-
+            console.log('BUTTON onSessionStarted')
+            onSessionStarted(session)
         }
         walletConnectInit()
-    }, [chainId, metadata, methods, onClientInitialized, relayProvider]);
-    
+    }, []);
+
     useEffect(() => {
         new Fountain()
-    }, [])
+    }, [chainId])
 
     return (
         <div >
@@ -183,4 +199,4 @@ function ConnectButton({
     );
 }
 
-export default ConnectButton;
+export default React.memo(ConnectButton);

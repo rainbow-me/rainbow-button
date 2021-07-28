@@ -2,8 +2,7 @@ import 'react-app-polyfill/ie11';
 import * as React from 'react';
 import * as encUtils from "enc-utils";
 import { useCallback, useState, useEffect, useMemo } from 'react';
-import RainbowButton, { goToRainbow, getClientPairings } from '../dist';
-import { SUPPORTED_MAIN_CHAINS, supportedMainChainsInfo } from './constants'
+import { supportedMainChainsInfo } from './constants'
 import { CLIENT_EVENTS } from '@walletconnect/client';
 import { PairingTypes, SessionTypes } from '@walletconnect/types';
 import useWalletConnectState from './hooks';
@@ -11,6 +10,11 @@ import { formatTestTransaction } from './helpers/accounts';
 import { eip712 } from './helpers/eip712'
 import styled from 'styled-components';
 import './App.css';
+import RainbowButton, { utils, constants } from '../dist';
+
+const {goToRainbow, getClientPairings} = utils;
+const { SUPPORTED_MAIN_CHAINS_EIP155 } = constants;
+
 
 const Button = styled.a`
   margin: 10px;
@@ -42,7 +46,7 @@ const getAddressAndChainIdFromWCAccount = (
 const Dapp = () => {
   const { client, session, accounts, chains, setSession, setClient,setPairings} = useWalletConnectState()
   const [selectedChain, setSelectedChain] = useState('eip155:10')
-  console.log('DAPPP', client)
+
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
   const onSessionStarted = useCallback((session) => setSession(session), [])
   const onClientInitialized = useCallback(client => setClient(client), [])
@@ -149,7 +153,7 @@ const Dapp = () => {
         <p>Selected chain: {selectedChain}</p>
         <Wrapper>
           {
-            SUPPORTED_MAIN_CHAINS.map((chain) => 
+            Object.values(SUPPORTED_MAIN_CHAINS_EIP155).map((chain) => 
               <Button
                 key={chain}
                 color={supportedMainChainsInfo[chain].color}
@@ -196,9 +200,9 @@ const Dapp = () => {
         <p>Connected to {supportedMainChainsInfo[chains?.[0] || '']?.name }</p>
         <p>Account: {getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address}</p>
         <Wrapper>
-          <Button key={'sendTransaction'} onClick={()=>sendTransaction()}>{'sendTransaction'}</Button>
-          <Button key={'signPersonalMessage'} onClick={()=>signPersonalMessage()}>{'signPersonalMessage'}</Button>
-          <Button key={'signTypedData'} onClick={()=>signTypedData()}>{'signTypedData'}</Button>
+          <Button key={'sendTransaction'} onClick={sendTransaction}>{'sendTransaction'}</Button>
+          <Button key={'signPersonalMessage'} onClick={signPersonalMessage}>{'signPersonalMessage'}</Button>
+          <Button key={'signTypedData'} onClick={signTypedData}>{'signTypedData'}</Button>
         </Wrapper>
       </div>
     )

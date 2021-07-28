@@ -2,29 +2,19 @@ import React, { HTMLAttributes } from 'react';
 import ConnectButton from './components/ConnectButton';
 import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
 import WalletConnectClient from "@walletconnect/client";
+import { getClientPairings, goToRainbow } from './utils'
+import {
+  SUPPORTED_TEST_CHAIN_IDS,
+  SUPPORTED_MAIN_CHAIN_IDS,
+  SUPPORTED_TEST_CHAINS_EIP155,
+  SUPPORTED_MAIN_CHAINS_EIP155,
+} from './constants'
 
 export interface Props extends HTMLAttributes<HTMLDivElement> {
   clientOptions: ClientOptions
   clientConnectParams: ClientTypes.ConnectParams,
   onClientInitialized: (client: WalletConnectClient) => void,
   onSessionStarted: (session: SessionTypes.Settled) => void,
-}
-
-/**
- * Go to rainbow app via deeplink
- */
-export const goToRainbow = (): void => {
-  window.location.href = 'https://rnbwapp.com/wc'
-}
-
-/**
- * Returns an array containing session topics, if any
- * 
- * @param client - WalletConnectClient
- * @returns - Session topics
- */
-export const getClientPairings = (client: WalletConnectClient): string[] => {
-  return client?.session?.topics || []
 }
 
 export default ({
@@ -40,4 +30,13 @@ export default ({
     onSessionStarted={onSessionStarted}
   />
 };
+
+export const utils = { goToRainbow, getClientPairings }
+
+export const constants = {
+  SUPPORTED_TEST_CHAIN_IDS,
+  SUPPORTED_MAIN_CHAIN_IDS,
+  SUPPORTED_TEST_CHAINS_EIP155,
+  SUPPORTED_MAIN_CHAINS_EIP155,
+}
 

@@ -12,14 +12,14 @@ export enum SUPPORTED_TEST_CHAIN_IDS {
     KOVAN = 42
 }
 
-export enum SUPPORTED_MAIN_CHAINS {
+export enum SUPPORTED_MAIN_CHAINS_EIP155 {
     MAINNET = 'eip155:1',
     OPTIMISM = 'eip155:10',
     POLYGON = 'eip155:137',
     ARBITRUM = 'eip155:42161',
 }
 
-export enum SUPPORTED_TEST_CHAINS {
+export enum SUPPORTED_TEST_CHAINS_EIP155 {
     ROPSTEN = 'eip155:3',
     RINKEBY = 'eip155:4',
     GÖRLI = 'eip155:5',

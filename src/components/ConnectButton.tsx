@@ -9,7 +9,7 @@ import { PairingTypes, SessionTypes, ClientOptions, ClientTypes } from '@walletc
 import QRExpandedState from './QRExpandedState';
 import styled, {keyframes} from 'styled-components';
 import Fountain from './EmojiPop'
-import { getClientPairings } from '..';
+import { getClientPairings } from '../utils';
 
 const animatedgradient = keyframes`
     0% {
@@ -137,10 +137,6 @@ function ConnectButton({
         }
     }, [uri])
 
-    const callbackOnClientInitialized = useCallback((client) => {
-        onClientInitialized?.(client)
-    }, [onClientInitialized])
-
     useEffect(() => {
         const walletConnectInit = async () => {
             const client = await WalletConnectClient.init(clientOptions);
@@ -152,7 +148,7 @@ function ConnectButton({
                     setUri(deeplink)
                 },
             );
-            callbackOnClientInitialized(client);
+            onClientInitialized(client);
             if (!getClientPairings(client).length) {
                 const session = await client.connect(clientConnectParams);
                 onSessionStarted(session)

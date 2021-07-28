@@ -9,6 +9,7 @@ import { PairingTypes, AppMetadata, SessionTypes } from '@walletconnect/types';
 import QRExpandedState from './QRExpandedState';
 import styled, {keyframes} from 'styled-components';
 import Fountain from './EmojiPop'
+import { getClientPairings } from '..';
 
 const animatedgradient = keyframes`
     0% {
@@ -148,7 +149,6 @@ function ConnectButton({
 
     useEffect(() => {
         const walletConnectInit = async () => {
-            console.log('BUTTON init')
             const client = await WalletConnectClient.init({
                 relayProvider,
                 metadata
@@ -162,7 +162,7 @@ function ConnectButton({
                 },
             );
             callbackOnClientInitialized(client);
-            console.log('BUTTON connect', chainId)
+            if (getClientPairings(client).length) return
             const session = await client.connect({
                 permissions: {
                     blockchain: {

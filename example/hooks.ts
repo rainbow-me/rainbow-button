@@ -32,10 +32,9 @@ export default function useWalletConnectState() {
 
 const dispatch = useDispatch()
 
-const setSession = (session: SessionTypes.Settled | undefined) => dispatch(rawSetSession(session))
+const setSession = (session: SessionTypes.Settled | null) => dispatch(rawSetSession(session))
 const setClient = (client: WalletConnectClient) => dispatch(rawSetClient(client))
 const setPairings = (pairings: string[]) => dispatch(rawSetPairings(pairings))
-
   return ({
     client,
     session,

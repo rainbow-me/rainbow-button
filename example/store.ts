@@ -1,10 +1,6 @@
 import WalletConnectClient from '@walletconnect/client';
 import { SessionTypes } from '@walletconnect/types';
 import { createStore } from 'redux'
-import {
-  clone,
-} from 'lodash';
-import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 
 const SET_SESSION = 'SET_SESSION';
 const SET_CLIENT = 'SET_CLIENT';
@@ -15,7 +11,7 @@ export const setClient = (client: WalletConnectClient) => ({
     payload: client
   })
 
-export const setSession = (sessions: SessionTypes.Settled | undefined) => ({
+export const setSession = (sessions: SessionTypes.Settled | null) => ({
     type: SET_SESSION,
     payload: sessions
   })
@@ -33,18 +29,16 @@ const INITIAL_STATE = {
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_SESSION:
+      console.log('CASE  SET_SESSION', action.payload, { ...state, session: action.payload })
       return { ...state, session: action.payload };
-  case SET_CLIENT:
+    case SET_CLIENT:
+      console.log('CASE SET CLIENT', action.payload)
       return { ...state, client: action.payload };
     default:
+      console.log('CASE  default', action.payload)
       return state;
   }
 };
-
-const persistConfig = {
-  key: 'root',
-  storage,
-}
 
 export const store = createStore(reducer) 
 

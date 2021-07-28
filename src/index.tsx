@@ -1,4 +1,4 @@
-import React, { FC, HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import ConnectButton from './components/ConnectButton';
 import { AppMetadata, SessionTypes } from '@walletconnect/types';
 import WalletConnectClient from "@walletconnect/client";
@@ -12,13 +12,21 @@ export interface Props extends HTMLAttributes<HTMLDivElement> {
   onSessionStarted: (session: SessionTypes.Settled) => void
 }
 
-export const RainbowButton: FC<Props> = ({  chainId,
+export const goToRainbow = () => {
+  window.location.href = 'https://rnbwapp.com/wc'
+}
+
+export const getClientPairings = (client: WalletConnectClient): string[] => {
+  return client?.session?.topics || []
+}
+
+export default ({ chainId,
   metadata,
   methods,
   onClientInitialized,
   onSessionStarted,
   relayProvider,
-}) => {
+}: Props) => {
   return <ConnectButton
       chainId={chainId}
       metadata={metadata}
@@ -29,6 +37,3 @@ export const RainbowButton: FC<Props> = ({  chainId,
     />
   };
 
-  export const goToRainbow = () => {
-    window.location.href = 'https://rnbwapp.com/wc'
-  }

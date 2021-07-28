@@ -42,28 +42,25 @@ const getAddressAndChainIdFromWCAccount = (
 const Dapp = () => {
   const { client, session, accounts, chains, setSession, setClient,setPairings} = useWalletConnectState()
   const [selectedChain, setSelectedChain] = useState('eip155:10')
-
+  console.log('DAPPP', client)
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
-
   const onSessionStarted = useCallback((session) => setSession(session), [])
-
   const onClientInitialized = useCallback(client => setClient(client), [])
 
   const subscribeToEvents = useCallback(() => {
     client?.on(CLIENT_EVENTS.pairing.created, async (proposal: PairingTypes.Settled) => {
       setPairings(client.pairing.topics)
     });
-
     client?.on(CLIENT_EVENTS.session.deleted, (session: SessionTypes.Settled) => {
       if (session.topic !== session?.topic) return;
-      setSession(undefined)
+      setSession(null)
       setPairings([])
     });
   }, [client])
 
   const checkPersistedState = useCallback(async () => {
     if (!session && getClientPairings(client).length) {
-      const session = await client.session.get(client.session.topics[0]);
+      const session = await client.session.get(getClientPairings(client)[0]);
       setSession(session)
     }
   }, [client, session])
@@ -71,11 +68,10 @@ const Dapp = () => {
   useEffect(() => {
     checkPersistedState()
     subscribeToEvents()
-  }, [client,checkPersistedState, subscribeToEvents])
+  }, [client, checkPersistedState, subscribeToEvents])
 
   const sendTransaction = useCallback(async () => {
     if (!client || !session) return
-
     try {
       // const address = getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
       const account = accounts?.[0] || '';
@@ -91,15 +87,13 @@ const Dapp = () => {
         },
       });
       console.log('RESULT', result)
-
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [client, session]);
 
   const signPersonalMessage = useCallback(async () => {
     if (!client || !session) return
-
     try {
       const message = `Hello from Rainbow! `;
       const hexMsg = encUtils.utf8ToHex(message, true);
@@ -116,17 +110,14 @@ const Dapp = () => {
           params,
         },
       });
-
       console.log('RESULT', result)
-
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [client, session]);
 
   const signTypedData = useCallback(async () => {
     if (!client || !session) return
-
     try {
       const message = JSON.stringify(eip712.example);
       const address = getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
@@ -143,28 +134,38 @@ const Dapp = () => {
         },
       });
       console.log('RESULT', result)
-
     } catch (error) {
       console.error(error);
     }
-  }, []);
+  }, [client, session]);
 
-  const renderConnection = useMemo(() => {
+  const isConnected = useMemo(() => {
+    return Boolean(client) && Boolean(getClientPairings(client).length)
+  }, [client])
+
+  const renderNotConnected = useMemo(() => {
     return (
       <div>
         <p>Selected chain: {selectedChain}</p>
         <Wrapper>
           {
             SUPPORTED_MAIN_CHAINS.map((chain) => 
-              <Button key={chain} color={supportedMainChainsInfo[chain].color} onClick={() => selectChain(chain)}>{supportedMainChainsInfo[chain].name}</Button>)
+              <Button
+                key={chain}
+                color={supportedMainChainsInfo[chain].color}
+                onClick={() => selectChain(chain)}>
+                  {
+                    supportedMainChainsInfo[chain].name
+                  }
+              </Button>)
           }
         </Wrapper>
         <RainbowButton 
           chainId={selectedChain}
           relayProvider={"wss://relay.walletconnect.org"}
           metadata={{
-            name: "🌈 Best Dapp",
-            description: "Best dapp in the world",
+            name: "🌈 Rainbow example dapp",
+            description: "Rainbow example dapp",
             url: 'https://best.dapp',
             icons: ['https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1'],
           }}
@@ -179,15 +180,15 @@ const Dapp = () => {
     )
   }, [selectedChain, onClientInitialized, onSessionStarted])
 
-  const renderNotConnected = useMemo(() => {
+  const renderConnected = useMemo(() => {
     return (
       <div>
         <p>Connected to {supportedMainChainsInfo[chains?.[0] || '']?.name }</p>
         <p>Account: {getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address}</p>
         <Wrapper>
-        <Button key={'sendTransaction'} onClick={()=>sendTransaction()}>{'sendTransaction'}</Button>
-        <Button key={'signPersonalMessage'} onClick={()=>signPersonalMessage()}>{'signPersonalMessage'}</Button>
-        <Button key={'signTypedData'} onClick={()=>signTypedData()}>{'signTypedData'}</Button>
+          <Button key={'sendTransaction'} onClick={()=>sendTransaction()}>{'sendTransaction'}</Button>
+          <Button key={'signPersonalMessage'} onClick={()=>signPersonalMessage()}>{'signPersonalMessage'}</Button>
+          <Button key={'signTypedData'} onClick={()=>signTypedData()}>{'signTypedData'}</Button>
         </Wrapper>
       </div>
     )
@@ -196,8 +197,8 @@ const Dapp = () => {
   return (
       <div>
         <h1 className="text-center">Rainbow example dapp</h1>
-        {getClientPairings(client).length && renderNotConnected}
-        {!getClientPairings(client).length && renderConnection}
+        <p>is connected: {Boolean(isConnected)}</p>
+        {isConnected ? renderConnected : renderNotConnected}
       </div>
 
   );

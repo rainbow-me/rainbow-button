@@ -16,4 +16,17 @@ export const goToRainbow = (): void => {
 export const getClientPairings = (client: WalletConnectClient): string[] => {
     return client?.session?.topics || []
 }
+
+const fromEIP55Format = (chain: string) => chain?.replace('eip155:', '');
+
+/**
+ * 
+ * @param account - Wallet Connect formatted account
+ * @returns - Object containing address and chainId
+ */
+export const getAddressAndChainIdFromAccount = (account: string): { address: string; chainId: number } => {
+    const [address, eip155ChainId] = account.split('@');
+    const chainId = fromEIP55Format(eip155ChainId);
+    return { address, chainId: Number(chainId) };
+};
   

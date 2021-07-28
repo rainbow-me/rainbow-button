@@ -2,7 +2,7 @@ import React, { HTMLAttributes } from 'react';
 import ConnectButton from './components/ConnectButton';
 import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
 import WalletConnectClient from "@walletconnect/client";
-import { getClientPairings, goToRainbow } from './utils'
+import { getClientPairings, goToRainbow, getAddressAndChainIdFromAccount } from './utils'
 import {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
@@ -31,7 +31,7 @@ export default ({
   />
 };
 
-export const utils = { goToRainbow, getClientPairings }
+export const utils = { goToRainbow, getClientPairings, getAddressAndChainIdFromAccount }
 
 export const constants = {
   SUPPORTED_TEST_CHAIN_IDS,

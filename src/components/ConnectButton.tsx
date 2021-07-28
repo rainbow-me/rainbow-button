@@ -5,7 +5,7 @@ import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnect/client";
 import './../style.module.css';
 import { constructDeeplink } from '../helpers/deeplink';
 import { userAgentIsMobile } from '../helpers/userAgent';
-import { PairingTypes, AppMetadata, SessionTypes } from '@walletconnect/types';
+import { PairingTypes, SessionTypes, ClientOptions, ClientTypes } from '@walletconnect/types';
 import QRExpandedState from './QRExpandedState';
 import styled, {keyframes} from 'styled-components';
 import Fountain from './EmojiPop'
@@ -115,17 +115,13 @@ const Label = styled.div`
 `
 
 function ConnectButton({
-    chainId,
-    metadata,
-    methods,
+    clientOptions,
+    clientConnectParams,
     onSessionStarted,
     onClientInitialized,
-    relayProvider,
 }: { 
-    chainId: string, 
-    relayProvider: string, 
-    metadata: AppMetadata, 
-    methods: string[], 
+    clientOptions: ClientOptions,
+    clientConnectParams: ClientTypes.ConnectParams,
     onSessionStarted: (client: SessionTypes.Settled) => void, 
     onClientInitialized: (client: WalletConnectClient) => void, 
 }) {
@@ -133,9 +129,7 @@ function ConnectButton({
     const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
     const connectToRainbow = useCallback(() => {
-        console.log('connectToRainbow', uri)
         if (!uri) return
-        console.log('connectToRainbow, ', uri)
         if (userAgentIsMobile()) {
             window.location.href = uri!
         } else {
@@ -149,10 +143,7 @@ function ConnectButton({
 
     useEffect(() => {
         const walletConnectInit = async () => {
-            const client = await WalletConnectClient.init({
-                relayProvider,
-                metadata
-            });
+            const client = await WalletConnectClient.init(clientOptions);
             client.on(
                 CLIENT_EVENTS.pairing.proposal,
                 async (proposal: PairingTypes.Proposal) => {
@@ -162,26 +153,17 @@ function ConnectButton({
                 },
             );
             callbackOnClientInitialized(client);
-            if (getClientPairings(client).length) return
-            const session = await client.connect({
-                permissions: {
-                    blockchain: {
-                        chains: [chainId],
-                    },
-                    jsonrpc: {
-                        methods,
-                    },
-                },
-            });
-            console.log('BUTTON onSessionStarted', session)
-            onSessionStarted(session)
+            if (!getClientPairings(client).length) {
+                const session = await client.connect(clientConnectParams);
+                onSessionStarted(session)
+            }
         }
         walletConnectInit()
     }, []);
 
     useEffect(() => {
         new Fountain()
-    }, [chainId])
+    }, [])
 
     return (
         <div >

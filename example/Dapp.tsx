@@ -160,18 +160,28 @@ const Dapp = () => {
               </Button>)
           }
         </Wrapper>
-        <RainbowButton 
-          chainId={selectedChain}
-          relayProvider={"wss://relay.walletconnect.org"}
-          metadata={{
-            name: "🌈 Rainbow example dapp",
-            description: "Rainbow example dapp",
-            url: 'https://best.dapp',
-            icons: ['https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1'],
+        <RainbowButton
+          clientOptions={{
+            relayProvider: "wss://relay.walletconnect.org",
+            metadata: {
+              name: "🌈 Rainbow example dapp",
+              description: "Rainbow example dapp",
+              url: 'https://best.dapp',
+              icons: ['https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1'],
+            }
           }}
-          methods={[
-            "eth_sendTransaction", "personal_sign", "eth_signTypedData"
-          ]}
+          clientConnectParams={{
+            permissions: {
+                blockchain: {
+                    chains: [selectedChain],
+                },
+                jsonrpc: {
+                    methods: [
+                      "eth_sendTransaction", "personal_sign", "eth_signTypedData"
+                    ],
+                },
+            },
+          }}
           onClientInitialized={onClientInitialized}
           onSessionStarted={onSessionStarted}
         />
@@ -197,7 +207,6 @@ const Dapp = () => {
   return (
       <div>
         <h1 className="text-center">Rainbow example dapp</h1>
-        <p>is connected: {Boolean(isConnected)}</p>
         {isConnected ? renderConnected : renderNotConnected}
       </div>
 

@@ -1,12 +1,18 @@
 import 'react-app-polyfill/ie11';
 import * as React from 'react';
-import { RainbowButton } from '../dist';
-import {SUPPORTED_MAIN_CHAINS, supportedMainChainsInfo} from './constants/chains'
+import { RainbowButton, goToRainbow } from '../dist';
+import {SUPPORTED_MAIN_CHAINS, supportedMainChainsInfo, SUPPORTED_METHODS} from './constants'
 import './App.css';
 import styled from 'styled-components';
 import { useCallback, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client';
 import { PairingTypes, SessionTypes } from '@walletconnect/types';
+import useWalletConnectState from './hooks';
+import { useEffect } from 'react';
+import { useMemo } from 'react';
+import { formatTestTransaction } from './helpers/accounts';
+import * as encUtils from "enc-utils";
+import {eip712} from './helpers/eip712'
 
 const Button = styled.a`
   margin: 10px;
@@ -19,78 +25,75 @@ const Button = styled.a`
   font-size: 18px;
 `
 
-const Wrapper = styled.a`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
 `
+const fromEIP55Format = (chain: string) => chain?.replace('eip155:', '');
+
+const getAddressAndChainIdFromWCAccount = (
+  account: string
+): { address: string; chainId: number } => {
+  const [address, eip155Network] = account.split('@');
+  const chainId = fromEIP55Format(eip155Network);
+  return { address, chainId: Number(chainId) };
+};
 
 const App = () => {
-  const [selectedChain, setSelectedChain] = useState('eip155:1')
-  const [client, setClient] = useState<WalletConnectClient>()
-  const [pairings, setPairings] = useState<string[]>()
-  const [accounts, setAccounts] = useState<string[]>()
-  const [chains, setChains] = useState<string[]>()
-  const [session, setSession] = useState<SessionTypes.Settled>()
+  const [selectedChain, setSelectedChain] = useState('eip155:10')
 
-  const chooseChain = useCallback(chain => setSelectedChain(chain), [])
+  const { client, session, accounts, pairings, chains, setSession, setClient,setPairings} = useWalletConnectState()
 
-  const subscribeToEvents = () => {
+  const selectChain = useCallback(chain => setSelectedChain(chain), [])
+
+  const onSessionStarted = useCallback((session) => {
+    setSession(session)
+  }, [])
+
+  const onClientInitialized = useCallback(client => setClient(client), [])
+
+  const subscribeToEvents = useCallback(() => {
     if (!client) return
-
     client.on(CLIENT_EVENTS.pairing.created, async (proposal: PairingTypes.Settled) => {
       setPairings(client.pairing.topics)
     });
 
     client.on(CLIENT_EVENTS.session.deleted, (session: SessionTypes.Settled) => {
       if (session.topic !== session?.topic) return;
-      console.log("EVENT", "session_deleted");
-      // this.resetApp();
+      setSession(undefined)
+      setPairings([])
     });
-  };
-
-  const checkPersistedState = async () => {
-    if (!client) throw new Error("WalletConnect is not initialized");
-    setPairings(client.pairing.topics)
-
-    if (typeof session !== "undefined") return;
-    // populates existing session to state (assume only the top one)
-    if (client.session.topics.length) {
-      const session = await client.session.get(client.session.topics[0]);
-      const chains = session.state.accounts.map(account => account.split("@")[1]);
-      setAccounts(session.state.accounts)
-      setChains(chains)
-      // this.onSessionConnected(session);
-    }
-  };
-
-  const onSessionStarted = useCallback((session) => {
-    console.log('setSession', session)
-    setSession(session)
   }, [client])
 
+  const checkPersistedState = useCallback(async () => {
+    if (!client) return
+    if (session) return;
+    if (client?.session?.topics?.length) {
+      const session = await client.session.get(client.session.topics[0]);
+      setSession(session)
+    }
+  }, [client, session])
 
-  const onClientInitialized = useCallback(client => setClient(client), [])
 
-  console.log('client ', client)
-  console.log('session state', session?.state)
-  console.log('session permissions', session?.permissions?.blockchain?.chains)
-  return (
+  useEffect(() => {
+    console.log('useEffect')
+    checkPersistedState()
+    subscribeToEvents()
+
+  }, [client,checkPersistedState, subscribeToEvents])
+
+  const renderConnection = useMemo(() => {
+    return (
       <div>
-        <h1 className="text-center">Rainbow example dapp</h1>
-
-        <Wrapper>
+      <p>Selected chain: {selectedChain}</p>
+      <Wrapper>
         {
           SUPPORTED_MAIN_CHAINS.map((chain) => {
-            return <Button key={chain} color={supportedMainChainsInfo[chain].color} onClick={() => chooseChain(chain)}>{supportedMainChainsInfo[chain].name}</Button>
+            return <Button key={chain} color={supportedMainChainsInfo[chain].color} onClick={() => selectChain(chain)}>{supportedMainChainsInfo[chain].name}</Button>
           })
         }
-        </Wrapper>
-        <p>Connected chain: {session?.permissions?.blockchain?.chains[0]}</p>
-        <p>Account: {session?.state?.accounts[0]}</p>
-        <Wrapper>
-        <p>Selected chain: {selectedChain}</p>
         </Wrapper>
         <RainbowButton 
           chainId={selectedChain}
@@ -107,6 +110,135 @@ const App = () => {
           onClientInitialized={onClientInitialized}
           onSessionStarted={onSessionStarted}
         />
+      </div>
+
+    )
+  }, [selectedChain, onClientInitialized, onSessionStarted])
+
+  const renderNotConnected = useMemo(() => {
+    return (
+      <div>
+        <p>Connected to {supportedMainChainsInfo[chains?.[0] || '']?.name }</p>
+        <p>Account: {getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address}</p>
+        <Wrapper>
+        {<Button key={'sendTransaction'} onClick={()=>sendTransaction()}>{'sendTransaction'}</Button>}
+        {<Button key={'signPersonalMessage'} onClick={()=>signPersonalMessage()}>{'signPersonalMessage'}</Button>}
+        {<Button key={'signTypedData'} onClick={()=>signTypedData()}>{'signTypedData'}</Button>}
+        </Wrapper>
+      </div>
+    )
+  }, [chains, accounts])
+
+
+  const sendTransaction = async () => {
+    if (!client) return
+    if (!session) return
+
+    try {
+      const address =getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
+      const account = accounts?.[0] || '';
+
+      const tx = await formatTestTransaction(account);
+      console.log('sending request')
+      goToRainbow()
+      const result = await client.request({
+        topic: session.topic,
+        chainId: chains?.[0] || '',
+        request: {
+          method: "eth_sendTransaction",
+          params: [tx],
+        },
+      });
+      console.log('RESULT', result)
+
+      // format displayed result
+      const formattedResult = {
+        method: "eth_sendTransaction",
+        address,
+        valid: true,
+        result,
+      };
+
+      console.log('formattedResult', formattedResult)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signPersonalMessage = async () => {
+    if (!client) return
+    if (!session) return
+
+    try {
+      // test message
+      const message = `Hello from Rainbow! `;
+
+      // encode message (hex)
+      const hexMsg = encUtils.utf8ToHex(message, true);
+
+      const address = getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
+      const account = accounts?.[0] || '';
+
+      // personal_sign params
+      const params = [hexMsg, address];
+
+      // send message
+      goToRainbow()
+      const result = await client.request({
+        topic: session.topic,
+        chainId: chains?.[0] || '',
+        request: {
+          method: "personal_sign",
+          params,
+        },
+      });
+
+      console.log('RESULT', result)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const signTypedData = async () => {
+    if (!client) return
+    if (!session) return
+
+    try {
+      // test message
+      const message = JSON.stringify(eip712.example);
+
+      const address = getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
+      const account = accounts?.[0] || '';
+
+      // eth_signTypedData params
+      const params = [address, message];
+
+
+      // send message
+      goToRainbow()
+      const result = await client.request({
+        topic: session.topic,
+        chainId: chains?.[0] || '',
+        request: {
+          method: "eth_signTypedData",
+          params,
+        },
+      });
+      console.log('RESULT', result)
+
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+      <div>
+        <h1 className="text-center">Rainbow example dapp</h1>
+
+        {client?.session?.topics?.length && renderNotConnected}
+        {!client?.session?.topics?.length && renderConnection}
       </div>
 
   );

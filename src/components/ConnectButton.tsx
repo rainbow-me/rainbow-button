@@ -132,7 +132,9 @@ function ConnectButton({
     const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
     const connectToRainbow = useCallback(() => {
+        console.log('connectToRainbow', uri)
         if (!uri) return
+        console.log('connectToRainbow, ', uri)
         if (userAgentIsMobile()) {
             window.location.href = uri!
         } else {
@@ -146,7 +148,7 @@ function ConnectButton({
 
     useEffect(() => {
         const walletConnectInit = async () => {
-            console.log('WALLET CONNECT INIT')
+            console.log('BUTTON init')
             const client = await WalletConnectClient.init({
                 relayProvider,
                 metadata
@@ -159,9 +161,8 @@ function ConnectButton({
                     setUri(deeplink)
                 },
             );
-            console.log('callbackOnClientInitialized')
             callbackOnClientInitialized(client);
-            console.log('callbackOnClientInitialized about to connect ', !!client)
+            console.log('BUTTON connect', chainId)
             const session = await client.connect({
                 permissions: {
                     blockchain: {
@@ -172,7 +173,7 @@ function ConnectButton({
                     },
                 },
             });
-            console.log('BUTTON onSessionStarted')
+            console.log('BUTTON onSessionStarted', session)
             onSessionStarted(session)
         }
         walletConnectInit()

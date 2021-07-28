@@ -5,6 +5,10 @@ export const SUPPORTED_MAIN_CHAINS = [
     'eip155:42161',
   ];
 
+  export const SUPPORTED_METHODS = [
+      "eth_sendTransaction", "personal_sign", "eth_signTypedData"
+    ]
+
   export const supportedMainChainsInfo = {
     'eip155:1': { name: "Ethereum Mainnet", color: '#0E76FD'},
     'eip155:10': { name: "Optimism", color: '#FF4040'},

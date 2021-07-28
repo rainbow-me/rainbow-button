@@ -28,3 +28,7 @@ export const RainbowButton: FC<Props> = ({  chainId,
       relayProvider={relayProvider}
     />
   };
+
+  export const goToRainbow = () => {
+    window.location.href = 'https://rnbwapp.com/wc'
+  }

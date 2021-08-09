@@ -144,6 +144,7 @@ function ConnectButton({
                 CLIENT_EVENTS.pairing.proposal,
                 async (proposal: PairingTypes.Proposal) => {
                     const { uri } = proposal.signal.params;
+                    console.log('uri', uri)
                     const deeplink = constructDeeplink(uri)
                     setUri(deeplink)
                 },

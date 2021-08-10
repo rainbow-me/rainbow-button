@@ -8,7 +8,7 @@ function ConnectButtonV1({
     onConnectorInitialized,
 }: { 
     connectorOptions: IWalletConnectOptions,
-    onConnectorInitialized: (client: WalletConnect) => WalletConnect, 
+    onConnectorInitialized: (client: WalletConnect) => void, 
 }) {
     const [uri, setUri] = useState<string>('');
 

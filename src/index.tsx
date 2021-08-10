@@ -1,7 +1,10 @@
 import React from 'react';
 import ConnectButtonV2 from './components/button/ConnectButtonV2';
+import ConnectButtonV1 from './components/button/ConnectButtonV1';
 import WalletConnectClient from "@walletconnectv2/client";
+import WalletConnect from "@walletconnect/browser";
 import { ClientOptions, ClientTypes, SessionTypes } from "@walletconnectv2/types";
+import { IWalletConnectOptions } from '@walletconnect/types';
 import { getClientPairings, goToRainbow, getAddressAndChainIdFromAccount } from './utils'
 import {
   SUPPORTED_TEST_CHAIN_IDS,
@@ -10,24 +13,39 @@ import {
   SUPPORTED_MAIN_CHAINS_EIP155,
 } from './constants'
 
-export interface Props {
+export interface ExperimentalProps {
   clientOptions: ClientOptions
   clientConnectParams: ClientTypes.ConnectParams,
   onClientInitialized: (client: WalletConnectClient) => void,
   onSessionStarted: (session: SessionTypes.Settled) => void,
 }
 
-export default ({
+export const RainbowButtonExperimental  = ({
   clientOptions,
   clientConnectParams,
   onClientInitialized,
   onSessionStarted,
-}: Props) => {
+}: ExperimentalProps) => {
   return <ConnectButtonV2
     clientOptions={clientOptions}
     clientConnectParams={clientConnectParams}
     onClientInitialized={onClientInitialized}
     onSessionStarted={onSessionStarted}
+  />
+};
+
+export interface Props {
+  connectorOptions: IWalletConnectOptions,
+  onConnectorInitialized: (client: WalletConnect) => void,
+}
+
+export const RainbowButton = ({
+  connectorOptions,
+  onConnectorInitialized,
+}: Props) => {
+  return <ConnectButtonV1
+    connectorOptions={connectorOptions}
+    onConnectorInitialized={onConnectorInitialized}
   />
 };
 

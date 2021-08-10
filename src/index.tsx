@@ -2,7 +2,7 @@ import React from 'react';
 import ConnectButtonV2 from './components/button/ConnectButtonV2';
 import ConnectButtonV1 from './components/button/ConnectButtonV1';
 import WalletConnectClient from "@walletconnectv2/client";
-import WalletConnect from "@walletconnect/browser";
+import WalletConnect from "@walletconnect/client";
 import { ClientOptions, ClientTypes, SessionTypes } from "@walletconnectv2/types";
 import { IWalletConnectOptions } from '@walletconnect/types';
 import { getClientPairings, goToRainbow, getAddressAndChainIdFromAccount } from './utils'
@@ -35,15 +35,18 @@ export const RainbowButtonExperimental  = ({
 };
 
 export interface Props {
+  chainId: number | undefined,
   connectorOptions: IWalletConnectOptions,
   onConnectorInitialized: (client: WalletConnect) => void,
 }
 
 export const RainbowButton = ({
+  chainId,
   connectorOptions,
   onConnectorInitialized,
 }: Props) => {
   return <ConnectButtonV1
+    chainId={chainId}
     connectorOptions={connectorOptions}
     onConnectorInitialized={onConnectorInitialized}
   />

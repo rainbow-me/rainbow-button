@@ -1,10 +1,17 @@
-import WalletConnectClient from '@walletconnect/client';
-import { SessionTypes } from '@walletconnect/types';
+import WalletConnectClient from '@walletconnectv2/client';
+import WalletConnect from '@walletconnect/client';
+import { SessionTypes } from '@walletconnectv2/types';
 import { createStore } from 'redux'
 
 const SET_SESSION = 'SET_SESSION';
 const SET_CLIENT = 'SET_CLIENT';
+const SET_CONNECTOR = 'SET_CONNECTOR';
 
+
+export const setConnector = (connector: WalletConnect | null) => ({
+    type: SET_CONNECTOR,
+    payload: connector
+  })
 
 export const setClient = (client: WalletConnectClient) => ({
     type: SET_CLIENT,
@@ -23,19 +30,19 @@ export const setPairings = (pairings: string[]) => ({
 
 const INITIAL_STATE = {
   session: undefined,
-  client: undefined
+  client: undefined,
+  connector: undefined
 };
   
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case SET_SESSION:
-      console.log('CASE  SET_SESSION', action.payload, { ...state, session: action.payload })
       return { ...state, session: action.payload };
     case SET_CLIENT:
-      console.log('CASE SET CLIENT', action.payload)
       return { ...state, client: action.payload };
+      case SET_CONNECTOR:
+        return { ...state, connector: action.payload };
     default:
-      console.log('CASE  default', action.payload)
       return state;
   }
 };

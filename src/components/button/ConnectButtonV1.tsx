@@ -1,20 +1,22 @@
 import React, {  useEffect, useState } from 'react';
 import ConnectButton from './ConnectButton';
-import WalletConnect from "@walletconnect/browser";
+import WalletConnect from "@walletconnect/client";
 import { IWalletConnectOptions } from '@walletconnect/types';
 
 function ConnectButtonV1({
+    chainId,
     connectorOptions,
     onConnectorInitialized,
 }: { 
+    chainId: number | undefined,
     connectorOptions: IWalletConnectOptions,
     onConnectorInitialized: (client: WalletConnect) => void, 
 }) {
     const [uri, setUri] = useState<string>('');
-
+    console.log('SSSSSSSSS', chainId)
     useEffect(() => {
          const connector = new WalletConnect(connectorOptions);
-         connector.createSession().then(() => {
+         connector.createSession({chainId}).then(() => {
             setUri(connector.uri);
           });
           connector.on("connect", (error) => {

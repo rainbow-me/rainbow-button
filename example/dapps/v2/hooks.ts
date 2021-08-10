@@ -6,7 +6,7 @@ import {
     setSession as rawSetSession,
     setClient as rawSetClient,
     setPairings as rawSetPairings,
-} from './store';
+} from '../store';
 
 const selector = createSelector(
     ({session, client}) => ({session, client}),

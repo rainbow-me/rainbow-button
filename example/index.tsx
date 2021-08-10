@@ -4,7 +4,7 @@ import * as ReactDOM from 'react-dom';
 import './App.css';
 import Dapp from './Dapp'
 import { Provider } from 'react-redux'
-import {store} from './store'
+import {store} from './dapps/store'
 
 const App = () => <Dapp />
 

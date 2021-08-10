@@ -2,6 +2,8 @@ import QRCodeUtil from 'qrcode';
 import React, { ReactElement, useMemo } from 'react';
 import styled from 'styled-components';
 
+const rainbow_og = require('./public/images/rainbow-og.png')
+
 const QRContainer = styled.div`
   height: 375px;
   user-select: none;
@@ -121,7 +123,7 @@ const QRCode = ({
                     left: logoPosition,
                 }}
             >
-                <img height={logoSize} width={logoSize} src="https://github.com/rainbow-me/rainbow/blob/develop/src/assets/rainbow-og.png?raw=true" alt=""  />
+                <img height={logoSize} width={logoSize} src={rainbow_og} alt=""  />
             </div>
             <svg height={size} width={size}>
                 <defs>

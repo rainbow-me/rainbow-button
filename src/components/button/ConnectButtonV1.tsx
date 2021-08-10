@@ -3,7 +3,6 @@ import ConnectButton from './ConnectButton';
 import WalletConnect from "@walletconnectv1/browser";
 import { IWalletConnectOptions } from '@walletconnect/types';
 
-
 function ConnectButtonV1({
     connectorOptions,
     onConnectorInitialized,

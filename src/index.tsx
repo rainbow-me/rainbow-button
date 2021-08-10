@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import React from 'react';
 import ConnectButtonV2 from './components/button/ConnectButtonV2';
 import WalletConnectClient from "@walletconnectv2/client";
 import { ClientOptions, ClientTypes, SessionTypes } from "@walletconnectv2/types";
@@ -10,7 +10,7 @@ import {
   SUPPORTED_MAIN_CHAINS_EIP155,
 } from './constants'
 
-export interface Props extends HTMLAttributes<HTMLDivElement> {
+export interface Props {
   clientOptions: ClientOptions
   clientConnectParams: ClientTypes.ConnectParams,
   onClientInitialized: (client: WalletConnectClient) => void,

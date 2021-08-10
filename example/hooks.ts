@@ -1,5 +1,5 @@
-import WalletConnectClient from '@walletconnect/client';
-import { SessionTypes } from '@walletconnect/types';
+import WalletConnectClient from '@walletconnectv2/client';
+import { SessionTypes } from '@walletconnectv2/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import {

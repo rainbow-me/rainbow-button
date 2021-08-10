@@ -1,6 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import ConnectButton from './ConnectButton';
-import WalletConnect from "@walletconnectv1/browser";
+import WalletConnect from "@walletconnect/browser";
 import { IWalletConnectOptions } from '@walletconnect/types';
 
 function ConnectButtonV1({

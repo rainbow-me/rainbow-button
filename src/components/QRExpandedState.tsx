@@ -17,40 +17,41 @@ const springConfig = {
   type: 'spring',
 };
 
-const QRExpandedState = ({ value, setIsQRCodeOpen }: { value: string, setIsQRCodeOpen: Dispatch<SetStateAction<boolean>> }) => {
-
+const QRExpandedState = ({ enabled, value, setIsQRCodeOpen }: { enabled: boolean, value: string, setIsQRCodeOpen: Dispatch<SetStateAction<boolean>> }) => {
   return (
     <AnimatePresence>
-      <UniqueTokenExpandedStateContent>
-        <motion.div
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          initial={{ opacity: 0 }}
-          transition={easingConfig}
-        >
-          <ExpandedStateBackground
-            opacity={0.8}
-          />
-        </motion.div>
-        <ExpandedState
-          animate={{ scale: 1, y: 0 }}
-          as={motion.div}
-          exit={{ scale: 0.8, y: '200vh' }}
-          initial={{ scale: 0.8, y: '100vh' }}
-          qr
-          transition={springConfig}
-        >
-          <Column
-            style={{ justifyContent: 'center', height: '100%' }}
+      {enabled && (     
+        <>
+          <UniqueTokenExpandedStateContent key={value}>
+            <motion.div
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              initial={{ opacity: 0 }}
+              transition={easingConfig}
+            >
+              <ExpandedStateBackground
+                opacity={0.8}
+              />
+            </motion.div>
+            <ExpandedState
+            animate={{ scale: 1, y: 0 }}
+            as={motion.div}
+            exit={{ scale: 0.8, y: '100vh' }}
+            initial={{ scale: 0.8, y: '100vh' }}
+            qr
+            transition={springConfig}
           >
-            <TitleText>📲 Scan to connect to Rainbow</TitleText>
-            <Container onClick={proxy => proxy.stopPropagation()}>
-              <QRCode value={value} size={380} logoSize={100} />
-            </Container>
+            <Column
+              style={{ justifyContent: 'center', height: '100%' }}
+            >
+              <TitleText>📲 Scan to connect to Rainbow</TitleText>
+              <Container onClick={proxy => proxy.stopPropagation()}>
+                <QRCode value={value} size={380} logoSize={100} />
+              </Container>
 
-          </Column>
-        </ExpandedState>
-        <DownloadContainer>
+            </Column>
+          </ExpandedState>
+            <DownloadContainer>
           <TitleText subtitle>👇 Don’t have the app yet? 👇</TitleText>
           <div style={{ display: 'flex', flexDirection: 'row' }}>
             <DownloadButton
@@ -65,17 +66,21 @@ const QRExpandedState = ({ value, setIsQRCodeOpen }: { value: string, setIsQRCod
             </DownloadButton>
           </div>
         </DownloadContainer>
-      </UniqueTokenExpandedStateContent>
-      <XButtonWrapper onClick={() => setIsQRCodeOpen(false)}>
-        <motion.div
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
-          initial={{ opacity: 0, scale: 0 }}
-          transition={easingConfig}
-        >
-          <XButton />
-        </motion.div>
-      </XButtonWrapper>
+          </UniqueTokenExpandedStateContent>
+          <XButtonWrapper onClick={() => setIsQRCodeOpen(false)}>
+            <motion.div
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0, scale: 0 }}
+              transition={easingConfig}
+
+            >
+              <XButton />
+            </motion.div>
+          </XButtonWrapper>
+        </>
+        )
+      }
     </AnimatePresence>
   );
 };

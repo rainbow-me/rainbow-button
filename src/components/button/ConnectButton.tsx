@@ -22,11 +22,9 @@ function ConnectButton({ uri }: { uri: string }) {
         new Fountain()
     }, [])
 
-    console.log('rainbow_logo', rainbow_logo)
-
     return (
         <div >
-            {showQRCode && <QRExpandedState setIsQRCodeOpen={setShowQRCode} value={uri} />}
+            <QRExpandedState enabled={showQRCode} setIsQRCodeOpen={setShowQRCode} value={uri} />
             <Content id="content">
                 <Button id="rainbow-button" onClick={connectToRainbow}>
                     <ButtonInner>

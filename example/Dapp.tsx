@@ -22,8 +22,8 @@ const Dapp = () => {
           <div>
           <h2 className="text-center">Choose a RainbowButton</h2>
             <Wrapper>
-                  <Button key={'v1'} onClick={() => setVersion('v1')}>{'RainbowButton'}</Button>
-                  <Button key={'v2'} onClick={() => setVersion('v2')}>{'RainbowButtonExperimental'}</Button>
+                  <Button key={'v1'} onClick={() => setVersion('v1')}>{'RainbowButton WC v1'}</Button>
+                  <Button key={'v2'} onClick={() => setVersion('v2')}>{'RainbowButton  WC v2'}</Button>
             </Wrapper>
           </div>
         )}

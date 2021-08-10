@@ -13,7 +13,6 @@ function ConnectButtonV1({
     onConnectorInitialized: (client: WalletConnect) => void, 
 }) {
     const [uri, setUri] = useState<string>('');
-    console.log('SSSSSSSSS', chainId)
     useEffect(() => {
          const connector = new WalletConnect(connectorOptions);
          connector.createSession({chainId}).then(() => {

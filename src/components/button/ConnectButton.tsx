@@ -3,6 +3,7 @@ import { userAgentIsMobile } from '../../helpers/userAgent';
 import QRExpandedState from '../QRExpandedState';
 import Fountain from '../EmojiPop'
 import { Button, ButtonInner, Content, Label, Logo } from '../../styled';
+import { constructDeeplink } from '../../helpers/deeplink';
 
 const rainbow_logo = require('./public/images/rainbow-logo.png')
 
@@ -10,9 +11,10 @@ function ConnectButton({ uri }: { uri: string }) {
     const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
     const connectToRainbow = useCallback(() => {
+
         if (!uri) return
         if (userAgentIsMobile()) {
-            window.location.href = uri!
+            window.location.href = constructDeeplink(uri)!
         } else {
             setShowQRCode(true)
         }

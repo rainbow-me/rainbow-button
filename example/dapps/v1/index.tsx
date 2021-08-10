@@ -22,13 +22,11 @@ const Dapp = () => {
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
   const onConnectorInitialized = useCallback(connector => {
-    console.log('setting connectr', connector)
     setConnector(connector)}
     , [])
 
   const subscribeToEvents = useCallback(() => {
     if (!connector) return 
-    console.log('subscribeToEvents', connector)
     // Check if connection is already established
     if (connector && !connector.connected) {
       // create new session
@@ -123,11 +121,11 @@ const Dapp = () => {
       console.error(error);
     }
   }, [connector, accounts]);
-  console.log('connectors', connector)
+
   const isConnected = useMemo(() => {
     return Boolean(connector) && accounts?.length
   }, [connector, accounts])
-  console.log('passing Number(selectedChain)', Number(selectedChain))
+
   const renderNotConnected = useMemo(() => {
     return (
       <div>

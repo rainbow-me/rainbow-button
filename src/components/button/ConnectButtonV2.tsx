@@ -1,7 +1,6 @@
 import React, {  useEffect, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from "@walletconnectv2/client";
 import {  PairingTypes, SessionTypes, ClientOptions, ClientTypes } from "@walletconnectv2/types";
-import { constructDeeplink } from '../../helpers/deeplink';
 import { getClientPairings } from '../../utils';
 import ConnectButton from './ConnectButton';
 
@@ -25,8 +24,7 @@ function ConnectButtonV2({
                 CLIENT_EVENTS.pairing.proposal,
                 async (proposal: PairingTypes.Proposal) => {
                     const { uri } = proposal.signal.params;
-                    const deeplink = constructDeeplink(uri)
-                    setUri(deeplink)
+                    setUri(uri)
                 },
             );
             onClientInitialized(client);

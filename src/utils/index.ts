@@ -1,4 +1,4 @@
-import WalletConnectClient from "@walletconnect/client"
+import WalletConnectClient from "@walletconnectv2/client"
 
 /**
  * Go to rainbow app via deeplink

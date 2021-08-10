@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled, {keyframes} from 'styled-components';
 
 export const XButtonWrapper = styled.div`
     -webkit-tap-highlight-color: transparent;
@@ -194,3 +194,106 @@ export const DownloadButton = styled.a`
     transform: scale(0.95);
   }
 `;
+
+export const animatedgradient = keyframes`
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+`
+export const Content = styled.div`
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+`
+
+export const Button = styled.a`
+    transition: 0.125s ease;
+    will-change: transform;
+    padding: 4px 0px;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:active {
+		transform: scale(0.95) !important;
+    }
+`;
+
+export const ButtonInner = styled.div`
+    -webkit-user-select: none;
+    align-items: center;
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    font-family: 'SFProRounded';
+    font-size: 18px;
+    font-weight: 700;
+    height: 44px;
+    letter-spacing: 0.5px;
+    padding: 0 16px 2px 0;
+    position: relative;
+    text-align: center;
+    transition: 0.125s ease;
+
+    &:before {
+		background: rgba(0, 0, 0, 1);
+		border-radius: 16px;
+		content: "";
+		height: 100%;
+		left: 0;
+		position: absolute;
+		top: 0;
+		transition: 0.125s ease;
+		width: 100%;
+		will-change: transform;
+		z-index: -1;
+
+        -webkit-backdrop-filter: saturate(5);
+		backdrop-filter: saturate(5);
+		background: rgba(0, 0, 0, 0.85);
+    }
+
+    &:after {
+		animation: ${animatedgradient} 80s ease-in-out alternate infinite;
+		background: linear-gradient(270deg, #174299 0%, #1EDBAE 9.09%, #00B2FF 18.18%, #9F4CED 27.27%, #D04C74 36.36%, #00B5D5 45.45%, #174299 54.54%, #00B6CF 63.63%, #00D56F 72.72%, #174299 81.81%, #01BCD5 90.9%, #174299 100%);
+		background-size: 1200% 1200%;
+		border-radius: 18px;
+		content: '';
+		height: calc(100% + 4px);
+		left: -2px;
+		position: absolute;
+		top: -2px;
+		transition: 0.125s ease;
+		width: calc(100% + 4px);
+		z-index: -2;
+    }
+`;
+
+export const Logo = styled.img`
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    border-radius: 11px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+    margin-left: 6px;
+    margin-right: 10px;
+    margin-top: 2px;
+`
+
+export const Label = styled.div`
+    background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg) no-repeat;
+    background-size: 100% 100%;
+    height: 14px;
+    opacity: 1;
+    transition: 0.125s ease;
+    width: 175px;
+    will-change: transform;
+`

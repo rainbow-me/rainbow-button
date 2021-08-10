@@ -1,7 +1,7 @@
 import React, { HTMLAttributes } from 'react';
-import ConnectButton from './components/ConnectButton';
-import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
-import WalletConnectClient from "@walletconnect/client";
+import ConnectButtonV2 from './components/button/ConnectButtonV2';
+import WalletConnectClient from "@walletconnectv2/client";
+import { ClientOptions, ClientTypes, SessionTypes } from "@walletconnectv2/types";
 import { getClientPairings, goToRainbow, getAddressAndChainIdFromAccount } from './utils'
 import {
   SUPPORTED_TEST_CHAIN_IDS,
@@ -23,7 +23,7 @@ export default ({
   onClientInitialized,
   onSessionStarted,
 }: Props) => {
-  return <ConnectButton
+  return <ConnectButtonV2
     clientOptions={clientOptions}
     clientConnectParams={clientConnectParams}
     onClientInitialized={onClientInitialized}

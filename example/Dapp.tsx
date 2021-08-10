@@ -3,8 +3,8 @@ import * as React from 'react';
 import * as encUtils from "enc-utils";
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { supportedMainChainsInfo } from './constants'
-import { CLIENT_EVENTS } from '@walletconnect/client';
-import { PairingTypes, SessionTypes } from '@walletconnect/types';
+import { CLIENT_EVENTS } from '@walletconnectv2/client';
+import { PairingTypes, SessionTypes } from '@walletconnectv2/types';
 import useWalletConnectState from './hooks';
 import { formatTestTransaction } from './helpers/accounts';
 import { eip712 } from './helpers/eip712'
@@ -33,13 +33,10 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 `
-const fromEIP55Format = (chain: string) => chain?.replace('eip155:', '');
-
 const getAddressAndChainIdFromWCAccount = (
   account: string
 ): { address: string; chainId: number } => {
-  const [address, eip155Network] = account.split('@');
-  const chainId = fromEIP55Format(eip155Network);
+  const [,chainId, address] = account.split(':');
   return { address, chainId: Number(chainId) };
 };
 

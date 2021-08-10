@@ -10,7 +10,7 @@ import { formatTestTransaction } from './helpers/accounts';
 import { eip712 } from './helpers/eip712'
 import styled from 'styled-components';
 import './App.css';
-import RainbowButton, { utils, constants } from '../dist';
+import { RainbowButtonExperimental,  utils, constants } from '../dist';
 
 const {goToRainbow, getClientPairings} = utils;
 const { SUPPORTED_MAIN_CHAINS_EIP155 } = constants;
@@ -42,7 +42,7 @@ const getAddressAndChainIdFromWCAccount = (
 
 const Dapp = () => {
   const { client, session, accounts, chains, setSession, setClient,setPairings} = useWalletConnectState()
-  const [selectedChain, setSelectedChain] = useState('eip155:10')
+  const [selectedChain, setSelectedChain] = useState('')
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
   const onSessionStarted = useCallback((session) => setSession(session), [])
@@ -147,8 +147,8 @@ const Dapp = () => {
   const renderNotConnected = useMemo(() => {
     return (
       <div>
-        <p>Selected chain: {selectedChain}</p>
-        <Wrapper>
+        <p className="text-center">{selectedChain ? `Selected chain: ${selectedChain}` : `Select chain to use the button`}</p>
+        {!selectedChain && <Wrapper>
           {
             Object.values(SUPPORTED_MAIN_CHAINS_EIP155).map((chain) => 
               <Button
@@ -160,8 +160,9 @@ const Dapp = () => {
                   }
               </Button>)
           }
-        </Wrapper>
-        <RainbowButton
+        </Wrapper>}
+
+        {selectedChain&& <RainbowButtonExperimental
           clientOptions={{
             relayProvider: "wss://relay.walletconnect.org",
             metadata: {
@@ -185,7 +186,7 @@ const Dapp = () => {
           }}
           onClientInitialized={onClientInitialized}
           onSessionStarted={onSessionStarted}
-        />
+        />}
       </div>
 
     )

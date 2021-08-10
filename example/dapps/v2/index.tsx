@@ -194,7 +194,6 @@ const Dapp = () => {
 
   return (
       <div>
-        <h1 className="text-center">Rainbow example dapp</h1>
         {isConnected ? renderConnected : renderNotConnected}
       </div>
 

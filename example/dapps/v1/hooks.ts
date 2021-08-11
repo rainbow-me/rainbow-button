@@ -24,7 +24,6 @@ export default function useWalletConnectState() {
     } = useSelector(selector);
 
     const dispatch = useDispatch()
-    console.log('on v1 useWalletConnectState', connector, accounts)
 
     const setConnector = (connector: WalletConnect | null) => dispatch(rawSetConnector(connector))
 

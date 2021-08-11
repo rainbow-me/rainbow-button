@@ -66,11 +66,6 @@ class Fountain {
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
         this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;
         this.autoAddParticle = true;
-        console.log(
-          'addEventListeneraddEventListeneraddEventListener',
-          this.mouseX,
-          this.mouseY
-        );
       });
 
     document.addEventListener(tapCancel, () => {

@@ -16,4 +16,5 @@ export const Wrapper = styled.div`
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    right: -200px;
 `

@@ -206,12 +206,9 @@ export const Content = styled.div`
   display: flex;
   overflow: hidden;
   height: 100%;
-`;
-
-export const Button = styled.a`
+  padding: 4px;
   transition: 0.125s ease;
   will-change: transform;
-  padding: 4px 0px;
 
   &:hover {
     transform: scale(1.05);
@@ -220,6 +217,12 @@ export const Button = styled.a`
   &:active {
     transform: scale(0.95) !important;
   }
+`;
+
+export const Button = styled.a`
+  transition: 0.125s ease;
+  will-change: transform;
+  padding: 4px 0px;
 `;
 
 export const ButtonInner = styled.div`

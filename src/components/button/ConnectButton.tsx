@@ -40,8 +40,8 @@ function ConnectButton({
         value={uri}
       />
       {customButton ? (
-        <div id="content" onClick={connectToRainbow}>
-          <div id="rainbow-button">{customButton}</div>
+        <div id="content">
+          <div id="rainbow-button" onClick={connectToRainbow}>{customButton}</div>
         </div>
       ) : (
         <Content id="content">

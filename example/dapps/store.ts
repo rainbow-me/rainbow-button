@@ -1,12 +1,14 @@
+import WalletConnect from '@walletconnect/client';
 import { createStore } from 'redux'
 
 const SET_SESSION = 'SET_SESSION';
 const SET_CLIENT = 'SET_CLIENT';
 const SET_CONNECTOR = 'SET_CONNECTOR';
 
-export const setPairings = (pairings: string[]) => ({
-    type: SET_SESSION,
-    payload: pairings
+
+export const setConnector = (connector: WalletConnect | null) => ({
+    type: SET_CONNECTOR,
+    payload: connector
   })
 
 const INITIAL_STATE = {

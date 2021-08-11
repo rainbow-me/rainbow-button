@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@types/react-redux": "^7.1.18",
+    "@walletconnect/client": "^1.5.4",
     "enc-utils": "^3.0.0",
     "lodash": "^4.17.21",
     "react-app-polyfill": "^1.0.0",

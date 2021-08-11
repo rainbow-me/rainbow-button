@@ -156,7 +156,7 @@ const Dapp = () => {
             }
           }}
           onConnectorInitialized={onConnectorInitialized}
-          customButton={<Button />}
+          // customButton={<Button />}
         />}
         </Wrapper>
       </div>

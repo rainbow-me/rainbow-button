@@ -7,7 +7,7 @@ import { constructDeeplink } from '../../helpers/deeplink';
 
 const rainbow_logo = require('./public/images/rainbow-logo.png')
 
-function ConnectButton({ uri }: { uri: string }) {
+function ConnectButton({ uri, customButton, animate = true }: { uri: string, customButton?: any, animate?: boolean }) {
     const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
     const connectToRainbow = useCallback(() => {
@@ -21,20 +21,23 @@ function ConnectButton({ uri }: { uri: string }) {
     }, [uri])
 
     useEffect(() => {
-        new Fountain()
-    }, [])
+        animate && new Fountain()
+    }, [animate])
 
     return (
         <div >
             <QRExpandedState enabled={showQRCode} setIsQRCodeOpen={setShowQRCode} value={uri} />
-            <Content id="content">
-                <Button id="rainbow-button" onClick={connectToRainbow}>
-                    <ButtonInner>
-                        <Logo src={rainbow_logo} width="34" />
-                        <Label id="rainbow-button-label" />
-                    </ButtonInner>
-                </Button>
-            </Content>
+            {customButton ? 
+                <div id="content" onClick={connectToRainbow}><div id="rainbow-button">{customButton}</div></div> : 
+                <Content id="content">
+                    <Button id="rainbow-button" onClick={connectToRainbow}>
+                        <ButtonInner>
+                            <Logo src={rainbow_logo} width="34" />
+                            <Label id="rainbow-button-label" />
+                        </ButtonInner>
+                    </Button>
+                </Content>
+            }
         </div>
     );
 }

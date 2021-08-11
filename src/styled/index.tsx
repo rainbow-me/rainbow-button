@@ -209,7 +209,6 @@ export const animatedgradient = keyframes`
 export const Content = styled.div`
     align-items: center;
     display: flex;
-    justify-content: center;
     overflow: hidden;
     height: 100%;
 `

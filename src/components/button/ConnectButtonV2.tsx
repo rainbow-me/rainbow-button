@@ -9,11 +9,15 @@ function ConnectButtonV2({
     clientConnectParams,
     onSessionStarted,
     onClientInitialized,
+    customButton,
+    animate
 }: { 
     clientOptions: ClientOptions,
     clientConnectParams: ClientTypes.ConnectParams,
     onSessionStarted: (client: SessionTypes.Settled) => void, 
     onClientInitialized: (client: WalletConnectClient) => void, 
+    customButton?: any,
+    animate?: boolean
 }) {
     const [uri, setUri] = useState<string>('');
 
@@ -36,7 +40,7 @@ function ConnectButtonV2({
         walletConnectInit()
     }, []);
 
-    return <ConnectButton uri={uri} />
+    return <ConnectButton uri={uri} customButton={customButton} animate={animate}/>
 }
 
 export default React.memo(ConnectButtonV2);

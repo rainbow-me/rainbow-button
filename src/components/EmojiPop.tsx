@@ -36,7 +36,6 @@ class Fountain {
 
   loop() {
     if (this.autoAddParticle && this.particles.length < this.limit) {
-      console.log('loop')
       this.createParticle();
     }
 

@@ -143,7 +143,7 @@ const Dapp = () => {
               </Button>)
           }
         </Wrapper>}
-
+        <Wrapper>
         {selectedChain && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
@@ -156,7 +156,9 @@ const Dapp = () => {
             }
           }}
           onConnectorInitialized={onConnectorInitialized}
+          customButton={<Button />}
         />}
+        </Wrapper>
       </div>
 
     )

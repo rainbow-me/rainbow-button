@@ -18,6 +18,8 @@ export interface ExperimentalProps {
   clientConnectParams: ClientTypes.ConnectParams,
   onClientInitialized: (client: WalletConnectClient) => void,
   onSessionStarted: (session: SessionTypes.Settled) => void,
+  customButton?: any,
+  animate?: boolean
 }
 
 export const RainbowButtonExperimental  = ({
@@ -25,12 +27,16 @@ export const RainbowButtonExperimental  = ({
   clientConnectParams,
   onClientInitialized,
   onSessionStarted,
+  customButton,
+  animate
 }: ExperimentalProps) => {
   return <ConnectButtonV2
     clientOptions={clientOptions}
     clientConnectParams={clientConnectParams}
     onClientInitialized={onClientInitialized}
     onSessionStarted={onSessionStarted}
+    customButton={customButton}
+    animate={animate}
   />
 };
 
@@ -38,17 +44,23 @@ export interface Props {
   chainId: number | undefined,
   connectorOptions: IWalletConnectOptions,
   onConnectorInitialized: (client: WalletConnect) => void,
+  customButton?: any,
+  animate?: boolean
 }
 
 export const RainbowButton = ({
   chainId,
   connectorOptions,
   onConnectorInitialized,
+  customButton,
+  animate
 }: Props) => {
   return <ConnectButtonV1
     chainId={chainId}
     connectorOptions={connectorOptions}
     onConnectorInitialized={onConnectorInitialized}
+    customButton={customButton}
+    animate={animate}
   />
 };
 

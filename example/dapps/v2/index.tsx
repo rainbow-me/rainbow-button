@@ -148,6 +148,7 @@ const Dapp = () => {
           }
         </Wrapper>}
 
+          <Wrapper>
         {selectedChain && <RainbowButtonExperimental
           clientOptions={{
             relayProvider: "wss://relay.walletconnect.org",
@@ -172,7 +173,9 @@ const Dapp = () => {
           }}
           onClientInitialized={onClientInitialized}
           onSessionStarted={onSessionStarted}
+          customButton={<Button >Custom button</Button>}
         />}
+          </Wrapper>
       </div>
 
     )

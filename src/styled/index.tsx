@@ -1,36 +1,36 @@
 import { motion } from 'framer-motion';
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const XButtonWrapper = styled.div`
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
-    height: 27px;
-    opacity: 1;
-    overflow: visible;
-    padding: 30px;
-    pointer-events: 'auto';
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  height: 27px;
+  opacity: 1;
+  overflow: visible;
+  padding: 30px;
+  pointer-events: 'auto';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 27px;
+  transition: 0.125s ease;
+  z-index: 100;
+  svg {
+    will-change: transform;
+  }
+  :hover {
+    transform: scale(1.125);
+  }
+  :active {
+    transform: scale(0.875);
+  }
+  @media (max-width: 1200px) {
+    padding: 19px 24px 15px;
     position: fixed;
-    top: 0;
     right: 0;
-    width: 27px;
-    transition: 0.125s ease;
-    z-index: 100;
-    svg {
-      will-change: transform;
-    }
-    :hover {
-      transform: scale(1.125);
-    }
-    :active {
-      transform: scale(0.875);
-    }
-    @media (max-width: 1200px) {
-      padding: 19px 24px 15px;
-      position: fixed;
-      right: 0;
-      top: 0;
-    }
-  `;
+    top: 0;
+  }
+`;
 
 export const UniqueTokenExpandedStateContent = styled.div`
   display: none;
@@ -58,7 +58,7 @@ export const UniqueTokenExpandedStateContent = styled.div`
   }
 `;
 
-export const ExpandedState = styled(motion.div) <{ qr?: boolean }>`
+export const ExpandedState = styled(motion.div)<{ qr?: boolean }>`
   align-items: center;
   align-self: center;
   background: transparent;
@@ -87,33 +87,28 @@ export const ExpandedState = styled(motion.div) <{ qr?: boolean }>`
   }
 `;
 
-
 export const ExpandedStateBackground = styled.div<{
   isPopoverVisible?: boolean;
   popover?: boolean;
   opacity?: number;
 }>`
-    background-color: #000000;
-    cursor: ${({ isPopoverVisible, popover }) =>
-    popover && isPopoverVisible
-      ? 'auto'
-      : 'default'};
-    ${({ theme: { isMobile } }) => !isMobile && 'left: -50vh;'}
-    opacity: ${({ isPopoverVisible, opacity, popover }) =>
+  background-color: #000000;
+  cursor: ${({ isPopoverVisible, popover }) =>
+    popover && isPopoverVisible ? 'auto' : 'default'};
+  ${({ theme: { isMobile } }) => !isMobile && 'left: -50vh;'}
+  opacity: ${({ isPopoverVisible, opacity, popover }) =>
     opacity || (popover && isPopoverVisible ? 0.1 : 0)};
-    pointer-events: ${({ isPopoverVisible, popover }) =>
+  pointer-events: ${({ isPopoverVisible, popover }) =>
     popover && !isPopoverVisible ? 'none' : 'auto'};
-    position: fixed;
-    top: 0;
-    transition: 0.125s ease;
-    width: ${({ theme: { isMobile } }) => (isMobile ? '100%' : '250vw')};
-    height: 100%;
-    z-index: -100;
-  `;
+  position: fixed;
+  top: 0;
+  transition: 0.125s ease;
+  width: ${({ theme: { isMobile } }) => (isMobile ? '100%' : '250vw')};
+  height: 100%;
+  z-index: -100;
+`;
 
-
-
-  export const Column = styled.div<{
+export const Column = styled.div<{
   width?: string;
   align?: string;
   justify?: string;
@@ -121,18 +116,18 @@ export const ExpandedStateBackground = styled.div<{
   border?: string;
   borderRadius?: string;
 }>`
-    width: ${({ width }) => width ?? '100%'};
-    display: flex;
-    flex-direction: column !important;
-    padding: 0;
-    align-items: ${({ align }) => align ?? 'center'};
-    justify-content: ${({ justify }) => justify ?? 'flex-start'};
-    padding: ${({ padding }) => padding};
-    border: ${({ border }) => border};
-    border-radius: ${({ borderRadius }) => borderRadius};
-  `;
+  width: ${({ width }) => width ?? '100%'};
+  display: flex;
+  flex-direction: column !important;
+  padding: 0;
+  align-items: ${({ align }) => align ?? 'center'};
+  justify-content: ${({ justify }) => justify ?? 'flex-start'};
+  padding: ${({ padding }) => padding};
+  border: ${({ border }) => border};
+  border-radius: ${({ borderRadius }) => borderRadius};
+`;
 
-  export const Container = styled.div`
+export const Container = styled.div`
   background: white;
   border-radius: 53px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -205,94 +200,109 @@ export const animatedgradient = keyframes`
     100% {
         background-position: 0% 50%;
     }
-`
+`;
 export const Content = styled.div`
-    align-items: center;
-    display: flex;
-    overflow: hidden;
-    height: 100%;
-`
+  align-items: center;
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+`;
 
 export const Button = styled.a`
-    transition: 0.125s ease;
-    will-change: transform;
-    padding: 4px 0px;
+  transition: 0.125s ease;
+  will-change: transform;
+  padding: 4px 0px;
 
-    &:hover {
-        transform: scale(1.05);
-    }
+  &:hover {
+    transform: scale(1.05);
+  }
 
-    &:active {
-		transform: scale(0.95) !important;
-    }
+  &:active {
+    transform: scale(0.95) !important;
+  }
 `;
 
 export const ButtonInner = styled.div`
-    -webkit-user-select: none;
-    align-items: center;
-    color: #ffffff;
-    cursor: pointer;
-    display: flex;
-    font-family: 'SFProRounded';
-    font-size: 18px;
-    font-weight: 700;
-    height: 44px;
-    letter-spacing: 0.5px;
-    padding: 0 16px 2px 0;
-    position: relative;
-    text-align: center;
+  -webkit-user-select: none;
+  align-items: center;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  font-family: 'SFProRounded';
+  font-size: 18px;
+  font-weight: 700;
+  height: 44px;
+  letter-spacing: 0.5px;
+  padding: 0 16px 2px 0;
+  position: relative;
+  text-align: center;
+  transition: 0.125s ease;
+
+  &:before {
+    background: rgba(0, 0, 0, 1);
+    border-radius: 16px;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
     transition: 0.125s ease;
+    width: 100%;
+    will-change: transform;
+    z-index: -1;
 
-    &:before {
-		background: rgba(0, 0, 0, 1);
-		border-radius: 16px;
-		content: "";
-		height: 100%;
-		left: 0;
-		position: absolute;
-		top: 0;
-		transition: 0.125s ease;
-		width: 100%;
-		will-change: transform;
-		z-index: -1;
+    -webkit-backdrop-filter: saturate(5);
+    backdrop-filter: saturate(5);
+    background: rgba(0, 0, 0, 0.85);
+  }
 
-        -webkit-backdrop-filter: saturate(5);
-		backdrop-filter: saturate(5);
-		background: rgba(0, 0, 0, 0.85);
-    }
-
-    &:after {
-		animation: ${animatedgradient} 80s ease-in-out alternate infinite;
-		background: linear-gradient(270deg, #174299 0%, #1EDBAE 9.09%, #00B2FF 18.18%, #9F4CED 27.27%, #D04C74 36.36%, #00B5D5 45.45%, #174299 54.54%, #00B6CF 63.63%, #00D56F 72.72%, #174299 81.81%, #01BCD5 90.9%, #174299 100%);
-		background-size: 1200% 1200%;
-		border-radius: 18px;
-		content: '';
-		height: calc(100% + 4px);
-		left: -2px;
-		position: absolute;
-		top: -2px;
-		transition: 0.125s ease;
-		width: calc(100% + 4px);
-		z-index: -2;
-    }
+  &:after {
+    animation: ${animatedgradient} 80s ease-in-out alternate infinite;
+    background: linear-gradient(
+      270deg,
+      #174299 0%,
+      #1edbae 9.09%,
+      #00b2ff 18.18%,
+      #9f4ced 27.27%,
+      #d04c74 36.36%,
+      #00b5d5 45.45%,
+      #174299 54.54%,
+      #00b6cf 63.63%,
+      #00d56f 72.72%,
+      #174299 81.81%,
+      #01bcd5 90.9%,
+      #174299 100%
+    );
+    background-size: 1200% 1200%;
+    border-radius: 18px;
+    content: '';
+    height: calc(100% + 4px);
+    left: -2px;
+    position: absolute;
+    top: -2px;
+    transition: 0.125s ease;
+    width: calc(100% + 4px);
+    z-index: -2;
+  }
 `;
 
 export const Logo = styled.img`
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    border-radius: 11px;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
-    margin-left: 6px;
-    margin-right: 10px;
-    margin-top: 2px;
-`
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  border-radius: 11px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.2);
+  margin-left: 6px;
+  margin-right: 10px;
+  margin-top: 2px;
+`;
 
 export const Label = styled.div`
-    background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg) no-repeat;
-    background-size: 100% 100%;
-    height: 14px;
-    opacity: 1;
-    transition: 0.125s ease;
-    width: 175px;
-    will-change: transform;
-`
+  background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg)
+    no-repeat;
+  background-size: 100% 100%;
+  height: 14px;
+  opacity: 1;
+  transition: 0.125s ease;
+  width: 175px;
+  will-change: transform;
+`;

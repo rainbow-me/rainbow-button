@@ -1,6 +1,5 @@
-
 interface Particle {
-  element: HTMLSpanElement,
+  element: HTMLSpanElement;
   size: number;
   speedHorz: number;
   speedUp: number;
@@ -11,15 +10,14 @@ interface Particle {
   direction: number;
 }
 class Fountain {
-
-  limit: number
-  particles: Particle[]
-  autoAddParticle: boolean
-  height: number
-  sizes: number[]
-  variants: string[]
-  mouseX: number
-  mouseY: number
+  limit: number;
+  particles: Particle[];
+  autoAddParticle: boolean;
+  height: number;
+  sizes: number[];
+  variants: string[];
+  mouseX: number;
+  mouseY: number;
 
   constructor() {
     this.limit = 7;
@@ -27,9 +25,9 @@ class Fountain {
     this.autoAddParticle = false;
     this.height = document.documentElement.clientHeight;
     this.sizes = [15, 20, 25, 35, 45];
-    this.mouseX= 0
-    this.mouseY= 0
-    this.variants = ["🌈"];
+    this.mouseX = 0;
+    this.mouseY = 0;
+    this.variants = ['🌈'];
     this.addHandlers();
     this.loop();
   }
@@ -46,29 +44,35 @@ class Fountain {
 
   addHandlers() {
     const isTouchInteraction =
-      "ontouchstart" in window || navigator.msMaxTouchPoints;
+      'ontouchstart' in window || navigator.msMaxTouchPoints;
 
-    const tap = isTouchInteraction ? "touchstart" : "mousedown";
-    const tapCancel = isTouchInteraction ? "touchcancel" : "contextmenu";
-    const tapEnd = isTouchInteraction ? "touchend" : "mouseup";
-    const move = isTouchInteraction ? "touchmove" : "mousemove";
+    const tap = isTouchInteraction ? 'touchstart' : 'mousedown';
+    const tapCancel = isTouchInteraction ? 'touchcancel' : 'contextmenu';
+    const tapEnd = isTouchInteraction ? 'touchend' : 'mouseup';
+    const move = isTouchInteraction ? 'touchmove' : 'mousemove';
 
     document?.addEventListener(
       move,
       (e) => {
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
-        this.mouseY = e instanceof MouseEvent ?  e.pageY :  e.touches[0].pageY;
+        this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;
       },
       { passive: false }
     );
 
-    document?.getElementById("rainbow-button")?.addEventListener(tap, (e: MouseEvent|TouchEvent) => {
-      this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
-      this.mouseY = e instanceof MouseEvent ?  e.pageY :  e.touches[0].pageY;
-      this.autoAddParticle = true;
-      console.log('addEventListeneraddEventListeneraddEventListener',  this.mouseX, this.mouseY)
-    });
-    
+    document
+      ?.getElementById('rainbow-button')
+      ?.addEventListener(tap, (e: MouseEvent | TouchEvent) => {
+        this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
+        this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;
+        this.autoAddParticle = true;
+        console.log(
+          'addEventListeneraddEventListeneraddEventListener',
+          this.mouseX,
+          this.mouseY
+        );
+      });
+
     document.addEventListener(tapCancel, () => {
       this.autoAddParticle = false;
     });
@@ -77,7 +81,7 @@ class Fountain {
       this.autoAddParticle = false;
     });
 
-    document.addEventListener("mouseleave", () => {
+    document.addEventListener('mouseleave', () => {
       this.autoAddParticle = false;
     });
   }
@@ -92,14 +96,14 @@ class Fountain {
     const left = this.mouseX - size / 2;
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
-    const particle = document.createElement("span");
+    const particle = document.createElement('span');
     particle.innerHTML = this.variants[
       Math.floor(Math.random() * this.variants.length)
     ];
-    particle.classList.add("particle");
+    particle.classList.add('particle');
 
     particle.setAttribute(
-      "style",
+      'style',
       `
       -webkit-user-select: none;
       font-size: ${size}px;
@@ -111,7 +115,7 @@ class Fountain {
     `
     );
 
-    document?.getElementById("content")?.appendChild(particle);
+    document?.getElementById('content')?.appendChild(particle);
 
     this.particles.push({
       element: particle,
@@ -139,7 +143,7 @@ class Fountain {
       }
 
       p.element.setAttribute(
-        "style",
+        'style',
         `
         -webkit-user-select: none;
         font-size: ${p.size}px;
@@ -154,4 +158,4 @@ class Fountain {
   }
 }
 
-export default Fountain
+export default Fountain;

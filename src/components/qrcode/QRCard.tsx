@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import QRCode from './QRCode';
 
-const Content = styled.div<{ showQR?: boolean, size?: number }>`
+const Content = styled.div<{ showQR?: boolean; size?: number }>`
   border-radius: 39px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
   height: ${({ size }) => (size ? `${size}px` : '200px')};
@@ -13,12 +13,20 @@ const Content = styled.div<{ showQR?: boolean, size?: number }>`
   position: 'absolute';
 `;
 
-const QRCard = ({ value, showQR, size }: { value: string, showQR: boolean, size?: number }) => {
-    return (
-        <Content size={size} showQR={showQR}>
-            <QRCode size={size} value={value} />
-        </Content>
-    );
+const QRCard = ({
+  value,
+  showQR,
+  size,
+}: {
+  value: string;
+  showQR: boolean;
+  size?: number;
+}) => {
+  return (
+    <Content size={size} showQR={showQR}>
+      <QRCode size={size} value={value} />
+    </Content>
+  );
 };
 
 export default QRCard;

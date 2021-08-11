@@ -8,9 +8,7 @@ import { formatTestTransaction } from '../helpers/accounts';
 import { eip712 } from '../helpers/eip712'
 import { RainbowButton, utils, constants } from '../../../dist';
 import { Button, Wrapper } from '../../styled';
-import { userAgentIsMobile } from '../helpers/userAgent';
-
-const isMobile = userAgentIsMobile()
+import { isMobile } from '@walletconnect/browser-utils';
 
 const {goToRainbow} = utils;
 const { SUPPORTED_MAIN_CHAIN_IDS } = constants;
@@ -80,7 +78,7 @@ const Dapp = () => {
     try {
       const tx = await formatTestTransaction(accounts?.[0]);
 
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await connector.sendTransaction(tx)
       console.log('RESULT', result)
     } catch (error) {
@@ -97,7 +95,7 @@ const Dapp = () => {
       const params = [hexMsg, address];
 
       // send message
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await connector.signPersonalMessage(params)
 
       console.log('RESULT', result)
@@ -114,7 +112,7 @@ const Dapp = () => {
       const params = [address, message];
 
       // send message
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await connector.signTypedData(params)
       console.log('RESULT', result)
     } catch (error) {

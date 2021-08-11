@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { userAgentIsMobile } from '../../helpers/userAgent';
 import QRExpandedState from '../QRExpandedState';
 import Fountain from '../EmojiPop'
 import { Button, ButtonInner, Content, Label, Logo } from '../../styled';
 import { constructDeeplink } from '../../helpers/deeplink';
+import { isMobile } from '@walletconnect/browser-utils';
 
 const rainbow_logo = require('./public/images/rainbow-logo.png')
 
@@ -13,7 +13,7 @@ function ConnectButton({ uri, customButton, animate = true }: { uri: string, cus
     const connectToRainbow = useCallback(() => {
 
         if (!uri) return
-        if (userAgentIsMobile()) {
+        if (isMobile()) {
             window.location.href = constructDeeplink(uri)!
         } else {
             setShowQRCode(true)

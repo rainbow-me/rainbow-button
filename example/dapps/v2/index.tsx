@@ -10,9 +10,8 @@ import { formatTestTransaction } from '../helpers/accounts';
 import { eip712 } from '../helpers/eip712'
 import { RainbowButtonExperimental, utils, constants } from '../../../dist';
 import { Button, Wrapper } from '../../styled';
-import { userAgentIsMobile } from '../helpers/userAgent';
+import { isMobile } from '@walletconnect/browser-utils';
 
-const isMobile = userAgentIsMobile()
 const {goToRainbow, getClientPairings} = utils;
 const { SUPPORTED_MAIN_CHAINS_EIP155 } = constants;
 
@@ -62,7 +61,7 @@ const Dapp = () => {
       const account = accounts?.[0] || '';
       const tx = await formatTestTransaction(account);
 
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await client.request({
         topic: session.topic,
         chainId: chains?.[0] || '',
@@ -86,7 +85,7 @@ const Dapp = () => {
       const params = [hexMsg, address];
 
       // send message
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await client.request({
         topic: session.topic,
         chainId: chains?.[0] || '',
@@ -109,7 +108,7 @@ const Dapp = () => {
       const params = [address, message];
 
       // send message
-      isMobile && goToRainbow()
+      isMobile() && goToRainbow()
       const result = await client.request({
         topic: session.topic,
         chainId: chains?.[0] || '',

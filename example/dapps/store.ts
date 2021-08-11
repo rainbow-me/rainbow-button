@@ -1,27 +1,8 @@
-import WalletConnectClient from '@walletconnectv2/client';
-import WalletConnect from '@walletconnect/client';
-import { SessionTypes } from '@walletconnectv2/types';
 import { createStore } from 'redux'
 
 const SET_SESSION = 'SET_SESSION';
 const SET_CLIENT = 'SET_CLIENT';
 const SET_CONNECTOR = 'SET_CONNECTOR';
-
-
-export const setConnector = (connector: WalletConnect | null) => ({
-    type: SET_CONNECTOR,
-    payload: connector
-  })
-
-export const setClient = (client: WalletConnectClient) => ({
-    type: SET_CLIENT,
-    payload: client
-  })
-
-export const setSession = (sessions: SessionTypes.Settled | null) => ({
-    type: SET_SESSION,
-    payload: sessions
-  })
 
 export const setPairings = (pairings: string[]) => ({
     type: SET_SESSION,

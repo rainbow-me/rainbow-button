@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import QRExpandedState from '../QRExpandedState';
 import Fountain from '../EmojiPop';
-import { Button, ButtonInner, Content, Label, Logo } from '../../styled';
+import { Button, ButtonInner, Content, Logo } from '../../styled';
 import { constructDeeplink } from '../../helpers/deeplink';
 import { isMobile } from '@walletconnect/browser-utils';
+import ButtonLabel from '../../icons/ButtonLabel';
 
 const rainbow_logo = require('./public/images/rainbow-logo.png');
 
@@ -47,7 +48,7 @@ function ConnectButton({
           <Button id="rainbow-button" onClick={connectToRainbow}>
             <ButtonInner>
               <Logo src={rainbow_logo} width="34" />
-              <Label id="rainbow-button-label" />
+              <ButtonLabel />
             </ButtonInner>
           </Button>
         </Content>

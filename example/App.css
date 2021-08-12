@@ -1,0 +1,122 @@
+.text-center {
+  text-align: center;
+}
+
+@font-face {
+  font-family: SFRounded;
+  src: url(/fonts/subset-SFRounded-Regular.eot);
+  src: url(/fonts/subset-SFRounded-Regular.eot?#iefix)
+      format('embedded-opentype'),
+    url(/fonts/subset-SFRounded-Regular.woff2) format('woff2'),
+    url(/fonts/subset-SFRounded-Regular.woff) format('woff'),
+    url(/fonts/subset-SFRounded-Regular.svg#SFRounded-Regular) format('svg');
+  font-weight: 400;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: SFRounded;
+  src: url(/fonts/subset-SFRounded-Medium.eot);
+  src: url(/fonts/subset-SFRounded-Medium.eot?#iefix)
+      format('embedded-opentype'),
+    url(/fonts/subset-SFRounded-Medium.woff2) format('woff2'),
+    url(/fonts/subset-SFRounded-Medium.woff) format('woff'),
+    url(/fonts/subset-SFRounded-Medium.svg#SFRounded-Medium) format('svg');
+  font-weight: 500;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: SFRounded;
+  src: url(/fonts/subset-SFRounded-Semibold.eot);
+  src: url(/fonts/subset-SFRounded-Semibold.eot?#iefix)
+      format('embedded-opentype'),
+    url(/fonts/subset-SFRounded-Semibold.woff2) format('woff2'),
+    url(/fonts/subset-SFRounded-Semibold.woff) format('woff'),
+    url(/fonts/subset-SFRounded-Semibold.svg#SFRounded-Semibold) format('svg');
+  font-weight: 600;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: SFRounded;
+  src: url(/fonts/subset-SFRounded-Bold.eot);
+  src: url(/fonts/subset-SFRounded-Bold.eot?#iefix) format('embedded-opentype'),
+    url(/fonts/subset-SFRounded-Bold.woff2) format('woff2'),
+    url(/fonts/subset-SFRounded-Bold.woff) format('woff'),
+    url(/fonts/subset-SFRounded-Bold.svg#SFRounded-Bold) format('svg');
+  font-weight: 700;
+  font-style: normal;
+  font-display: auto;
+}
+
+@font-face {
+  font-family: SFRounded;
+  src: url(/fonts/subset-SFRounded-Heavy.eot);
+  src: url(/fonts/subset-SFRounded-Heavy.eot?#iefix) format('embedded-opentype'),
+    url(/fonts/subset-SFRounded-Heavy.woff2) format('woff2'),
+    url(/fonts/subset-SFRounded-Heavy.woff) format('woff'),
+    url(/fonts/subset-SFRounded-Heavy.svg#SFRounded-Heavy) format('svg');
+  font-weight: 800;
+  font-style: normal;
+  font-display: auto;
+}
+
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  font-family: SFRounded, ui-rounded, SF Pro Rounded, system-ui, Helvetica Neue,
+    Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  position: relative;
+  text-rendering: optimizeLegibility;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  display: table-cell;
+}
+
+h1 {
+  color: #25292e;
+  font-size: 3.75em;
+  font-weight: 800;
+  line-height: 1.1em;
+  margin: 60px auto 30px;
+  max-width: 666px;
+  padding: 0 60px;
+  text-align: center;
+}
+
+p {
+  color: rgba(60, 66, 82, 0.8);
+  font-size: 23px;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.network-icon {
+  margin-bottom: -8px;
+  width: 42px;
+}
+
+.ethereum {
+  margin-bottom: -1px;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 20px;
+}

@@ -1,0 +1,33 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "dependencies": {
+    "@types/react-redux": "^7.1.18",
+    "@walletconnect/client": "^1.5.4",
+    "enc-utils": "^3.0.0",
+    "lodash": "^4.17.21",
+    "react-app-polyfill": "^1.0.0",
+    "react-redux": "^7.2.4",
+    "redux-persist": "^6.0.0",
+    "reselect": "^4.0.0",
+    "styled-components": "^5.3.0"
+  },
+  "alias": {
+    "react": "../node_modules/react",
+    "react-dom": "../node_modules/react-dom/profiling",
+    "scheduler/tracing": "../node_modules/scheduler/tracing-profiling"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.8.4",
+    "parcel": "^1.12.3",
+    "parcel-bundler": "^1.12.5",
+    "typescript": "^3.4.5"
+  }
+}

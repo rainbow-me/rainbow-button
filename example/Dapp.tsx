@@ -13,14 +13,14 @@ const Dapp = () => {
   }, [version])
 
   return (
-      <div>
+      <div className={"body"}>
         <h1 className="text-center">Rainbow example dapp</h1>
         {version && renderDapp }
         {!version && (
           <div>
           <h2 className="text-center">Choose a RainbowButton</h2>
             <Wrapper>
-                  <Button key={'v1'} onClick={() => setVersion('v1')}>{'RainbowButton WC v1'}</Button>
+                  <Button className="button" key={'v1'} onClick={() => setVersion('v1')}>{'RainbowButton WC v1'}</Button>
             </Wrapper>
           </div>
         )}

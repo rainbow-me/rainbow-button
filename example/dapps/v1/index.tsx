@@ -13,6 +13,12 @@ import { isMobile } from '@walletconnect/browser-utils';
 const {goToRainbow} = utils;
 const { SUPPORTED_MAIN_CHAIN_IDS } = constants;
 
+const images = {
+  arbitrum: require("../../assets/images/arbitrum.png"),
+  ethereum: require("../../assets/images/ethereum.png"),
+  optimism: require("../../assets/images/optimism.png"),
+  polygon: require("../../assets/images/polygon.png")
+}
 
 const Dapp = () => {
   const { connector, accounts, chainId, setConnector} = useWalletConnectState()
@@ -127,7 +133,6 @@ const Dapp = () => {
   const renderNotConnected = useMemo(() => {
     return (
       <div>
-        <p className="text-center">{'Trying RainbowButton (with Wallet Connect v1)'}</p>
         <p className="text-center">{selectedChain ? `Selected chain: ${selectedChain}` : `Select chain to use the button`}</p>
         {!selectedChain && <Wrapper>
           {
@@ -135,6 +140,10 @@ const Dapp = () => {
             supportedMainChainsInfo[chain]?.name && <Button
                 key={chain}
                 onClick={() => selectChain(chain)}>
+                  <img
+                    src={images[supportedMainChainsInfo[chain]?.value]}
+                    className={`network-icon ${supportedMainChainsInfo[chain]?.value}`}
+                  />
                   {
                     supportedMainChainsInfo[chain]?.name
                   }

@@ -120,7 +120,7 @@ class Fountain {
     `
     );
 
-    document?.firstElementChild?.appendChild(particle);
+    document?.documentElement?.appendChild(particle);
 
     this.particles.push({
       element: particle,

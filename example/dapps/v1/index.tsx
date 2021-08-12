@@ -4,10 +4,10 @@ import * as encUtils from "enc-utils";
 import { useCallback, useState, useEffect, useMemo } from 'react';
 import { supportedMainChainsInfo } from '../constants'
 import useWalletConnectState from '../v1/hooks';
-import { formatTestTransaction } from '../helpers/accounts';
+import { formatTestTransaction, renderAddress } from '../helpers/accounts';
 import { eip712 } from '../helpers/eip712'
 import { RainbowButton, utils, constants } from '../../../dist';
-import { Button, Wrapper } from '../../styled';
+import { Button, ActionButton, Wrapper } from '../../styled';
 import { isMobile } from '@walletconnect/browser-utils';
 
 const {goToRainbow} = utils;
@@ -26,6 +26,7 @@ const Dapp = () => {
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
   const onConnectorInitialized = useCallback(connector => {
+    console.log('onConnectorInitialized')
     setConnector(connector)}
     , [])
 
@@ -92,6 +93,8 @@ const Dapp = () => {
     }
   }, [connector, accounts]);
 
+  const disconnect = useCallback(async () => connector?.killSession(), [connector])
+
   const signPersonalMessage = useCallback(async () => {
     if (!connector) return
     try {
@@ -133,7 +136,7 @@ const Dapp = () => {
   const renderNotConnected = useMemo(() => {
     return (
       <div>
-        <p className="text-center">{selectedChain ? `Selected chain: ${selectedChain}` : `Select chain to use the button`}</p>
+        <p className="text-center">{selectedChain ? `Selected chain id: ${selectedChain}` : `Select chain to use with the button`}</p>
         {!selectedChain && <Wrapper>
           {
             Object.values(SUPPORTED_MAIN_CHAIN_IDS).map((chain) => 
@@ -174,12 +177,17 @@ const Dapp = () => {
   const renderConnected = useMemo(() => {
     return (
       <div>
-        <p className="text-center">Connected to {supportedMainChainsInfo[chainId]?.name }</p>
-        <p className="text-center">Account: {accounts?.[0]}</p>
         <Wrapper>
-          <Button key={'sendTransaction'} onClick={sendTransaction}>{'sendTransaction'}</Button>
-          <Button key={'signPersonalMessage'} onClick={signPersonalMessage}>{'signPersonalMessage'}</Button>
-          <Button key={'signTypedData'} onClick={signTypedData}>{'signTypedData'}</Button>
+        <p className="text-center">Connected to {supportedMainChainsInfo[chainId]?.name }</p>
+        <p className="text-center">Account: {renderAddress(accounts?.[0])}</p>
+        </Wrapper>
+        <Wrapper>
+          <ActionButton key={'sendTransaction'} onClick={sendTransaction}>{'sendTransaction'}</ActionButton>
+          <ActionButton key={'signPersonalMessage'} onClick={signPersonalMessage}>{'signPersonalMessage'}</ActionButton>
+          <ActionButton key={'signTypedData'} onClick={signTypedData}>{'signTypedData'}</ActionButton>
+          </Wrapper>
+        <Wrapper>
+          <ActionButton key={'disconnect'} onClick={disconnect}>{'disconnect'}</ActionButton>
         </Wrapper>
       </div>
     )

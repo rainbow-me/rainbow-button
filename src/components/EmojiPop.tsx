@@ -34,6 +34,7 @@ class Fountain {
 
   loop() {
     if (this.autoAddParticle && this.particles.length < this.limit) {
+      console.log('loop')
       this.createParticle();
     }
 
@@ -63,6 +64,7 @@ class Fountain {
     document
       ?.getElementById('rainbow-button')
       ?.addEventListener(tap, (e: MouseEvent | TouchEvent) => {
+        console.log('addEventListener')
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
         this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;
         this.autoAddParticle = true;

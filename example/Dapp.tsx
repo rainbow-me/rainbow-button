@@ -14,7 +14,7 @@ const Dapp = () => {
 
   return (
       <div className={"body"}>
-        <h1 className="text-center">Rainbow example dapp</h1>
+        <h1 className="text-center">Rainbow Button Dapp</h1>
         {version && renderDapp }
         {!version && (
           <div>

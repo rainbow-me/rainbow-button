@@ -19,6 +19,7 @@ function ConnectButtonV1({
   const [uri, setUri] = useState<string>('');
   useEffect(() => {
     const connector = new WalletConnect(connectorOptions);
+    onConnectorInitialized(connector);
     connector.createSession({ chainId }).then(() => {
       setUri(connector.uri);
     });
@@ -26,7 +27,6 @@ function ConnectButtonV1({
       if (error) {
         throw error;
       }
-      onConnectorInitialized(connector);
     });
   }, [chainId, connectorOptions, onConnectorInitialized]);
 

@@ -29,7 +29,7 @@ function ConnectButton({
   }, [uri]);
 
   useEffect(() => {
-    animate && new Fountain();
+    new Fountain();
   }, [animate]);
 
   return (

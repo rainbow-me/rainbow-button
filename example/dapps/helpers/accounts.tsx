@@ -26,3 +26,10 @@ export async function formatTestTransaction(address: string) {
 
   return tx;
 }
+
+export const renderAddress = (address = '') => {
+  return [
+    address.substring(0, 4),
+    address.substring(address.length - 4),
+  ].join('...')
+}

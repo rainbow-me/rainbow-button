@@ -1,4 +1,4 @@
-import { RAINBOW_BUTTON_ID } from "../constants";
+import { RAINBOW_BUTTON_ID } from '../constants';
 
 interface Particle {
   element: HTMLSpanElement;
@@ -12,11 +12,19 @@ interface Particle {
   direction: number;
 }
 
-const validateEventPosition = (mouseX: number, mouseY: number, rect?: DOMRect) => {
-  if (!rect) return 
-  return (mouseX > rect.x && mouseX < rect.x + rect.width && 
-    mouseY > rect.y && mouseY < rect.y + rect.height)
-}
+const validateEventPosition = (
+  mouseX: number,
+  mouseY: number,
+  rect?: DOMRect
+) => {
+  if (!rect) return;
+  return (
+    mouseX > rect.x &&
+    mouseX < rect.x + rect.width &&
+    mouseY > rect.y &&
+    mouseY < rect.y + rect.height
+  );
+};
 
 class Fountain {
   limit: number;
@@ -40,11 +48,17 @@ class Fountain {
     this.variants = ['🌈'];
     this.addHandlers();
     this.loop();
-    this.rect = document?.getElementById(RAINBOW_BUTTON_ID)?.getBoundingClientRect();
+    this.rect = document
+      ?.getElementById(RAINBOW_BUTTON_ID)
+      ?.getBoundingClientRect();
   }
 
   loop() {
-    if (validateEventPosition(this.mouseX, this.mouseY, this.rect) && this.autoAddParticle && this.particles.length < this.limit) {
+    if (
+      validateEventPosition(this.mouseX, this.mouseY, this.rect) &&
+      this.autoAddParticle &&
+      this.particles.length < this.limit
+    ) {
       this.createParticle();
     }
 
@@ -71,7 +85,8 @@ class Fountain {
       { passive: false }
     );
 
-    document?.getElementById(RAINBOW_BUTTON_ID)
+    document
+      ?.getElementById(RAINBOW_BUTTON_ID)
       ?.addEventListener(tap, (e: MouseEvent | TouchEvent) => {
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
         this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;

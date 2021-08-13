@@ -92,7 +92,6 @@ const QRExpandedState = ({
                 </div>
               </DownloadContainer>
             </ExpandedState>
-       
           </UniqueTokenExpandedStateContent>
           <XButtonWrapper onClick={() => setIsQRCodeOpen(false)}>
             <motion.div

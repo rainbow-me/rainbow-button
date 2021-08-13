@@ -40,8 +40,12 @@ function ConnectButton({
         setIsQRCodeOpen={setShowQRCode}
         value={uri}
       />
-      {customButton ? (<div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>{customButton}</div>) : (
-        <Content >
+      {customButton ? (
+        <div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
+          {customButton}
+        </div>
+      ) : (
+        <Content>
           <Button id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
             <ButtonInner>
               <Logo src={rainbow_logo} width="34" />

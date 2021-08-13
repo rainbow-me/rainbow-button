@@ -32,7 +32,6 @@ function ConnectButtonV1({
       if (error) {
         throw error;
       }
-      
     });
   }, [chainId, connectorOptions, onConnectorInitialized]);
 

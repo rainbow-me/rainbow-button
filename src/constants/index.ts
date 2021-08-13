@@ -39,4 +39,4 @@ export enum SUPPORTED_TEST_CHAINS_NAMES {
   GÖRLI = 'Gorli',
   KOVAN = 'Kovan',
 }
-export const RAINBOW_BUTTON_ID = "1628799713918-rainbow-button"
+export const RAINBOW_BUTTON_ID = '1628799713918-rainbow-button';

@@ -5,6 +5,7 @@ import { Button, ButtonInner, Content, Logo } from '../../styled';
 import { constructDeeplink } from '../../helpers/deeplink';
 import { isMobile } from '@walletconnect/browser-utils';
 import ButtonLabel from '../../icons/ButtonLabel';
+import { RAINBOW_BUTTON_ID } from '../../constants';
 
 const rainbow_logo = require('./public/images/rainbow-logo.png');
 
@@ -39,13 +40,9 @@ function ConnectButton({
         setIsQRCodeOpen={setShowQRCode}
         value={uri}
       />
-      {customButton ? (
-        <div id="content">
-          <div id="rainbow-button" onClick={connectToRainbow}>{customButton}</div>
-        </div>
-      ) : (
-        <Content id="content">
-          <Button id="rainbow-button" onClick={connectToRainbow}>
+      {customButton ? (<div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>{customButton}</div>) : (
+        <Content >
+          <Button id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
             <ButtonInner>
               <Logo src={rainbow_logo} width="34" />
               <ButtonLabel />

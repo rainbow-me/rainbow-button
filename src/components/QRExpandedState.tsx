@@ -68,30 +68,31 @@ const QRExpandedState = ({
                   <QRCode value={value} size={380} logoSize={100} />
                 </Container>
               </Column>
+              <DownloadContainer>
+                <TitleText subtitle>
+                  <span role="img" aria-labelledby="emoji">
+                    👇
+                  </span>{' '}
+                  Don’t have the app yet?{' '}
+                  <span role="img" aria-labelledby="emoji">
+                    👇
+                  </span>
+                </TitleText>
+                <div style={{ display: 'flex', flexDirection: 'row' }}>
+                  <DownloadButton
+                    href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
+                    onClick={(proxy) => proxy.stopPropagation()}
+                    target="_blank"
+                  >
+                    <div style={{ marginRight: 6 }}>
+                      <LogoAppStore />
+                    </div>
+                    App Store
+                  </DownloadButton>
+                </div>
+              </DownloadContainer>
             </ExpandedState>
-            <DownloadContainer>
-              <TitleText subtitle>
-                <span role="img" aria-labelledby="emoji">
-                  👇
-                </span>{' '}
-                Don’t have the app yet?{' '}
-                <span role="img" aria-labelledby="emoji">
-                  👇
-                </span>
-              </TitleText>
-              <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <DownloadButton
-                  href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
-                  onClick={(proxy) => proxy.stopPropagation()}
-                  target="_blank"
-                >
-                  <div style={{ marginRight: 6 }}>
-                    <LogoAppStore />
-                  </div>
-                  App Store
-                </DownloadButton>
-              </div>
-            </DownloadContainer>
+       
           </UniqueTokenExpandedStateContent>
           <XButtonWrapper onClick={() => setIsQRCodeOpen(false)}>
             <motion.div

@@ -21,16 +21,16 @@ const images = {
 }
 
 const Dapp = () => {
-  const { connector, accounts, chainId, setConnector} = useWalletConnectState()
+  const { connector, accounts, chainId, setConnector, setAccounts, setChainId} = useWalletConnectState()
   const [selectedChain, setSelectedChain] = useState('')
-
+  console.log('accounts', accounts, connector)
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
   const onConnectorInitialized = useCallback(connector => {
     console.log('onConnectorInitialized')
     setConnector(connector)}
     , [])
 
-  const subscribeToEvents = useCallback(() => {
+  useEffect(() => {
     if (!connector) return 
     // Check if connection is already established
     if (connector && !connector.connected) {
@@ -45,7 +45,10 @@ const Dapp = () => {
       }
 
       // Get provided accounts and chainId
-      // const { accounts, chainId } = payload.params[0];
+      console.log('ON CONNECT')
+      const { accounts, chainId } = payload.params[0];
+      setAccounts(accounts)
+      setChainId(chainId)
     });
 
     connector.on("session_update", (error, payload) => {
@@ -54,8 +57,9 @@ const Dapp = () => {
       }
 
       // Get updated accounts and chainId
-      // const { accounts, chainId } = payload.params[0];
-
+      const { accounts, chainId } = payload.params[0];
+      setAccounts(accounts)
+      setChainId(chainId)
     });
 
     connector.on("disconnect", (error, payload) => {
@@ -75,10 +79,7 @@ const Dapp = () => {
   //   }
   // }, [connector])
 
-  useEffect(() => {
-    // checkPersistedState()
-    subscribeToEvents()
-  }, [subscribeToEvents])
+
 
   const sendTransaction = useCallback(async () => {
     if (!connector) return
@@ -154,16 +155,10 @@ const Dapp = () => {
           }
         </Wrapper>}
         <Wrapper>
-        {selectedChain && <RainbowButton
+        {(selectedChain) && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
             bridge: "https://bridge.walletconnect.org",
-            clientMeta: {
-              name: "🌈 Rainbow example dapp",
-              description: "Rainbow example dapp",
-              url: 'https://best.dapp',
-              icons: ['https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1'],
-            }
           }}
           onConnectorInitialized={onConnectorInitialized}
           // customButton={<Button>Custom</Button>}

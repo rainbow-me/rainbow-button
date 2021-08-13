@@ -1,9 +1,9 @@
 import WalletConnect from '@walletconnect/client';
 import { createStore } from 'redux'
 
-const SET_SESSION = 'SET_SESSION';
-const SET_CLIENT = 'SET_CLIENT';
 const SET_CONNECTOR = 'SET_CONNECTOR';
+const SET_ACCOUNTS = 'SET_ACCOUNTS';
+const SET_CHAIN_ID = 'SET_CHAIN_ID';
 
 
 export const setConnector = (connector: WalletConnect | null) => ({
@@ -11,20 +11,30 @@ export const setConnector = (connector: WalletConnect | null) => ({
     payload: connector
   })
 
+export const setAccounts = (accounts: string[] | null) => ({
+    type: SET_ACCOUNTS,
+    payload: accounts
+  })
+
+export const setChainId = (chainId: string | null) => ({
+    type: SET_CHAIN_ID,
+    payload: chainId
+  })
+
 const INITIAL_STATE = {
-  session: undefined,
-  client: undefined,
-  connector: undefined
+  connector: undefined,
+  accounts: undefined,
+  chainId: undefined,
 };
   
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case SET_SESSION:
-      return { ...state, session: action.payload };
-    case SET_CLIENT:
-      return { ...state, client: action.payload };
-      case SET_CONNECTOR:
-        return { ...state, connector: action.payload };
+    case SET_CONNECTOR:
+      return { ...state, connector: action.payload };
+    case SET_ACCOUNTS:
+      return { ...state, accounts: action.payload };
+    case SET_CHAIN_ID:
+      return { ...state, chainId: action.payload };
     default:
       return state;
   }

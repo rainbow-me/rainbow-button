@@ -20,9 +20,11 @@ function ConnectButtonV1({
   useEffect(() => {
     const connector = new WalletConnect(connectorOptions);
     onConnectorInitialized(connector);
-    connector.createSession({ chainId }).then(() => {
-      setUri(connector.uri);
-    });
+    if (connector && !connector.connected) {
+      connector.createSession({ chainId }).then(() => {
+        setUri(connector.uri);
+      });
+    }
     connector.on('connect', (error) => {
       if (error) {
         throw error;

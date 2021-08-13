@@ -26,3 +26,5 @@ dist
 *.tgz
 
 example/.cache
+
+package-lock.json

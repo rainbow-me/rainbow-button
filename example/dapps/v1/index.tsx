@@ -23,12 +23,10 @@ const images = {
 const Dapp = () => {
   const { connector, accounts, chainId, setConnector, setAccounts, setChainId} = useWalletConnectState()
   const [selectedChain, setSelectedChain] = useState('')
-  console.log('accounts', accounts, connector)
+
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
-  const onConnectorInitialized = useCallback(connector => {
-    console.log('onConnectorInitialized')
-    setConnector(connector)}
-    , [])
+
+  const onConnectorInitialized = useCallback(connector => setConnector(connector), [])
 
   useEffect(() => {
     if (!connector) return 
@@ -45,7 +43,6 @@ const Dapp = () => {
       }
 
       // Get provided accounts and chainId
-      console.log('ON CONNECT')
       const { accounts, chainId } = payload.params[0];
       setAccounts(accounts)
       setChainId(chainId)
@@ -71,15 +68,6 @@ const Dapp = () => {
       setConnector(null)
     });
   }, [connector])
-
-  // const checkPersistedState = useCallback(async () => {
-  //   if (!connector && getClientPairings(client).length) {
-  //     const session = await client.session.get(getClientPairings(client)[0]);
-  //     setSession(session)
-  //   }
-  // }, [connector])
-
-
 
   const sendTransaction = useCallback(async () => {
     if (!connector) return

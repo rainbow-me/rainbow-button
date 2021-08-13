@@ -17,18 +17,22 @@ function ConnectButtonV1({
   animate?: boolean;
 }) {
   const [uri, setUri] = useState<string>('');
+
   useEffect(() => {
     const connector = new WalletConnect(connectorOptions);
     onConnectorInitialized(connector);
+
     if (connector && !connector.connected) {
       connector.createSession({ chainId }).then(() => {
         setUri(connector.uri);
       });
     }
+
     connector.on('connect', (error) => {
       if (error) {
         throw error;
       }
+      
     });
   }, [chainId, connectorOptions, onConnectorInitialized]);
 

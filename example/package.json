@@ -5,11 +5,14 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build-dev": "rm -rf dist/ && parcel build index.html --no-minify --public-url ./",
+    "build": "rm -rf dist/ && parcel build index.html --public-url https://rainbow-me.github.io/rainbow-button",
+    "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
+    "@rainbow/rainbow-button": "../rainbow-rainbow-button-v1.0.1.tgz",
     "@types/react-redux": "^7.1.18",
-    "@walletconnect/client": "^1.5.4",
+    "@walletconnect/client": "^1.6.0",
     "enc-utils": "^3.0.0",
     "lodash": "^4.17.21",
     "react-app-polyfill": "^1.0.0",

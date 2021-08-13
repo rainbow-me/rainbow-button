@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "@walletconnect/client": ">1.5.4",
+    "@walletconnect/client": ">1.6.0",
     "react": ">=16"
   },
   "husky": {
@@ -37,7 +37,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "rainbow-button",
+  "name": "@rainbow/rainbow-button",
   "author": "Esteban Miño",
   "module": "dist/rainbow-button.esm.js",
   "size-limit": [

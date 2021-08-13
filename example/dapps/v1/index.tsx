@@ -6,7 +6,7 @@ import { supportedMainChainsInfo } from '../constants'
 import useWalletConnectState from '../v1/hooks';
 import { formatTestTransaction, renderAddress } from '../helpers/accounts';
 import { eip712 } from '../helpers/eip712'
-import { RainbowButton, utils, constants } from '../../../dist';
+import { RainbowButton, utils, constants } from '@rainbow/rainbow-button';
 import { Button, ActionButton, Wrapper } from '../../styled';
 import { isMobile } from '@walletconnect/browser-utils';
 

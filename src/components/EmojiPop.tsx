@@ -62,7 +62,7 @@ class Fountain {
     const tapEnd = isTouchInteraction ? 'touchend' : 'mouseup';
     const move = isTouchInteraction ? 'touchmove' : 'mousemove';
 
-    document?.addEventListener(
+    document?.getElementById(RAINBOW_BUTTON_ID)?.addEventListener(
       move,
       (e) => {
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;

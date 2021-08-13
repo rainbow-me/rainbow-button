@@ -1034,6 +1034,16 @@
     qrcode "^1.4.4"
     styled-components "^5.3.0"
 
+"@rainbow/rainbow-button@../rainbow-rainbow-button-v1.0.1.tgz":
+  version "1.0.1"
+  resolved "../rainbow-rainbow-button-v1.0.1.tgz#557f525300b9db7263f4aa79e9390a472eba81e4"
+  dependencies:
+    "@walletconnect/browser-utils" "^1.5.4"
+    eslint-plugin-prettier "^3.4.0"
+    framer-motion "^4.1.17"
+    qrcode "^1.4.4"
+    styled-components "^5.3.0"
+
 "@types/hoist-non-react-statics@^3.3.0":
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz#1124aafe5118cb591977aeb1ceaaed1070eb039f"

@@ -10,7 +10,7 @@
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {
-    "@rainbow/rainbow-button": "../rainbow-rainbow-button-v1.0.0.tgz",
+    "@rainbow/rainbow-button": "../rainbow-rainbow-button-v1.0.1.tgz",
     "@types/react-redux": "^7.1.18",
     "@walletconnect/client": "^1.5.4",
     "enc-utils": "^3.0.0",

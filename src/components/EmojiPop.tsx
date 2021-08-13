@@ -71,7 +71,7 @@ class Fountain {
       { passive: false }
     );
 
-    document
+    document?.getElementById(RAINBOW_BUTTON_ID)
       ?.addEventListener(tap, (e: MouseEvent | TouchEvent) => {
         this.mouseX = e instanceof MouseEvent ? e.pageX : e.touches[0].pageX;
         this.mouseY = e instanceof MouseEvent ? e.pageY : e.touches[0].pageY;

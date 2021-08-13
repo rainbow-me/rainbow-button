@@ -5,7 +5,6 @@ import WalletConnect from '@walletconnect/client';
 import { IWalletConnectOptions } from '@walletconnect/types';
 import {
   goToRainbow,
-  getAddressAndChainIdFromAccount,
 } from './utils';
 import {
   SUPPORTED_TEST_CHAIN_IDS,
@@ -40,9 +39,13 @@ export const RainbowButton = ({
   );
 };
 
+export const assets = {
+  rainbow_icon: require('./public/images/rainbow-icon.png'),
+  rainbow: require('./public/images/rainbow.png')
+}
+
 export const utils = {
   goToRainbow,
-  getAddressAndChainIdFromAccount,
 };
 
 export const constants = {

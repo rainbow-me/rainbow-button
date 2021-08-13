@@ -14,6 +14,13 @@ yarn add @rainbow/rainbow-button
 
 ```
 
+**Required peerDependencies:**
+
+The following packages also need to be installed along side `@rainbow/rainbow-button`.
+
+- `@walletconnect/client@>=1.6.0`
+- `react@>=16`
+
 ## How to use
 
 ```js

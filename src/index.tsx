@@ -9,8 +9,6 @@ import {
 import {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAINS_EIP155,
-  SUPPORTED_MAIN_CHAINS_EIP155,
 } from './constants';
 
 export interface Props {
@@ -50,7 +48,5 @@ export const utils = {
 
 export const constants = {
   SUPPORTED_TEST_CHAIN_IDS,
-  SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAINS_EIP155,
-  SUPPORTED_MAIN_CHAINS_EIP155,
+  SUPPORTED_MAIN_CHAIN_IDS
 };

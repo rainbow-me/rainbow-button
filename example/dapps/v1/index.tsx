@@ -21,16 +21,14 @@ const images = {
 }
 
 const Dapp = () => {
-  const { connector, accounts, chainId, setConnector} = useWalletConnectState()
+  const { connector, accounts, chainId, setConnector, setAccounts, setChainId} = useWalletConnectState()
   const [selectedChain, setSelectedChain] = useState('')
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
-  const onConnectorInitialized = useCallback(connector => {
-    console.log('onConnectorInitialized')
-    setConnector(connector)}
-    , [])
 
-  const subscribeToEvents = useCallback(() => {
+  const onConnectorInitialized = useCallback(connector => setConnector(connector), [])
+
+  useEffect(() => {
     if (!connector) return 
     // Check if connection is already established
     if (connector && !connector.connected) {
@@ -45,7 +43,9 @@ const Dapp = () => {
       }
 
       // Get provided accounts and chainId
-      // const { accounts, chainId } = payload.params[0];
+      const { accounts, chainId } = payload.params[0];
+      setAccounts(accounts)
+      setChainId(chainId)
     });
 
     connector.on("session_update", (error, payload) => {
@@ -54,8 +54,9 @@ const Dapp = () => {
       }
 
       // Get updated accounts and chainId
-      // const { accounts, chainId } = payload.params[0];
-
+      const { accounts, chainId } = payload.params[0];
+      setAccounts(accounts)
+      setChainId(chainId)
     });
 
     connector.on("disconnect", (error, payload) => {
@@ -67,18 +68,6 @@ const Dapp = () => {
       setConnector(null)
     });
   }, [connector])
-
-  // const checkPersistedState = useCallback(async () => {
-  //   if (!connector && getClientPairings(client).length) {
-  //     const session = await client.session.get(getClientPairings(client)[0]);
-  //     setSession(session)
-  //   }
-  // }, [connector])
-
-  useEffect(() => {
-    // checkPersistedState()
-    subscribeToEvents()
-  }, [subscribeToEvents])
 
   const sendTransaction = useCallback(async () => {
     if (!connector) return
@@ -154,16 +143,10 @@ const Dapp = () => {
           }
         </Wrapper>}
         <Wrapper>
-        {selectedChain && <RainbowButton
+        {(selectedChain) && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
             bridge: "https://bridge.walletconnect.org",
-            clientMeta: {
-              name: "🌈 Rainbow example dapp",
-              description: "Rainbow example dapp",
-              url: 'https://best.dapp',
-              icons: ['https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1'],
-            }
           }}
           onConnectorInitialized={onConnectorInitialized}
           // customButton={<Button>Custom</Button>}

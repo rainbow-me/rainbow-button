@@ -23,7 +23,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
-    "@walletconnect/client": ">1.6.0",
+    "@walletconnect/client": ">=1.6.0",
     "react": ">=16"
   },
   "husky": {

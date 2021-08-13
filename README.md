@@ -1,8 +1,10 @@
-# Rainbow Button
+# Rainbow Button 🌈
+
+Rainbow Button is a react component that renders an opinionated button built on top of (WalletConnect)[https://walletconnect.org/] v1 which allows you to connect to (Rainbow)[https://rainbow.me/] on mobile (via Mobile Deeplinking) and desktop (via QR codes) and maybe add a recordit gif showing a quick demo
 
 ## Demo Dapp
 
-[Demo Link](TBD)
+[Demo Link](https://rainbow-me.github.io/rainbow-button)
 
 ## Install
 
@@ -21,9 +23,9 @@ import { RainbowButton } from '@rainbow/rainbow-button';
 
 ReactDOM.render(
   <RainbowButton
-    chainId={chainId}
-    connectorOptions={connectorOptions}
-    onConnectorInitialized={onConnectorInitialized}
+    chainId={1}
+    connectorOptions={{ bridge: 'https://bridge.walletconnect.org' }}
+    onConnectorInitialized={(connector) => console.log(connector)}
   />,
   document.getElementById('rainbowButton')
 );
@@ -34,10 +36,10 @@ ReactDOM.render(
 ```js
 ReactDOM.render(
   <RainbowButton
-    chainId={chainId}
-    connectorOptions={connectorOptions}
-    onConnectorInitialized={onConnectorInitialized}
-    render={<button>Custom Rainbow button</button>}
+    chainId={1}
+    connectorOptions={{ bridge: 'https://bridge.walletconnect.org' }}
+    onConnectorInitialized={(connector) => console.log(connector)}
+    render={() => <button>Custom Rainbow button</button>}
   />,
   document.getElementById('rainbowButton')
 );

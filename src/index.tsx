@@ -10,6 +10,8 @@ import {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
 } from './constants';
+import rainbow_logo from '../assets/images/rainbow-icon.png';
+import rainbow_o from '../assets/images/rainbow.png';
 
 export interface Props {
   chainId: number | undefined;
@@ -38,9 +40,9 @@ export const RainbowButton = ({
 };
 
 export const assets = {
-  rainbow_icon: require('./public/images/rainbow-icon.png'),
-  rainbow: require('./public/images/rainbow.png')
-}
+  rainbow_icon: rainbow_logo,
+  rainbow: rainbow_o,
+};
 
 export const utils = {
   goToRainbow,

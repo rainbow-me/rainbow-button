@@ -7,7 +7,7 @@ import { isMobile } from '@walletconnect/browser-utils';
 import ButtonLabel from '../../icons/ButtonLabel';
 import { RAINBOW_BUTTON_ID } from '../../constants';
 
-const rainbow_logo = require('./public/images/rainbow-logo.png');
+const rainbow_logo = require('./public/images/rainbow-icon.png');
 
 function ConnectButton({
   uri,

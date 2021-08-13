@@ -102,6 +102,41 @@ More details can be found in the Wallet Connect docs:
 
 - [Wallet Connect client](https://docs.walletconnect.org/quick-start/dapps/client)
 
+## Exported assets
+
+```js
+import { assets } from '@rainbow/rainbow-button';
+
+ReactDOM.render(
+  <div>
+    <img src={assets.rainbow} tag="rainbow" />
+    <img src={assets.rainbow_icon} tag="rainbow icon" />
+  </div>,
+  document.getElementById('assets')
+);
+```
+
+## Exported utils
+
+```js
+import { utils } from '@rainbow/rainbow-button';
+
+// Triggers a deeplink to go to the app. Only mobile.
+utils.goToRainbow();
+```
+
+## Exported constants
+
+```js
+import { constants } from '@rainbow/rainbow-button';
+
+console.log('Rainbow supported chain ids', constants.SUPPORTED_MAIN_CHAIN_IDS);
+console.log(
+  'Rainbow supported test chain ids',
+  constants.SUPPORTED_TEST_CHAIN_IDS
+);
+```
+
 ## Dev Server
 
 ```

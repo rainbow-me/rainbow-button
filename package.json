@@ -52,6 +52,7 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.14.8",
+    "@rollup/plugin-image": "^2.1.0",
     "@size-limit/preset-small-lib": "^5.0.1",
     "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-info": "^5.3.21",
@@ -71,7 +72,6 @@
     "react": ">= 16.8.0",
     "react-dom": ">= 16.8.0",
     "react-is": ">= 16.8.0",
-    "rollup-plugin-copy": "^3.4.0",
     "size-limit": "^5.0.1",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",

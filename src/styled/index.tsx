@@ -142,6 +142,14 @@ export const Container = styled.div`
   :active {
     transform: scale(1.025) translate3d(0, 0, 0);
   }
+  
+  @media (max-height: 750px) {
+    margin-bottom: 130px;
+  }
+  
+  @media (max-height: 680px) {
+    margin-bottom: 24px;
+  }
 `;
 
 export const TitleText = styled.div<{ subtitle?: boolean }>`
@@ -161,10 +169,18 @@ export const DownloadContainer = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   left: 0;
-  margin: 0 auto 41px;
+  margin: 0 auto 42px;
   position: absolute;
   right: 0;
   z-index: 100;
+  
+  @media (max-height: 750px) {
+    margin: 0 auto 24px;
+  }
+  
+  @media (max-height: 680px) {
+    display: none;
+  }
 `;
 
 export const DownloadButton = styled.a`

@@ -144,7 +144,7 @@ export const Container = styled.div`
   }
   
   @media (max-height: 750px) {
-    margin-bottom: 130px;
+    margin-bottom: 135px;
   }
   
   @media (max-height: 680px) {

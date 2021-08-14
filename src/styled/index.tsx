@@ -129,13 +129,15 @@ export const Column = styled.div<{
 
 export const Container = styled.div`
   background: white;
-  border-radius: 53px;
+  border-radius: 47px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   margin-bottom: 150px;
-  padding: 24px;
+  padding: 30px;
+  padding-bottom: 36px;
   transform: translate3d(0, 0, 0);
   transition: 0.125s ease;
   will-change: transform;
+  z-index: 20;
 
   :active {
     transform: scale(1.025) translate3d(0, 0, 0);
@@ -144,6 +146,7 @@ export const Container = styled.div`
 
 export const TitleText = styled.div<{ subtitle?: boolean }>`
   color: white;
+  letter-spacing: 0.35px;
   font-size: 20px;
   font-weight: 800;
   margin-bottom: ${({ subtitle }) => (subtitle ? 0 : '24px')};
@@ -167,7 +170,7 @@ export const DownloadContainer = styled.div`
 export const DownloadButton = styled.a`
   background: #000000;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.4);
-  border-radius: 38px;
+  border-radius: 47px;
   box-sizing: border-box;
   color: white;
   cursor: pointer;
@@ -177,11 +180,13 @@ export const DownloadButton = styled.a`
   padding: 10px 19px 0;
   font-size: 18px;
   font-weight: 800;
+  letter-spacing: 0.35px;
   text-align: center;
   transition: 0.125s ease;
   will-change: transform;
   text-decoration: none;
   z-index: 100;
+
   :hover {
     transform: scale(1.05);
   }
@@ -201,6 +206,7 @@ export const animatedgradient = keyframes`
         background-position: 0% 50%;
     }
 `;
+
 export const Content = styled.div`
   align-items: center;
   display: flex;
@@ -210,11 +216,11 @@ export const Content = styled.div`
   transition: 0.125s ease;
   will-change: transform;
 
-  &:hover {
+  :hover {
     transform: scale(1.05);
   }
 
-  &:active {
+  :active {
     transform: scale(0.95) !important;
   }
 `;
@@ -222,7 +228,6 @@ export const Content = styled.div`
 export const Button = styled.a`
   transition: 0.125s ease;
   will-change: transform;
-  padding: 4px 0px;
 `;
 
 export const ButtonInner = styled.div`
@@ -240,9 +245,17 @@ export const ButtonInner = styled.div`
   position: relative;
   text-align: center;
   transition: 0.125s ease;
+  
+  :hover {
+    &:before {
+      backdrop-filter: saturate(4);
+      background: rgba(0, 0, 0, 0.925);
+    }
+  }
 
   &:before {
-    background: rgba(0, 0, 0, 1);
+    backdrop-filter: saturate(4);
+    background: rgba(0, 0, 0, 0.85);
     border-radius: 16px;
     content: '';
     height: 100%;
@@ -253,10 +266,6 @@ export const ButtonInner = styled.div`
     width: 100%;
     will-change: transform;
     z-index: -1;
-
-    -webkit-backdrop-filter: saturate(5);
-    backdrop-filter: saturate(5);
-    background: rgba(0, 0, 0, 0.85);
   }
 
   &:after {
@@ -285,7 +294,25 @@ export const ButtonInner = styled.div`
     top: -2px;
     transition: 0.125s ease;
     width: calc(100% + 4px);
+    will-change: transform;
     z-index: -2;
+  }
+  
+  @media (color-gamut: p3) {
+    :hover {
+      &:before {
+        background: color(display-p3 0 0 0 / 92.5%);
+      }
+    }
+
+    &:before {
+      background: color(display-p3 0 0 0 / 85%); 
+    }
+
+    &:after {
+      background: linear-gradient(315deg, color(display-p3 0.09020 0.25882 0.6) 0%, color(display-p3 0.11765 0.85882 0.68235) 9.09%, color(display-p3 0 0.69804 1) 18.18%, color(display-p3 0.62353 0.29804 0.92941) 27.27%, color(display-p3 0.81569 0.29804 0.65098) 36.36%, color(display-p3 0 0.70980 0.83529) 45.45%, color(display-p3 0.09020 0.25882 0.6) 54.54%, color(display-p3 0 0.71373 0.81176) 63.63%, color(display-p3 0 0.83529 0.43529) 72.72%, color(display-p3 0.0902 0.25882 0.6) 81.81%, color(display-p3 0.00392 0.73725 0.83529) 90.9%, color(display-p3 0.09020 0.25882 0.6) 100%);
+      background-size: 1200% 1200%;
+    }
   }
 `;
 
@@ -300,8 +327,6 @@ export const Logo = styled.img`
 `;
 
 export const Label = styled.div`
-  background: url(https://raw.githubusercontent.com/christianbaroni/rainbow-buttons/7186dbd3e6ba3e4b92e925fe97acfe21036d9f2b/1/button-label.svg)
-    no-repeat;
   background-size: 100% 100%;
   height: 14px;
   opacity: 1;

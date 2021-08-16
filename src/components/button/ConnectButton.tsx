@@ -6,8 +6,7 @@ import { constructDeeplink } from '../../helpers/deeplink';
 import { isMobile } from '@walletconnect/browser-utils';
 import ButtonLabel from '../../icons/ButtonLabel';
 import { RAINBOW_BUTTON_ID } from '../../constants';
-
-const rainbow_logo = require('./public/images/rainbow-icon.png');
+import rainbow_icon from '../../../assets/images/rainbow-icon.png';
 
 function ConnectButton({
   uri,
@@ -44,7 +43,7 @@ function ConnectButton({
         <Content >
           <Button id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
             <ButtonInner>
-              <Logo src={rainbow_logo} width="34" />
+              <Logo src={rainbow_icon} width="34" />
               <ButtonLabel />
             </ButtonInner>
           </Button>

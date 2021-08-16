@@ -19,7 +19,7 @@ function ConnectButton({
 }) {
   const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
-  const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri]);
+  const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri])
 
   const connectToRainbow = useCallback(() => {
     if (!uri) return;
@@ -28,7 +28,7 @@ function ConnectButton({
     } else {
       setShowQRCode(true);
     }
-  }, [uri, deeplink]);
+  }, [uri]);
 
   useEffect(() => {
     new Fountain();
@@ -41,12 +41,8 @@ function ConnectButton({
         setIsQRCodeOpen={setShowQRCode}
         value={deeplink}
       />
-      {customButton ? (
-        <div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
-          {customButton}
-        </div>
-      ) : (
-        <Content>
+      {customButton ? (<div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>{customButton}</div>) : (
+        <Content >
           <Button id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
             <ButtonInner>
               <Logo src={rainbow_icon} width="34" />

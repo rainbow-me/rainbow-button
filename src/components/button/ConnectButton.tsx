@@ -31,7 +31,7 @@ function ConnectButton({
   }, [uri, deeplink]);
 
   useEffect(() => {
-    new Fountain();
+    animate && new Fountain();
   }, [animate]);
 
   return (

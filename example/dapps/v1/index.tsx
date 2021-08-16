@@ -60,7 +60,12 @@ const Dapp = () => {
       }
 
       // Delete connector
+      // IMPORTANT if users reject the session request you have to
+      // create a new session from scratch. `disconnect` will trigger
+      // in that case
       setConnector(null)
+      setAccounts(null)
+      setSelectedChain('')
     });
   }, [connector])
 

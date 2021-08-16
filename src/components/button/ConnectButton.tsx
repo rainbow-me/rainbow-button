@@ -28,7 +28,7 @@ function ConnectButton({
     } else {
       setShowQRCode(true);
     }
-  }, [uri]);
+  }, [uri, deeplink]);
 
   useEffect(() => {
     new Fountain();

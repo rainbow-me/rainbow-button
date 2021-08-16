@@ -142,11 +142,11 @@ export const Container = styled.div`
   :active {
     transform: scale(1.025) translate3d(0, 0, 0);
   }
-  
+
   @media (max-height: 750px) {
     margin-bottom: 135px;
   }
-  
+
   @media (max-height: 680px) {
     margin-bottom: 24px;
   }
@@ -173,11 +173,11 @@ export const DownloadContainer = styled.div`
   position: absolute;
   right: 0;
   z-index: 100;
-  
+
   @media (max-height: 750px) {
     margin: 0 auto 24px;
   }
-  
+
   @media (max-height: 680px) {
     display: none;
   }
@@ -261,7 +261,7 @@ export const ButtonInner = styled.div`
   position: relative;
   text-align: center;
   transition: 0.125s ease;
-  
+
   :hover {
     &:before {
       backdrop-filter: saturate(4);
@@ -313,7 +313,7 @@ export const ButtonInner = styled.div`
     will-change: transform;
     z-index: -2;
   }
-  
+
   @media (color-gamut: p3) {
     :hover {
       &:before {
@@ -322,11 +322,25 @@ export const ButtonInner = styled.div`
     }
 
     &:before {
-      background: color(display-p3 0 0 0 / 85%); 
+      background: color(display-p3 0 0 0 / 85%);
     }
 
     &:after {
-      background: linear-gradient(315deg, color(display-p3 0.09020 0.25882 0.6) 0%, color(display-p3 0.11765 0.85882 0.68235) 9.09%, color(display-p3 0 0.69804 1) 18.18%, color(display-p3 0.62353 0.29804 0.92941) 27.27%, color(display-p3 0.81569 0.29804 0.65098) 36.36%, color(display-p3 0 0.70980 0.83529) 45.45%, color(display-p3 0.09020 0.25882 0.6) 54.54%, color(display-p3 0 0.71373 0.81176) 63.63%, color(display-p3 0 0.83529 0.43529) 72.72%, color(display-p3 0.0902 0.25882 0.6) 81.81%, color(display-p3 0.00392 0.73725 0.83529) 90.9%, color(display-p3 0.09020 0.25882 0.6) 100%);
+      background: linear-gradient(
+        315deg,
+        color(display-p3 0.0902 0.25882 0.6) 0%,
+        color(display-p3 0.11765 0.85882 0.68235) 9.09%,
+        color(display-p3 0 0.69804 1) 18.18%,
+        color(display-p3 0.62353 0.29804 0.92941) 27.27%,
+        color(display-p3 0.81569 0.29804 0.65098) 36.36%,
+        color(display-p3 0 0.7098 0.83529) 45.45%,
+        color(display-p3 0.0902 0.25882 0.6) 54.54%,
+        color(display-p3 0 0.71373 0.81176) 63.63%,
+        color(display-p3 0 0.83529 0.43529) 72.72%,
+        color(display-p3 0.0902 0.25882 0.6) 81.81%,
+        color(display-p3 0.00392 0.73725 0.83529) 90.9%,
+        color(display-p3 0.0902 0.25882 0.6) 100%
+      );
       background-size: 1200% 1200%;
     }
   }

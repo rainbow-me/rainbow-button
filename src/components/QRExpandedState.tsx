@@ -47,7 +47,10 @@ const QRExpandedState = ({
               initial={{ opacity: 0 }}
               transition={easingConfig}
             >
-              <ExpandedStateBackground onClick={() => setIsQRCodeOpen(false)} opacity={0.8} />
+              <ExpandedStateBackground
+                onClick={() => setIsQRCodeOpen(false)}
+                opacity={0.8}
+              />
             </motion.div>
             <ExpandedState
               animate={{ scale: 1, y: 0 }}
@@ -58,7 +61,10 @@ const QRExpandedState = ({
               qr
               transition={springConfig}
             >
-              <Column onClick={() => setIsQRCodeOpen(false)} style={{ justifyContent: 'center', height: '100%' }}>
+              <Column
+                onClick={() => setIsQRCodeOpen(false)}
+                style={{ justifyContent: 'center', height: '100%' }}
+              >
                 <TitleText>
                   <span role="img" aria-labelledby="emoji">
                     📲

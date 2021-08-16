@@ -25,14 +25,13 @@ function ConnectButtonV1({
     if (connector && !connector.connected) {
       connector.createSession({ chainId }).then(() => {
         setUri(connector.uri);
-      })
+      });
     }
 
     connector.on('connect', (error) => {
       if (error) {
         throw error;
       }
-      
     });
   }, [chainId, connectorOptions, onConnectorInitialized]);
 

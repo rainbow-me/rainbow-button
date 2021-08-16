@@ -10,7 +10,7 @@ export const supportedMainChainsInfoEip155 = {
 }
 
 export const supportedMainChainsInfo = {
-  '1': { name: "Ethereum Mainnet", color: '#0E76FD', value: "ethereum", iconWidth: "20"},
+  '1': { name: "Ethereum", color: '#0E76FD', value: "ethereum", iconWidth: "20"},
   '10': { name: "Optimism", color: '#FF4040', value: "optimism", iconWidth: "42"},
   '137': { name: "Polygon", color: '#8247E5', value: "polygon", iconWidth: "42"},
   // '42161': { name: "Arbitrum", color: '#2D374B', value: "arbitrum", iconWidth: "42"},

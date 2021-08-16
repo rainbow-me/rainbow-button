@@ -4,7 +4,7 @@
  * Go to rainbow app via deeplink
  */
 export const goToRainbow = (): void => {
-  window.location.href = 'https://rnbwapp.com/wc';
+  window.location.href =  'https://rainbow.me/wc';
 };
 
 /**

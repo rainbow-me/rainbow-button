@@ -170,7 +170,7 @@ const Dapp = () => {
           <ActionButton key={'signTypedData'} onClick={signTypedData}>{'signTypedData'}</ActionButton>
           </Wrapper>
         <Wrapper>
-          <ActionButton key={'disconnect'} onClick={disconnect}>{'disconnect'}</ActionButton>
+          <ActionButton key={'disconnect'} onClick={disconnect}>{'Disconnect'}</ActionButton>
         </Wrapper>
       </div>
     )

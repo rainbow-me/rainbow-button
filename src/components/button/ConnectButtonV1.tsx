@@ -27,13 +27,6 @@ function ConnectButtonV1({
         setUri(connector.uri);
       });
     }
-
-    connector.on('connect', (error) => {
-      if (error) {
-        throw error;
-      }
-      
-    });
   }, [chainId, connectorOptions, onConnectorInitialized]);
 
   return (

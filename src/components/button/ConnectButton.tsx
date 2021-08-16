@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import QRExpandedState from '../QRExpandedState';
 import Fountain from '../EmojiPop';
 import { Button, ButtonInner, Content, Logo } from '../../styled';
@@ -19,10 +19,12 @@ function ConnectButton({
 }) {
   const [showQRCode, setShowQRCode] = useState<boolean>(false);
 
+  const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri])
+
   const connectToRainbow = useCallback(() => {
     if (!uri) return;
     if (isMobile()) {
-      window.location.href = constructDeeplink(uri)!;
+      window.location.href = deeplink;
     } else {
       setShowQRCode(true);
     }
@@ -37,7 +39,7 @@ function ConnectButton({
       <QRExpandedState
         enabled={showQRCode}
         setIsQRCodeOpen={setShowQRCode}
-        value={uri}
+        value={deeplink}
       />
       {customButton ? (<div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>{customButton}</div>) : (
         <Content >

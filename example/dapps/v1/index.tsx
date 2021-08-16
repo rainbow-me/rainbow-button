@@ -30,11 +30,6 @@ const Dapp = () => {
 
   useEffect(() => {
     if (!connector) return 
-    // Check if connection is already established
-    if (connector && !connector.connected) {
-      // create new session
-      // connector.createSession();
-    }
 
     // Subscribe to connection events
     connector.on("connect", (error, payload) => {

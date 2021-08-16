@@ -1,4 +1,4 @@
-const baseUrl = 'https://rnbwapp.com';
+const baseUrl = 'https://rainbow.me';
 
 const constructDeeplink = (uri: string): string => {
   const encodedUri = encodeURIComponent(uri);

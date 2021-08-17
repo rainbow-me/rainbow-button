@@ -22,7 +22,7 @@ const images = {
 
 const Dapp = () => {
   const { connector, accounts, chainId, setConnector, setAccounts, setChainId} = useWalletConnectState()
-  const [selectedChain, setSelectedChain] = useState('')
+  const [selectedChain, setSelectedChain] = useState<string | null>(null)
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
 
@@ -30,11 +30,6 @@ const Dapp = () => {
 
   useEffect(() => {
     if (!connector) return 
-    // Check if connection is already established
-    if (connector && !connector.connected) {
-      // create new session
-      // connector.createSession();
-    }
 
     // Subscribe to connection events
     connector.on("connect", (error, payload) => {
@@ -65,7 +60,13 @@ const Dapp = () => {
       }
 
       // Delete connector
+      // IMPORTANT if users reject the session request you have to
+      // create a new session from scratch. `disconnect` will trigger
+      // in that case
       setConnector(null)
+      setAccounts(null)
+      setChainId(null)
+      setSelectedChain(null)
     });
   }, [connector])
 
@@ -118,10 +119,6 @@ const Dapp = () => {
     }
   }, [connector, accounts]);
 
-  const isConnected = useMemo(() => {
-    return Boolean(connector) && accounts?.length
-  }, [connector, accounts])
-
   const renderNotConnected = useMemo(() => {
     return (
       <div>
@@ -143,7 +140,7 @@ const Dapp = () => {
           }
         </Wrapper>}
         <Wrapper>
-        {(selectedChain) && <RainbowButton
+        {selectedChain && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
             bridge: "https://bridge.walletconnect.org",
@@ -170,7 +167,7 @@ const Dapp = () => {
           <ActionButton key={'signTypedData'} onClick={signTypedData}>{'signTypedData'}</ActionButton>
           </Wrapper>
         <Wrapper>
-          <ActionButton key={'disconnect'} onClick={disconnect}>{'disconnect'}</ActionButton>
+          <ActionButton key={'disconnect'} onClick={disconnect}>{'Disconnect'}</ActionButton>
         </Wrapper>
       </div>
     )
@@ -178,7 +175,7 @@ const Dapp = () => {
 
   return (
       <div>
-        {isConnected ? renderConnected : renderNotConnected}
+        {connector?.connected && accounts?.length ? renderConnected : renderNotConnected}
       </div>
 
   );

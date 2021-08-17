@@ -8,12 +8,12 @@ import {
 } from '../store';
 
 const selector = createSelector(
-    ({connector}) => ({connector}),
-    ({connector}) => {
+    ({connector, accounts, chainId}) => ({connector, accounts, chainId}),
+    ({connector, accounts, chainId}) => {
         return {
             connector,
-            accounts: connector?.accounts,
-            chainId: connector?.chainId,
+            accounts,
+            chainId
         }
     }
   );

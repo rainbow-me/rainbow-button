@@ -63,9 +63,16 @@ const Dapp = () => {
       // IMPORTANT if users reject the session request you have to
       // create a new session from scratch. `disconnect` will trigger
       // in that case
+      try {
+        connector?.killSession()
+      } catch (e) {
+        //
+      }
       setConnector(null)
       setAccounts(null)
+      setChainId(null)
       setSelectedChain('')
+ 
     });
   }, [connector])
 
@@ -119,7 +126,7 @@ const Dapp = () => {
   }, [connector, accounts]);
 
   const isConnected = useMemo(() => {
-    return Boolean(connector) && accounts?.length
+    return connector?.connected
   }, [connector, accounts])
 
   const renderNotConnected = useMemo(() => {

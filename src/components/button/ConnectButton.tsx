@@ -22,13 +22,13 @@ function ConnectButton({
   const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri])
 
   const connectToRainbow = useCallback(() => {
-    if (!uri) return;
+    if (!deeplink) return;
     if (isMobile()) {
       window.location.href = deeplink;
     } else {
       setShowQRCode(true);
     }
-  }, [uri, deeplink]);
+  }, [deeplink]);
 
   useEffect(() => {
     animate && new Fountain();

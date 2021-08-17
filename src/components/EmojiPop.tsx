@@ -23,6 +23,7 @@ class Fountain {
   particles: Particle[];
   autoAddParticle: boolean;
   height: number;
+  width: number;
   sizes: number[];
   variants: string[];
   mouseX: number;
@@ -34,6 +35,7 @@ class Fountain {
     this.particles = [];
     this.autoAddParticle = false;
     this.height = document.documentElement.clientHeight;
+    this.width = document.documentElement.clientWidth;
     this.sizes = [15, 20, 25, 35, 45];
     this.mouseX = 0;
     this.mouseY = 0;
@@ -97,8 +99,8 @@ class Fountain {
     const speedUp = Math.random() * 25;
     const spinVal = Math.random() * 360;
     const spinSpeed = Math.random() * 25 * (Math.random() <= 0.5 ? -1 : 1);
-    const top = this.mouseY - size / 2;
-    const left = this.mouseX - size / 2;
+    const top = this.mouseY - size;
+    const left = this.mouseX - size;
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
     const particle = document.createElement('span');
@@ -116,6 +118,7 @@ class Fountain {
       pointer-events: none;
       position: absolute;
       top: ${top}px;
+      overflow: hidden;
       transform: rotate(${spinVal}deg);
     `
     );
@@ -141,8 +144,7 @@ class Fountain {
       p.top = p.top - p.speedUp;
       p.speedUp = Math.min(p.size, p.speedUp - 1);
       p.spinVal = p.spinVal + p.spinSpeed;
-
-      if (p.top >= this.height + p.size) {
+      if (p.top > this.height - 1.4 * p.size || p.left > this.width - 1.4 * p.size) {
         this.particles = this.particles.filter((o) => o !== p);
         p.element.remove();
       }

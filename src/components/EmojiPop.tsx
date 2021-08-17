@@ -23,7 +23,6 @@ class Fountain {
   particles: Particle[];
   autoAddParticle: boolean;
   height: number;
-  width: number;
   sizes: number[];
   variants: string[];
   mouseX: number;
@@ -35,7 +34,6 @@ class Fountain {
     this.particles = [];
     this.autoAddParticle = false;
     this.height = document.documentElement.clientHeight;
-    this.width = document.documentElement.clientWidth;
     this.sizes = [15, 20, 25, 35, 45];
     this.mouseX = 0;
     this.mouseY = 0;
@@ -116,7 +114,7 @@ class Fountain {
       font-size: ${size}px;
       left: ${left}px;
       pointer-events: none;
-      position: absolute;
+      position: fixed;
       top: ${top}px;
       overflow: hidden;
       transform: rotate(${spinVal}deg);
@@ -144,7 +142,7 @@ class Fountain {
       p.top = p.top - p.speedUp;
       p.speedUp = Math.min(p.size, p.speedUp - 1);
       p.spinVal = p.spinVal + p.spinSpeed;
-      if (p.top > this.height - 1.4 * p.size || p.left > this.width - 1.4 * p.size) {
+      if (p.top > this.height - p.size) {
         this.particles = this.particles.filter((o) => o !== p);
         p.element.remove();
       }
@@ -156,7 +154,7 @@ class Fountain {
         font-size: ${p.size}px;
         left: ${p.left}px;
         pointer-events: none;
-        position: absolute;
+        position: fixed;
         top: ${p.top}px;
         transform: rotate(${p.spinVal}deg);
       `

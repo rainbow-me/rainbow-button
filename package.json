@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -63,7 +63,7 @@
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.6",
-    "@walletconnect/client": "^1.5.4",
+    "@walletconnect/client": "^1.6.1",
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "cssnano": "^5.0.7",

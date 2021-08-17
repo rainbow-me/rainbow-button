@@ -97,8 +97,8 @@ class Fountain {
     const speedUp = Math.random() * 25;
     const spinVal = Math.random() * 360;
     const spinSpeed = Math.random() * 25 * (Math.random() <= 0.5 ? -1 : 1);
-    const top = this.mouseY - size;
-    const left = this.mouseX - size;
+    const top = this.mouseY - size / 2;
+    const left = this.mouseX - size / 2;
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
     const particle = document.createElement('span');
@@ -142,7 +142,7 @@ class Fountain {
       p.top = p.top - p.speedUp;
       p.speedUp = Math.min(p.size, p.speedUp - 1);
       p.spinVal = p.spinVal + p.spinSpeed;
-      if (p.top > this.height - p.size) {
+      if (p.top > this.height + p.size) {
         this.particles = this.particles.filter((o) => o !== p);
         p.element.remove();
       }

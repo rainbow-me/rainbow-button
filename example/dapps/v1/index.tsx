@@ -159,7 +159,7 @@ const Dapp = () => {
       <div>
         <Wrapper>
         <p className="text-center">Connected to {supportedMainChainsInfo[chainId]?.name }</p>
-        <p className="text-center">on account: {renderAddress(accounts?.[0])}</p>
+        <p className="text-center">Account: {renderAddress(accounts?.[0])}</p>
         </Wrapper>
         <Wrapper>
           <ActionButton key={'sendTransaction'} onClick={sendTransaction}>{'sendTransaction'}</ActionButton>
@@ -175,7 +175,7 @@ const Dapp = () => {
 
   return (
       <div>
-        {connector?.connected && selectedChain? renderConnected : renderNotConnected}
+        {connector?.connected && accounts?.length ? renderConnected : renderNotConnected}
       </div>
 
   );

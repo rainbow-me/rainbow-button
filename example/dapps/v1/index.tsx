@@ -22,7 +22,7 @@ const images = {
 
 const Dapp = () => {
   const { connector, accounts, chainId, setConnector, setAccounts, setChainId} = useWalletConnectState()
-  const [selectedChain, setSelectedChain] = useState('')
+  const [selectedChain, setSelectedChain] = useState<string | null>(null)
 
   const selectChain = useCallback(chain => setSelectedChain(chain), [])
 
@@ -66,8 +66,7 @@ const Dapp = () => {
       setConnector(null)
       setAccounts(null)
       setChainId(null)
-      setSelectedChain('')
- 
+      setSelectedChain(null)
     });
   }, [connector])
 
@@ -120,10 +119,6 @@ const Dapp = () => {
     }
   }, [connector, accounts]);
 
-  const isConnected = useMemo(() => {
-    return connector?.connected
-  }, [connector, accounts])
-
   const renderNotConnected = useMemo(() => {
     return (
       <div>
@@ -145,7 +140,7 @@ const Dapp = () => {
           }
         </Wrapper>}
         <Wrapper>
-        {(selectedChain) && <RainbowButton
+        {selectedChain && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
             bridge: "https://bridge.walletconnect.org",
@@ -180,7 +175,7 @@ const Dapp = () => {
 
   return (
       <div>
-        {isConnected ? renderConnected : renderNotConnected}
+        {connector?.connected && selectedChain? renderConnected : renderNotConnected}
       </div>
 
   );

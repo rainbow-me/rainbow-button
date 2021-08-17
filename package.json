@@ -37,7 +37,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@rainbow/rainbow-button",
+  "name": "@rainbow-me/rainbow-button",
   "author": "Esteban Miño",
   "module": "dist/rainbow-button.esm.js",
   "size-limit": [

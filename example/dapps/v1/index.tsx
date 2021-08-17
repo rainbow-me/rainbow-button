@@ -63,11 +63,6 @@ const Dapp = () => {
       // IMPORTANT if users reject the session request you have to
       // create a new session from scratch. `disconnect` will trigger
       // in that case
-      try {
-        connector?.killSession()
-      } catch (e) {
-        //
-      }
       setConnector(null)
       setAccounts(null)
       setChainId(null)
@@ -169,7 +164,7 @@ const Dapp = () => {
       <div>
         <Wrapper>
         <p className="text-center">Connected to {supportedMainChainsInfo[chainId]?.name }</p>
-        <p className="text-center">Account: {renderAddress(accounts?.[0])}</p>
+        <p className="text-center">on account: {renderAddress(accounts?.[0])}</p>
         </Wrapper>
         <Wrapper>
           <ActionButton key={'sendTransaction'} onClick={sendTransaction}>{'sendTransaction'}</ActionButton>

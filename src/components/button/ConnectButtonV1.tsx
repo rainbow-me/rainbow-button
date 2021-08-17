@@ -19,6 +19,7 @@ function ConnectButtonV1({
   const [uri, setUri] = useState<string>('');
 
   useEffect(() => {
+    console.log('aa connectorOptions', connectorOptions)
     const connector = new WalletConnect(connectorOptions);
     onConnectorInitialized(connector);
 

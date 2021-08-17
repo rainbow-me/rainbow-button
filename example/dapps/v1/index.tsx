@@ -144,6 +144,12 @@ const Dapp = () => {
           chainId={Number(selectedChain)}
           connectorOptions={{
             bridge: "https://bridge.walletconnect.org",
+            clientMeta: {
+              description: 'Rainbow Button example dapp',
+              url:'https://rainbow-me.github.io/rainbow-button/',
+              icons: ['https://github.com/rainbow-me/rainbow-button/blob/master/assets/images/rainbow-og.png'],
+              name: 'Rainbow Button Dapp',
+            }
           }}
           onConnectorInitialized={onConnectorInitialized}
           // customButton={<Button>Custom</Button>}

@@ -97,8 +97,8 @@ class Fountain {
     const speedUp = Math.random() * 25;
     const spinVal = Math.random() * 360;
     const spinSpeed = Math.random() * 25 * (Math.random() <= 0.5 ? -1 : 1);
-    const top = this.mouseY - size / 2;
-    const left = this.mouseX - size / 2;
+    const top = this.mouseY - size;
+    const left = this.mouseX - size;
     const direction = Math.random() <= 0.5 ? -1 : 1;
 
     const particle = document.createElement('span');
@@ -114,8 +114,9 @@ class Fountain {
       font-size: ${size}px;
       left: ${left}px;
       pointer-events: none;
-      position: absolute;
+      position: fixed;
       top: ${top}px;
+      overflow: hidden;
       transform: rotate(${spinVal}deg);
     `
     );
@@ -142,7 +143,7 @@ class Fountain {
       p.speedUp = Math.min(p.size, p.speedUp - 1);
       p.spinVal = p.spinVal + p.spinSpeed;
 
-      if (p.top >= this.height + p.size) {
+      if (p.top > this.height - p.size) {
         this.particles = this.particles.filter((o) => o !== p);
         p.element.remove();
       }
@@ -154,7 +155,7 @@ class Fountain {
         font-size: ${p.size}px;
         left: ${p.left}px;
         pointer-events: none;
-        position: absolute;
+        position: fixed;
         top: ${p.top}px;
         transform: rotate(${p.spinVal}deg);
       `

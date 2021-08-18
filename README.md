@@ -10,7 +10,7 @@ Rainbow Button is a react component that renders an opinionated button built on 
 
 ```
 
-yarn add @rainbow/rainbow-button
+yarn add @rainbow-me/rainbow-button
 
 ```
 
@@ -19,7 +19,7 @@ yarn add @rainbow/rainbow-button
 ```js
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { RainbowButton } from '@rainbow/rainbow-button';
+import { RainbowButton } from '@rainbow-me/rainbow-button';
 
 ReactDOM.render(
   <RainbowButton
@@ -105,7 +105,7 @@ More details can be found in the Wallet Connect docs:
 ## Exported assets
 
 ```js
-import { assets } from '@rainbow/rainbow-button';
+import { assets } from '@rainbow-me/rainbow-button';
 
 ReactDOM.render(
   <div>
@@ -119,7 +119,7 @@ ReactDOM.render(
 ## Exported utils
 
 ```js
-import { utils } from '@rainbow/rainbow-button';
+import { utils } from '@rainbow-me/rainbow-button';
 
 // Triggers a deeplink to go to the app. Only mobile.
 utils.goToRainbow();
@@ -128,7 +128,7 @@ utils.goToRainbow();
 ## Exported constants
 
 ```js
-import { constants } from '@rainbow/rainbow-button';
+import { constants } from '@rainbow-me/rainbow-button';
 
 console.log('Rainbow supported chain ids', constants.SUPPORTED_MAIN_CHAIN_IDS);
 console.log(

@@ -143,7 +143,7 @@ const Dapp = () => {
         {selectedChain && <RainbowButton
           chainId={Number(selectedChain)}
           connectorOptions={{
-            bridge: "https://bridge.walletconnect.org",
+            bridge: "https://bridge.walletconnect.org"
           }}
           onConnectorInitialized={onConnectorInitialized}
           // customButton={<Button>Custom</Button>}

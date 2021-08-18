@@ -25,7 +25,7 @@ function ConnectButtonV1({
     if (connector && !connector.connected) {
       connector.createSession({ chainId }).then(() => {
         setUri(connector.uri);
-      })
+      });
     }
   }, [chainId, connectorOptions, onConnectorInitialized]);
 

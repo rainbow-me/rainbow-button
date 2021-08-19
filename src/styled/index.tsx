@@ -224,19 +224,18 @@ export const animatedgradient = keyframes`
 `;
 
 export const Content = styled.div`
-  align-items: center;
-  display: flex;
+  display: inline-block;
   overflow: hidden;
   height: 100%;
   padding: 4px;
   transition: 0.125s ease;
-  will-change: transform;
+  justify-content: center;
 
   :hover {
     transform: scale(1.05);
   }
 
-  :active {
+  :active {qq
     transform: scale(0.95) !important;
   }
 `;
@@ -252,16 +251,13 @@ export const ButtonInner = styled.div`
   color: #ffffff;
   cursor: pointer;
   display: flex;
-  font-family: 'SFProRounded';
-  font-size: 18px;
   font-weight: 700;
   height: 44px;
-  letter-spacing: 0.5px;
   padding: 0 16px 2px 0;
   position: relative;
   text-align: center;
   transition: 0.125s ease;
-  
+
   :hover {
     &:before {
       backdrop-filter: saturate(4);
@@ -306,6 +302,7 @@ export const ButtonInner = styled.div`
     content: '';
     height: calc(100% + 4px);
     left: -2px;
+    right: -2px;
     position: absolute;
     top: -2px;
     transition: 0.125s ease;

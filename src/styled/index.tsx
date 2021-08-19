@@ -235,7 +235,7 @@ export const Content = styled.div`
     transform: scale(1.05);
   }
 
-  :active {qq
+  :active {
     transform: scale(0.95) !important;
   }
 `;

@@ -140,14 +140,14 @@ const Dapp = () => {
           }
         </Wrapper>}
         <Wrapper>
-        {selectedChain && <RainbowButton
-          chainId={Number(selectedChain)}
-          connectorOptions={{
-            bridge: "https://bridge.walletconnect.org"
-          }}
-          onConnectorInitialized={onConnectorInitialized}
-          // customButton={<Button>Custom</Button>}
-        />}
+          {selectedChain && <RainbowButton
+            chainId={Number(selectedChain)}
+            connectorOptions={{
+              bridge: "https://bridge.walletconnect.org"
+            }}
+            onConnectorInitialized={onConnectorInitialized}
+            // customButton={<Button>Custom</Button>}
+          />}
         </Wrapper>
       </div>
 

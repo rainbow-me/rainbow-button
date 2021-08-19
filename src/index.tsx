@@ -3,9 +3,7 @@ import ConnectButtonV1 from './components/button/ConnectButtonV1';
 import WalletConnect from '@walletconnect/client';
 
 import { IWalletConnectOptions } from '@walletconnect/types';
-import {
-  goToRainbow,
-} from './utils';
+import { goToRainbow } from './utils';
 import {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
@@ -50,5 +48,5 @@ export const utils = {
 
 export const constants = {
   SUPPORTED_TEST_CHAIN_IDS,
-  SUPPORTED_MAIN_CHAIN_IDS
+  SUPPORTED_MAIN_CHAIN_IDS,
 };

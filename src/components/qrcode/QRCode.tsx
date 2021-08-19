@@ -1,7 +1,7 @@
 import QRCodeUtil from 'qrcode';
 import React, { ReactElement, useMemo } from 'react';
 import styled from 'styled-components';
-import rainbowOg from '../../../assets/images/rainbow-og.png'
+import rainbowOg from '../../../assets/images/rainbow-og.png';
 
 const QRContainer = styled.div`
   height: 375px;
@@ -122,7 +122,7 @@ const QRCode = ({
           height: 0,
           position: 'relative',
           top: logoPosition,
-          textAlign: 'center'
+          textAlign: 'center',
         }}
       >
         <img height={logoSize} width={logoSize} src={rainbowOg} alt="" />

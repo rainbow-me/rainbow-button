@@ -47,7 +47,10 @@ const QRExpandedState = ({
               initial={{ opacity: 0 }}
               transition={easingConfig}
             >
-              <ExpandedStateBackground onClick={() => setIsQRCodeOpen(false)} opacity={0.8} />
+              <ExpandedStateBackground
+                onClick={() => setIsQRCodeOpen(false)}
+                opacity={0.8}
+              />
             </motion.div>
             <ExpandedState
               animate={{ scale: 1, y: 0 }}
@@ -58,14 +61,17 @@ const QRExpandedState = ({
               qr
               transition={springConfig}
             >
-              <Column onClick={() => setIsQRCodeOpen(false)} style={{ justifyContent: 'center', height: '100%' }}>
+              <Column
+                onClick={() => setIsQRCodeOpen(false)}
+                style={{ justifyContent: 'center', height: '100%' }}
+              >
                 <TitleText>
                   <span role="img" aria-labelledby="emoji">
                     📲
                   </span>{' '}
                   Scan to connect to Rainbow
                 </TitleText>
-                <Container onClick={(proxy) => proxy.stopPropagation()}>
+                <Container onClick={proxy => proxy.stopPropagation()}>
                   <QRCode value={value} size={380} logoSize={100} />
                 </Container>
                 <DownloadContainer>
@@ -81,7 +87,7 @@ const QRExpandedState = ({
                   <div style={{ display: 'flex', flexDirection: 'row' }}>
                     <DownloadButton
                       href="https://apps.apple.com/us/app/rainbow-ethereum-wallet/id1457119021"
-                      onClick={(proxy) => proxy.stopPropagation()}
+                      onClick={proxy => proxy.stopPropagation()}
                       target="_blank"
                     >
                       <div style={{ marginRight: 6 }}>

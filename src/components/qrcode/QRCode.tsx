@@ -122,7 +122,7 @@ const QRCode = ({
           height: 0,
           position: 'relative',
           top: logoPosition,
-          left: logoPosition,
+          textAlign: 'center',
         }}
       >
         <img height={logoSize} width={logoSize} src={rainbowOg} alt="" />

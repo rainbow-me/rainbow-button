@@ -23,4 +23,4 @@ jobs:
     - run: cd example
     - run: yarn
     - run: yarn build
-    - run: yarn push-gh-pages
+    - run: yarn push-gh-pages --force

@@ -20,7 +20,9 @@ jobs:
       with:
         node-version: lts/*
     - run: yarn
-    - run: cd example
-    - run: yarn
-    - run: yarn build
-    - run: yarn push-gh-pages --force
+    - name: Build and deploy website
+      run: |
+        cd example
+        yarn
+        yarn build
+        yarn push-gh-pages --force

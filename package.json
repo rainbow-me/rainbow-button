@@ -17,7 +17,8 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "clean-install": "rm -rf node_modules yarn.lock dist example/node_modules example/yarn.lock example/dist && yarn && cd example && yarn && yarn run build-dev"
   },
   "peerDependencies": {
     "@walletconnect/client": ">=1.6.0",

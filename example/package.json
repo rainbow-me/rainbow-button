@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build-dev": "rm -rf dist/ && parcel build index.html --no-minify",
-    "build": "rm -rf dist/ && parcel build index.html",
+    "build-dev": "yarn run build --no-minify",
+    "build": "rm -rf dist/ && parcel build index.html --public-url ./",
     "push-gh-pages": "push-dir --dir=dist --branch=gh-pages --cleanup --verbose"
   },
   "dependencies": {

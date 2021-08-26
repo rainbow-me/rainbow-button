@@ -1,10 +1,12 @@
 # Rainbow Button 🌈
+[![npm version](https://img.shields.io/npm/v/@rainbow-me/rainbow-button.svg)](https://npmjs.org/package/@rainbow-me/rainbow-button.svg)
+[![Actions Status](https://github.com/rainbow-me/rainbow-button/workflows/tests/badge.svg)](https://github.com/rainbow-me/rainbow-button/actions)
 
 Rainbow Button is a react component that renders an opinionated button built on top of [WalletConnect](https://walletconnect.org/) v1 which allows you to connect to [Rainbow](https://rainbow.me/) on mobile (via Mobile Deeplinking) and desktop (via QR codes).
 
 ## Demo Dapp
 
-[Demo Link](https://rainbow-me.github.io/rainbow-button)
+🌎 [Demo Link](https://rainbow-me.github.io/rainbow-button)
 
 ## Install
 
@@ -144,23 +146,6 @@ console.log(
 );
 ```
 
-## Dev Server
+## Contributing
 
-```
-yarn start
-```
-
-To run and try the example dapp locally open other terminal and run
-
-```
-cd example
-yarn start
-```
-
-Default dev server runs at localhost:1234 in browser.
-
-## Production Bundle
-
-```
-yarn bundle
-```
+See [CONTRIBUTING.md](./CONTRIBUTING.md)

@@ -41,6 +41,10 @@ const Dapp = () => {
   useEffect(() => {
     if (!connector) return;
 
+    // Capture initial connector state
+    setAccounts(connector.accounts);
+    setChainId(connector.chainId);
+
     // Subscribe to connection events
     connector.on('connect', (error, payload) => {
       if (error) {

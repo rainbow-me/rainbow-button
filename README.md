@@ -1,5 +1,5 @@
 # Rainbow Button 🌈
-[![npm version](https://img.shields.io/npm/v/@rainbow-me/rainbow-button.svg)](https://npmjs.org/package/@rainbow-me/rainbow-button.svg)
+[![npm version](https://img.shields.io/npm/v/@rainbow-me/rainbow-button.svg)](https://npmjs.org/package/@rainbow-me/rainbow-button)
 [![Actions Status](https://github.com/rainbow-me/rainbow-button/workflows/tests/badge.svg)](https://github.com/rainbow-me/rainbow-button/actions)
 
 Rainbow Button is a react component that renders an opinionated button built on top of [WalletConnect](https://walletconnect.org/) v1 which allows you to connect to [Rainbow](https://rainbow.me/) on mobile (via Mobile Deeplinking) and desktop (via QR codes).

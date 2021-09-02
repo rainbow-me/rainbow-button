@@ -60,6 +60,6 @@ In another console
 ```console
 cd example
 yarn
-yarn @rainbow-me/rainbow-button
+yarn link @rainbow-me/rainbow-button
 yarn start
 ```

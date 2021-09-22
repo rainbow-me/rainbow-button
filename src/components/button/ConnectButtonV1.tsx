@@ -1,4 +1,5 @@
 import WalletConnect from '@walletconnect/client';
+// eslint-disable-next-line import/no-unresolved
 import { IWalletConnectOptions } from '@walletconnect/types';
 import React, { useEffect, useState } from 'react';
 import ConnectButton from './ConnectButton';

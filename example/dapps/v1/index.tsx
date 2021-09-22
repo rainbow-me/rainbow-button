@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import 'react-app-polyfill/ie11';
 import { constants, RainbowButton, utils } from '@rainbow-me/rainbow-button';
 import { isMobile } from '@walletconnect/browser-utils';
@@ -14,10 +15,12 @@ const { goToRainbow } = utils;
 const { SUPPORTED_MAIN_CHAIN_IDS } = constants;
 
 const images = {
+  /* eslint-disable import/no-commonjs */
   arbitrum: require('../../assets/images/arbitrum.png'),
   ethereum: require('../../assets/images/ethereum.png'),
   optimism: require('../../assets/images/optimism.png'),
   polygon: require('../../assets/images/polygon.png'),
+  /* eslint-enable import/no-commonjs */
 };
 
 const Dapp = () => {
@@ -68,6 +71,7 @@ const Dapp = () => {
       setChainId(chainId);
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     connector.on('disconnect', (error, payload) => {
       if (error) {
         throw error;

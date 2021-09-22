@@ -1,5 +1,6 @@
 import WalletConnect from '@walletconnect/client';
 
+// eslint-disable-next-line import/no-unresolved
 import { IWalletConnectOptions } from '@walletconnect/types';
 import React from 'react';
 import rainbow_icon from '../assets/images/rainbow-icon.png';

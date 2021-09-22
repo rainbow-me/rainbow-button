@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import ConnectButton from './ConnectButton';
 import WalletConnect from '@walletconnect/client';
 import { IWalletConnectOptions } from '@walletconnect/types';
+import React, { useEffect, useState } from 'react';
+import ConnectButton from './ConnectButton';
 
 function ConnectButtonV1({
   chainId,
@@ -30,7 +30,7 @@ function ConnectButtonV1({
   }, [chainId, connectorOptions, onConnectorInitialized]);
 
   return (
-    <ConnectButton uri={uri} customButton={customButton} animate={animate} />
+    <ConnectButton animate={animate} customButton={customButton} uri={uri} />
   );
 }
 

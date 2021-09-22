@@ -5,8 +5,8 @@ module.exports = {
     config.plugins = [
       images({ incude: ['**/*.png', '**/*.jpg'] }),
       ...config.plugins,
-    ]
+    ];
 
-    return config
+    return config;
   },
-}
+};

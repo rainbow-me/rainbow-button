@@ -48,7 +48,7 @@ ReactDOM.render(
     chainId={1}
     connectorOptions={{ bridge: 'https://bridge.walletconnect.org' }}
     onConnectorInitialized={(connector) => console.log(connector)}
-    render={() => <button>Custom Rainbow button</button>}
+    customButton={() => <button>Custom Rainbow button</button>}
   />,
   document.getElementById('rainbowButton')
 );
@@ -61,7 +61,7 @@ ReactDOM.render(
 | chainId                | number   | REQUIRED      | Rainbow supported chainId                                                          |
 | connectorOptions       | object   | REQUIRED      | _Wallet Connect_ `connector` options. `bridge` param is required                   |
 | onConnectorInitialized | function | REQUIRED      | Will be called when the button is instantiated, will return the `connector` object |
-| render                 | function | -             | Render prop to use a custom element                                                |
+| customButton           | function | -             | Render prop to use a custom element                                                |
 | animate                | boolean  | true          | Whether or not animate the button                                                  |
 
 ## onConnectorInitialized callback

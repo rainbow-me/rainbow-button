@@ -1,37 +1,58 @@
 import React, { useEffect, useState } from 'react';
+import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client';
+import {
+  PairingTypes,
+  SessionTypes,
+  ClientOptions,
+  ClientTypes,
+} from '@walletconnect/types';
+import { getClientPairings } from '../../utils';
 import ConnectButton from './ConnectButton';
-import WalletConnect from '@walletconnect/client';
-import { IWalletConnectOptions } from '@walletconnect/types';
 
-function ConnectButtonV1({
-  chainId,
-  connectorOptions,
-  onConnectorInitialized,
+function ConnectButtonV2({
+  clientOptions,
+  clientConnectParams,
+  onSessionStarted,
+  onClientInitialized,
   customButton,
   animate,
 }: {
-  chainId: number | undefined;
-  connectorOptions: IWalletConnectOptions;
-  onConnectorInitialized: (client: WalletConnect) => void;
+  clientOptions: ClientOptions;
+  clientConnectParams: ClientTypes.ConnectParams;
+  onSessionStarted: (client: SessionTypes.Settled) => void;
+  onClientInitialized: (client: WalletConnectClient) => void;
   customButton?: any;
   animate?: boolean;
 }) {
   const [uri, setUri] = useState<string>('');
 
   useEffect(() => {
-    const connector = new WalletConnect(connectorOptions);
-    onConnectorInitialized(connector);
-
-    if (connector && !connector.connected) {
-      connector.createSession({ chainId }).then(() => {
-        setUri(connector.uri);
-      });
-    }
-  }, [chainId, connectorOptions, onConnectorInitialized]);
+    const walletConnectInit = async () => {
+      const client = await WalletConnectClient.init(clientOptions);
+      client.on(
+        CLIENT_EVENTS.pairing.proposal,
+        async (proposal: PairingTypes.Proposal) => {
+          const { uri } = proposal.signal.params;
+          setUri(uri);
+        }
+      );
+      onClientInitialized(client);
+      if (!getClientPairings(client).length) {
+        const session = await client.connect(clientConnectParams);
+        onSessionStarted(session);
+      }
+    };
+    walletConnectInit();
+  }, [
+    clientConnectParams,
+    clientOptions,
+    onClientInitialized,
+    onSessionStarted,
+  ]);
 
   return (
     <ConnectButton uri={uri} customButton={customButton} animate={animate} />
   );
 }
 
-export default React.memo(ConnectButtonV1);
+export default React.memo(ConnectButtonV2);

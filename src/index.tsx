@@ -1,52 +1,57 @@
 import React from 'react';
 import ConnectButtonV1 from './components/button/ConnectButtonV1';
-import WalletConnect from '@walletconnect/client';
-
-import { IWalletConnectOptions } from '@walletconnect/types';
-import { goToRainbow } from './utils';
+import WalletConnectClient from '@walletconnect/client';
+import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
+import {
+  getClientPairings,
+  goToRainbow,
+  getAddressAndChainIdFromAccount,
+} from './utils';
 import {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
+  SUPPORTED_TEST_CHAINS_EIP155,
+  SUPPORTED_MAIN_CHAINS_EIP155,
 } from './constants';
-import rainbow_icon from '../assets/images/rainbow-icon.png';
-import rainbow from '../assets/images/rainbow.png';
 
-export interface Props {
-  chainId: number | undefined;
-  connectorOptions: IWalletConnectOptions;
-  onConnectorInitialized: (client: WalletConnect) => void;
+export interface ExperimentalProps {
+  clientOptions: ClientOptions;
+  clientConnectParams: ClientTypes.ConnectParams;
+  onClientInitialized: (client: WalletConnectClient) => void;
+  onSessionStarted: (session: SessionTypes.Settled) => void;
   customButton?: any;
   animate?: boolean;
 }
 
-export const RainbowButton = ({
-  chainId,
-  connectorOptions,
-  onConnectorInitialized,
+export const RainbowButtonExperimental = ({
+  clientOptions,
+  clientConnectParams,
+  onClientInitialized,
+  onSessionStarted,
   customButton,
   animate,
-}: Props) => {
+}: ExperimentalProps) => {
   return (
     <ConnectButtonV1
-      chainId={chainId}
-      connectorOptions={connectorOptions}
-      onConnectorInitialized={onConnectorInitialized}
+      clientOptions={clientOptions}
+      clientConnectParams={clientConnectParams}
+      onClientInitialized={onClientInitialized}
+      onSessionStarted={onSessionStarted}
       customButton={customButton}
       animate={animate}
     />
   );
 };
 
-export const assets = {
-  rainbow_icon: rainbow_icon,
-  rainbow: rainbow,
-};
-
 export const utils = {
   goToRainbow,
+  getClientPairings,
+  getAddressAndChainIdFromAccount,
 };
 
 export const constants = {
   SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
+  SUPPORTED_TEST_CHAINS_EIP155,
+  SUPPORTED_MAIN_CHAINS_EIP155,
 };

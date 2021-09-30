@@ -5,6 +5,7 @@ const XButton = () => (
     fill="none"
     height={27}
     overflow="visible"
+    style={{ all: 'revert' }}
     viewBox="0 0 27 27"
     width={27}
     xmlns="http://www.w3.org/2000/svg"

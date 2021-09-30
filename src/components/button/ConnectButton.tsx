@@ -1,61 +1,61 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import QRExpandedState from '../QRExpandedState';
-import Fountain from '../EmojiPop';
-import { Button, ButtonInner, Content, Logo } from '../../styled';
-import { constructDeeplink } from '../../helpers/deeplink';
-import { isMobile } from '@walletconnect/browser-utils';
-import ButtonLabel from '../../icons/ButtonLabel';
-import { RAINBOW_BUTTON_ID } from '../../constants';
-import rainbow_icon from '../../../assets/images/rainbow-icon.png';
+import React, { useEffect, useState } from 'react';
+import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client';
+import {
+  PairingTypes,
+  SessionTypes,
+  ClientOptions,
+  ClientTypes,
+} from '@walletconnect/types';
+import { getClientPairings } from '../../utils';
+import ConnectButtonMask from './ConnectButtonMask';
 
 function ConnectButton({
-  uri,
+  clientOptions,
+  clientConnectParams,
+  onSessionStarted,
+  onClientInitialized,
   customButton,
-  animate = true,
+  animate,
 }: {
-  uri: string;
+  clientOptions: ClientOptions;
+  clientConnectParams: ClientTypes.ConnectParams;
+  onSessionStarted: (client: SessionTypes.Settled) => void;
+  onClientInitialized: (client: WalletConnectClient) => void;
   customButton?: any;
   animate?: boolean;
 }) {
-  const [showQRCode, setShowQRCode] = useState<boolean>(false);
-
-  const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri]);
-
-  const connectToRainbow = useCallback(() => {
-    if (!deeplink) return;
-    if (isMobile()) {
-      window.location.href = deeplink;
-    } else {
-      setShowQRCode(true);
-    }
-  }, [deeplink]);
+  const [uri, setUri] = useState<string>('');
 
   useEffect(() => {
-    animate && new Fountain();
-  }, [animate]);
+    const walletConnectInit = async () => {
+      const client = await WalletConnectClient.init(clientOptions);
+      client.on(
+        CLIENT_EVENTS.pairing.proposal,
+        async (proposal: PairingTypes.Proposal) => {
+          const { uri } = proposal.signal.params;
+          setUri(uri);
+        }
+      );
+      onClientInitialized(client);
+      if (!getClientPairings(client).length) {
+        const session = await client.connect(clientConnectParams);
+        onSessionStarted(session);
+      }
+    };
+    walletConnectInit();
+  }, [
+    clientConnectParams,
+    clientOptions,
+    onClientInitialized,
+    onSessionStarted,
+  ]);
 
   return (
-    <div>
-      <QRExpandedState
-        enabled={showQRCode}
-        setIsQRCodeOpen={setShowQRCode}
-        value={deeplink}
-      />
-      {customButton ? (
-        <div id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
-          {customButton}
-        </div>
-      ) : (
-        <Content>
-          <Button id={RAINBOW_BUTTON_ID} onClick={connectToRainbow}>
-            <ButtonInner>
-              <Logo src={rainbow_icon} width="34" />
-              <ButtonLabel />
-            </ButtonInner>
-          </Button>
-        </Content>
-      )}
-    </div>
+    <ConnectButtonMask
+      uri={uri}
+      customButton={customButton}
+      animate={animate}
+    />
   );
 }
 

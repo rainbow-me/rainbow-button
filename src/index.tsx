@@ -1,5 +1,5 @@
 import React from 'react';
-import ConnectButtonV1 from './components/button/ConnectButtonV1';
+import ConnectButton from './components/button/ConnectButton';
 import WalletConnectClient from '@walletconnect/client';
 import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
 import {
@@ -32,7 +32,7 @@ export const RainbowButtonExperimental = ({
   animate,
 }: ExperimentalProps) => {
   return (
-    <ConnectButtonV1
+    <ConnectButton
       clientOptions={clientOptions}
       clientConnectParams={clientConnectParams}
       onClientInitialized={onClientInitialized}

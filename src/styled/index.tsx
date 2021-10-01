@@ -61,6 +61,8 @@ export const UniqueTokenExpandedStateContent = styled.div`
 `;
 
 export const ExpandedState = styled(motion.div)<{ qr?: boolean }>`
+  font-family: SFRounded, ui-rounded, 'SF Pro Rounded', system-ui,
+    'Helvetica Neue', Arial, Helvetica, sans-serif;
   align-items: center;
   align-self: center;
   background: transparent;

@@ -4,6 +4,7 @@ const ButtonLabel = () => (
   <svg
     fill="none"
     height="14"
+    style={{ all: 'revert' }}
     viewBox="0 0 175 14"
     width="175"
     xmlns="http://www.w3.org/2000/svg"

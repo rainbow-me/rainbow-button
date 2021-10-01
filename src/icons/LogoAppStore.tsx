@@ -4,6 +4,7 @@ const LogoAppStore = () => (
   <svg
     fill="none"
     height={20}
+    style={{ all: 'revert' }}
     viewBox="0 0 17 20"
     width={17}
     xmlns="http://www.w3.org/2000/svg"

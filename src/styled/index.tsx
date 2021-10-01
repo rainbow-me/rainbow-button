@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import styled, { keyframes } from 'styled-components';
 
 export const XButtonWrapper = styled.div`
+  all: revert;
   -webkit-tap-highlight-color: transparent;
   cursor: pointer;
   height: 27px;
@@ -33,6 +34,7 @@ export const XButtonWrapper = styled.div`
 `;
 
 export const UniqueTokenExpandedStateContent = styled.div`
+  all: revert;
   display: none;
   align-items: center;
   align-self: center;
@@ -59,6 +61,8 @@ export const UniqueTokenExpandedStateContent = styled.div`
 `;
 
 export const ExpandedState = styled(motion.div)<{ qr?: boolean }>`
+  font-family: SFRounded, ui-rounded, 'SF Pro Rounded', system-ui,
+    'Helvetica Neue', Arial, Helvetica, sans-serif;
   align-items: center;
   align-self: center;
   background: transparent;
@@ -224,6 +228,7 @@ export const animatedgradient = keyframes`
 `;
 
 export const Content = styled.div`
+  all: revert;
   display: inline-block;
   overflow: hidden;
   height: 100%;
@@ -344,6 +349,7 @@ export const ButtonInner = styled.div`
 `;
 
 export const Logo = styled.img`
+  all: revert;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   border-radius: 11px;
@@ -351,6 +357,8 @@ export const Logo = styled.img`
   margin-left: 6px;
   margin-right: 10px;
   margin-top: 2px;
+  height: 34px;
+  width: 34px;
 `;
 
 export const Label = styled.div`

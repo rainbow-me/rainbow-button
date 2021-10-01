@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import QRExpandedState from '../QRExpandedState';
-import Fountain from '../EmojiPop';
-import { Button, ButtonInner, Content, Logo } from '../../styled';
-import { constructDeeplink } from '../../helpers/deeplink';
 import { isMobile } from '@walletconnect/browser-utils';
-import ButtonLabel from '../../icons/ButtonLabel';
-import { RAINBOW_BUTTON_ID } from '../../constants';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import rainbow_icon from '../../../assets/images/rainbow-icon.png';
+import { RAINBOW_BUTTON_ID } from '../../constants';
+import { constructDeeplink } from '../../helpers/deeplink';
+import ButtonLabel from '../../icons/ButtonLabel';
+import { Button, ButtonInner, Content, Logo } from '../../styled';
+import Fountain from '../EmojiPop';
+import QRExpandedState from '../QRExpandedState';
 
 function ConnectButtonMask({
   uri,
@@ -22,8 +22,6 @@ function ConnectButtonMask({
   const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri]);
 
   const connectToRainbow = useCallback(() => {
-    console.log('connectToRainbow', deeplink);
-    console.log('connectToRainbow isMobile', isMobile());
     if (!deeplink) return;
     if (isMobile()) {
       window.location.href = deeplink;

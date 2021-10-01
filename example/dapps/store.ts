@@ -6,23 +6,23 @@ const SET_SESSION = 'SET_SESSION';
 const SET_CLIENT = 'SET_CLIENT';
 
 export const setClient = (client: WalletConnectClient) => ({
-  type: SET_CLIENT,
   payload: client,
+  type: SET_CLIENT,
 });
 
 export const setSession = (sessions: SessionTypes.Settled | null) => ({
-  type: SET_SESSION,
   payload: sessions,
+  type: SET_SESSION,
 });
 
 export const setPairings = (pairings: string[]) => ({
-  type: SET_SESSION,
   payload: pairings,
+  type: SET_SESSION,
 });
 
 const INITIAL_STATE = {
-  session: undefined,
   client: undefined,
+  session: undefined,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {

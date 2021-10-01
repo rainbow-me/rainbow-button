@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
 import WalletConnectClient, { CLIENT_EVENTS } from '@walletconnect/client';
 import {
-  PairingTypes,
-  SessionTypes,
   ClientOptions,
   ClientTypes,
+  PairingTypes,
+  SessionTypes,
 } from '@walletconnect/types';
+import React, { useEffect, useState } from 'react';
 import { getClientPairings } from '../../utils';
 import ConnectButtonMask from './ConnectButtonMask';
 
@@ -28,18 +28,14 @@ function ConnectButton({
 
   useEffect(() => {
     const walletConnectInit = async () => {
-      console.log('walletConnectInit');
       const client = await WalletConnectClient.init(clientOptions);
-      console.log('walletConnectInit await');
       client.on(
         CLIENT_EVENTS.pairing.proposal,
         async (proposal: PairingTypes.Proposal) => {
           const { uri } = proposal.signal.params;
-          console.log('CLIENT_EVENTS.pairing.proposal', uri);
           setUri(uri);
         }
       );
-      console.log('onClientInitialized', client);
       onClientInitialized(client);
       if (!getClientPairings(client).length) {
         const session = await client.connect(clientConnectParams);
@@ -51,9 +47,9 @@ function ConnectButton({
 
   return (
     <ConnectButtonMask
-      uri={uri}
-      customButton={customButton}
       animate={animate}
+      customButton={customButton}
+      uri={uri}
     />
   );
 }

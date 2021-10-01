@@ -3,20 +3,20 @@ import { SessionTypes } from '@walletconnect/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import {
-  setSession as rawSetSession,
   setClient as rawSetClient,
   setPairings as rawSetPairings,
+  setSession as rawSetSession,
 } from '../store';
 
 const selector = createSelector(
-  ({ session, client }) => ({ session, client }),
+  ({ session, client }) => ({ client, session }),
   ({ session, client }) => {
     return {
-      client,
-      session,
-      pairings: session?.state?.pairings,
       accounts: session?.state?.accounts || [],
       chains: session?.permissions?.blockchain?.chains || [],
+      client,
+      pairings: session?.state?.pairings,
+      session,
     };
   }
 );
@@ -33,13 +33,13 @@ export default function useWalletConnectState() {
   const setPairings = (pairings: string[]) =>
     dispatch(rawSetPairings(pairings));
   return {
-    client,
-    session,
-    pairings,
     accounts,
     chains,
-    setSession,
+    client,
+    pairings,
+    session,
     setClient,
     setPairings,
+    setSession,
   };
 }

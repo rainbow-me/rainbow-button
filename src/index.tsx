@@ -1,18 +1,17 @@
-import React from 'react';
-import ConnectButton from './components/button/ConnectButton';
 import WalletConnectClient from '@walletconnect/client';
 import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
+import React from 'react';
+import ConnectButton from './components/button/ConnectButton';
 import {
+  SUPPORTED_MAIN_CHAIN_IDS,
+  SUPPORTED_MAIN_CHAINS_EIP155,
+  SUPPORTED_TEST_CHAINS_EIP155,
+} from './constants';
+import {
+  getAddressAndChainIdFromAccount,
   getClientPairings,
   goToRainbow,
-  getAddressAndChainIdFromAccount,
 } from './utils';
-import {
-  SUPPORTED_TEST_CHAIN_IDS,
-  SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAINS_EIP155,
-  SUPPORTED_MAIN_CHAINS_EIP155,
-} from './constants';
 
 export interface ExperimentalProps {
   clientOptions: ClientOptions;
@@ -33,25 +32,24 @@ export const RainbowButton = ({
 }: ExperimentalProps) => {
   return (
     <ConnectButton
-      clientOptions={clientOptions}
+      animate={animate}
       clientConnectParams={clientConnectParams}
+      clientOptions={clientOptions}
+      customButton={customButton}
       onClientInitialized={onClientInitialized}
       onSessionStarted={onSessionStarted}
-      customButton={customButton}
-      animate={animate}
     />
   );
 };
 
 export const utils = {
-  goToRainbow,
-  getClientPairings,
   getAddressAndChainIdFromAccount,
+  getClientPairings,
+  goToRainbow,
 };
 
 export const constants = {
-  SUPPORTED_TEST_CHAIN_IDS,
   SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAINS_EIP155,
   SUPPORTED_MAIN_CHAINS_EIP155,
+  SUPPORTED_TEST_CHAINS_EIP155,
 };

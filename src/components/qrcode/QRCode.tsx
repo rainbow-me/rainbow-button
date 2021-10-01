@@ -121,13 +121,19 @@ const QRCode = ({
         style={{
           height: 0,
           position: 'relative',
-          top: logoPosition,
           textAlign: 'center',
+          top: logoPosition,
         }}
       >
-        <img height={logoSize} width={logoSize} src={rainbowOg} alt="" />
+        <img
+          alt=""
+          height={logoSize}
+          src={rainbowOg}
+          style={{ all: 'revert', height: logoSize, width: logoSize }}
+          width={logoSize}
+        />
       </div>
-      <svg height={size} width={size}>
+      <svg height={size} style={{ all: 'revert' }} width={size}>
         <defs>
           <clipPath id="clip-wrapper">
             <rect height={logoWrapperSize} width={logoWrapperSize} />

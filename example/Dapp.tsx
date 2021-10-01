@@ -5,7 +5,7 @@ import DappV2 from './dapps/v2';
 
 const Dapp = () => {
   return (
-    <div className={'body'}>
+    <div className="body">
       <h1 className="text-center">Rainbow Button Dapp</h1>
       <DappV2 />
     </div>

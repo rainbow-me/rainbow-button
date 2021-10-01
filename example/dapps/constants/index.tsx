@@ -5,30 +5,30 @@ export const SUPPORTED_METHODS = [
 ];
 
 export const supportedMainChainsInfoEip155 = {
-  'eip155:1': { name: 'Ethereum', color: '#0E76FD', value: 'ethereum' },
-  'eip155:10': { name: 'Optimism', color: '#FF4040', value: 'optimism' },
-  'eip155:137': { name: 'Polygon', color: '#8247E5', value: 'polygon' },
-  'eip155:42161': { name: 'Arbitrum', color: '#2D374B', value: 'arbitrum' },
+  'eip155:1': { color: '#0E76FD', name: 'Ethereum', value: 'ethereum' },
+  'eip155:10': { color: '#FF4040', name: 'Optimism', value: 'optimism' },
+  'eip155:137': { color: '#8247E5', name: 'Polygon', value: 'polygon' },
+  'eip155:42161': { color: '#2D374B', name: 'Arbitrum', value: 'arbitrum' },
 };
 
 export const supportedMainChainsInfo = {
   '1': {
-    name: 'Ethereum',
     color: '#0E76FD',
-    value: 'ethereum',
     iconWidth: '20',
+    name: 'Ethereum',
+    value: 'ethereum',
   },
   '10': {
-    name: 'Optimism',
     color: '#FF4040',
-    value: 'optimism',
     iconWidth: '42',
+    name: 'Optimism',
+    value: 'optimism',
   },
   '137': {
-    name: 'Polygon',
     color: '#8247E5',
-    value: 'polygon',
     iconWidth: '42',
+    name: 'Polygon',
+    value: 'polygon',
   },
   // '42161': { name: "Arbitrum", color: '#2D374B', value: "arbitrum", iconWidth: "42"},
 };

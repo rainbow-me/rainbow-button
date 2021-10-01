@@ -22,6 +22,8 @@ function ConnectButtonMask({
   const deeplink = useMemo(() => uri && constructDeeplink(uri), [uri]);
 
   const connectToRainbow = useCallback(() => {
+    console.log('connectToRainbow', deeplink);
+    console.log('connectToRainbow isMobile', isMobile());
     if (!deeplink) return;
     if (isMobile()) {
       window.location.href = deeplink;

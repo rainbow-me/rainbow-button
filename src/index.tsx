@@ -23,7 +23,7 @@ export interface ExperimentalProps {
   animate?: boolean;
 }
 
-export const RainbowButtonExperimental = ({
+export const RainbowButton = ({
   clientOptions,
   clientConnectParams,
   onClientInitialized,

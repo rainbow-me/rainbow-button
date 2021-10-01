@@ -78,6 +78,6 @@
     "styled-components": "^5.3.0"
   },
   "resolutions": {
-    "@walletconnect/**/@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18"
+    "@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18"
   }
 }

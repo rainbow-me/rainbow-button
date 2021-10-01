@@ -12,7 +12,9 @@
   "dependencies": {
     "@rainbow-me/rainbow-button": "../.",
     "@types/react-redux": "^7.1.18",
-    "@walletconnect/client": "^1.6.1",
+    "@walletconnect/client": "npm:@walletconnect/client@2.0.0-beta.18",
+    "@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18",
+    "@walletconnect/browser-utils": "^1.6.5",
     "enc-utils": "^3.0.0",
     "lodash": "^4.17.21",
     "react-app-polyfill": "^1.0.0",
@@ -33,5 +35,8 @@
     "parcel-bundler": "^1.12.5",
     "typescript": "^3.4.5",
     "push-dir": "^0.4.1"
+  },
+  "resolutions": {
+    "@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18"
   }
 }

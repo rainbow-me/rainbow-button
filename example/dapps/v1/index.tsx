@@ -3,6 +3,7 @@ import 'react-app-polyfill/ie11';
 import { constants, RainbowButton, utils } from '@rainbow-me/rainbow-button';
 import { isMobile } from '@walletconnect/browser-utils';
 import * as encUtils from 'enc-utils';
+import { utils as ethersUtils } from 'ethers';
 import * as React from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ActionButton, Button, Wrapper } from '../../styled';
@@ -106,6 +107,26 @@ const Dapp = () => {
     [connector]
   );
 
+  const signMessage = useCallback(async () => {
+    if (!connector) return;
+    try {
+      const message = `Hello from Rainbow! `;
+      const hexMsg = encUtils.utf8ToHex(message, true);
+      const address = accounts?.[0];
+      const params = [address, hexMsg];
+
+      // send message
+      isMobile() && goToRainbow();
+      const result = await connector.signMessage(params);
+      const splitSignature = ethersUtils.splitSignature(result);
+      const res = ethersUtils.verifyMessage(message, splitSignature);
+      console.log('RESULT', result);
+      console.log('Address verified', res === address);
+    } catch (error) {
+      console.error(error);
+    }
+  }, [connector, accounts]);
+
   const signPersonalMessage = useCallback(async () => {
     if (!connector) return;
     try {
@@ -117,8 +138,11 @@ const Dapp = () => {
       // send message
       isMobile() && goToRainbow();
       const result = await connector.signPersonalMessage(params);
+      const splitSignature = ethersUtils.splitSignature(result);
+      const res = ethersUtils.verifyMessage(message, splitSignature);
 
       console.log('RESULT', result);
+      console.log('Address verified', res === address);
     } catch (error) {
       console.error(error);
     }
@@ -194,6 +218,9 @@ const Dapp = () => {
         <Wrapper>
           <ActionButton key="sendTransaction" onClick={sendTransaction}>
             sendTransaction
+          </ActionButton>
+          <ActionButton key="signMessage" onClick={signMessage}>
+            signMessage
           </ActionButton>
           <ActionButton key="signPersonalMessage" onClick={signPersonalMessage}>
             signPersonalMessage

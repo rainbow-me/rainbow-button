@@ -21,7 +21,7 @@
     "clean-install": "rm -rf node_modules yarn.lock dist example/node_modules example/yarn.lock example/dist && yarn && cd example && yarn && yarn run build-dev"
   },
   "peerDependencies": {
-    "@walletconnect/client": ">=2.0.0-beta.18",
+    "@walletconnect/client": ">=2.0.0-beta.21",
     "react": ">=16"
   },
   "husky": {
@@ -55,14 +55,14 @@
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "@types/styled-components": "^5.1.6",
-    "@walletconnect/client": "npm:@walletconnect/client@2.0.0-beta.18",
-    "@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18",
+    "@walletconnect/client": "2.0.0-beta.21",
+    "@walletconnect/types": "2.0.0-beta.21",
     "@typescript-eslint/eslint-plugin": "^4.31.2",
     "autoprefixer": "^10.3.1",
     "babel-loader": "^8.2.2",
     "cssnano": "^5.0.7",
     "eslint": "^7.32.0",
-    "eslint-config-rainbow": "^2.0.0",
+    "eslint-config-rainbow": "^2.0.1",
     "eslint-plugin-jest": "^24.4.2",
     "husky": "^7.0.1",
     "postcss": "^8.3.6",
@@ -77,11 +77,13 @@
   },
   "dependencies": {
     "@walletconnect/browser-utils": "^1.6.5",
+    "@walletconnect/types": "2.0.0-beta.21",
+    "ethers": "^5.5.2",
     "framer-motion": "^4.1.17",
     "qrcode": "^1.4.4",
     "styled-components": "^5.3.0"
   },
   "resolutions": {
-    "@walletconnect/types": "npm:@walletconnect/types@2.0.0-beta.18"
+    "@walletconnect/types": "2.0.0-beta.21"
   }
 }

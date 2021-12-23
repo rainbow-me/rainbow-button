@@ -214,6 +214,7 @@ const Dapp = () => {
                   name: '🌈 Rainbow example dapp',
                   url: 'https://best.dapp',
                 },
+                projectId: '',
                 relayProvider: 'wss://relay.walletconnect.org',
               }}
               onClientInitialized={onClientInitialized}

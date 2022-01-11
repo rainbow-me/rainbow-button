@@ -19,8 +19,10 @@ const getAddressAndChainIdFromWCAccount = (
   account: string
 ): { address: string; chainId: number } => {
   const [, chainId, address] = account.split(':');
-  return { address, chainId: Number(chainId) };
+  return { address: address || '', chainId: Number(chainId) || -1 };
 };
+
+const toEIP55Format = (chainId: string | number) => `eip155:${chainId}`;
 
 const images = {
   /* eslint-disable import/no-commonjs */
@@ -32,18 +34,17 @@ const images = {
 };
 
 const Dapp = () => {
-  const {
-    client,
-    session,
-    accounts,
-    chains,
-    setSession,
-    setClient,
-    setPairings,
-  } = useWalletConnectState();
+  const { client, session, accounts, setSession, setClient, setPairings } =
+    useWalletConnectState();
   const [selectedChain, setSelectedChain] = useState('');
 
+  const currentSession = useMemo(
+    () => getAddressAndChainIdFromWCAccount(accounts?.[0] || ''),
+    [accounts]
+  );
+
   const selectChain = useCallback((chain) => setSelectedChain(chain), []);
+
   const onSessionStarted = useCallback(
     (session) => setSession(session),
     [setSession]
@@ -63,6 +64,13 @@ const Dapp = () => {
         if (session.topic !== session?.topic) return;
         setSession(null);
         setPairings([]);
+      }
+    );
+    client?.on(
+      CLIENT_EVENTS.session.updated,
+      (session: SessionTypes.Settled) => {
+        if (session.topic !== session?.topic) return;
+        setSession(session);
       }
     );
   }, [client, setPairings, setSession]);
@@ -88,7 +96,7 @@ const Dapp = () => {
 
       isMobile() && goToRainbow();
       await client.request({
-        chainId: chains?.[0] || '',
+        chainId: toEIP55Format(currentSession.chainId),
         request: {
           method: 'eth_sendTransaction',
           params: [tx],
@@ -97,22 +105,20 @@ const Dapp = () => {
       });
       // eslint-disable-next-line no-empty
     } catch (error) {}
-  }, [accounts, chains, client, session]);
+  }, [accounts, client, currentSession.chainId, session]);
 
   const signPersonalMessage = useCallback(async () => {
     if (!client || !session) return;
     try {
       const message = `Hello from Rainbow! `;
       const hexMsg = encUtils.utf8ToHex(message, true);
-      const address = getAddressAndChainIdFromWCAccount(
-        accounts?.[0] || ''
-      ).address;
+      const address = currentSession.address;
       const params = [hexMsg, address];
 
       // send message
       isMobile() && goToRainbow();
       await client.request({
-        chainId: chains?.[0] || '',
+        chainId: toEIP55Format(currentSession.chainId),
         request: {
           method: 'personal_sign',
           params,
@@ -121,21 +127,19 @@ const Dapp = () => {
       });
       // eslint-disable-next-line no-empty
     } catch (error) {}
-  }, [accounts, chains, client, session]);
+  }, [client, currentSession.address, currentSession.chainId, session]);
 
   const signTypedData = useCallback(async () => {
     if (!client || !session) return;
     try {
       const message = JSON.stringify(eip712.example);
-      const address = getAddressAndChainIdFromWCAccount(
-        accounts?.[0] || ''
-      ).address;
+      const address = currentSession.address;
       const params = [address, message];
 
       // send message
       isMobile() && goToRainbow();
       await client.request({
-        chainId: chains?.[0] || '',
+        chainId: toEIP55Format(currentSession.chainId),
         request: {
           method: 'eth_signTypedData',
           params,
@@ -144,7 +148,7 @@ const Dapp = () => {
       });
       // eslint-disable-next-line no-empty
     } catch (error) {}
-  }, [accounts, chains, client, session]);
+  }, [client, currentSession.address, currentSession.chainId, session]);
 
   const isConnected = useMemo(() => {
     return Boolean(client) && Boolean(getClientPairings(client).length);
@@ -214,8 +218,7 @@ const Dapp = () => {
                   name: '🌈 Rainbow example dapp',
                   url: 'https://best.dapp',
                 },
-                projectId: '',
-                relayProvider: 'wss://relay.walletconnect.org',
+                projectId: '35b6d81a08d1d098a6a0be761f00eea0',
               }}
               onClientInitialized={onClientInitialized}
               onSessionStarted={onSessionStarted}
@@ -229,19 +232,19 @@ const Dapp = () => {
   const renderConnected = useMemo(() => {
     return (
       <div>
-        <p>{chains}</p>
         <Wrapper>
           <p className="text-center">
             Connected to{' '}
-            {supportedMainChainsInfoEip155[chains?.[0] || '']?.name}
+            {
+              supportedMainChainsInfoEip155[
+                toEIP55Format(currentSession.chainId)
+              ]?.name
+            }
           </p>
         </Wrapper>
         <Wrapper>
           <p className="text-center">
-            Account:{' '}
-            {renderAddress(
-              getAddressAndChainIdFromWCAccount(accounts?.[0] || '').address
-            )}
+            Account: {renderAddress(currentSession.address)}
           </p>
         </Wrapper>
         <Wrapper>
@@ -264,8 +267,8 @@ const Dapp = () => {
       </div>
     );
   }, [
-    chains,
-    accounts,
+    currentSession.chainId,
+    currentSession.address,
     sendTransaction,
     signPersonalMessage,
     signTypedData,

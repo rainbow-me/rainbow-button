@@ -5,10 +5,10 @@ export const SUPPORTED_METHODS = [
 ];
 
 export const supportedMainChainsInfoEip155 = {
-  'eip155:1': { color: '#0E76FD', name: 'Ethereum Mainnet' },
-  'eip155:10': { color: '#FF4040', name: 'Optimism' },
-  'eip155:137': { color: '#8247E5', name: 'Polygon' },
-  'eip155:42161': { color: '#2D374B', name: 'Arbitrum' },
+  'eip155:1': { color: '#0E76FD', name: 'Ethereum', value: 'ethereum' },
+  'eip155:10': { color: '#FF4040', name: 'Optimism', value: 'optimism' },
+  'eip155:137': { color: '#8247E5', name: 'Polygon', value: 'polygon' },
+  'eip155:42161': { color: '#2D374B', name: 'Arbitrum', value: 'arbitrum' },
 };
 
 export const supportedMainChainsInfo = {

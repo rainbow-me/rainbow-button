@@ -1,53 +1,55 @@
-import WalletConnect from '@walletconnect/client';
-
-// eslint-disable-next-line import/no-unresolved
-import { IWalletConnectOptions } from '@walletconnect/types';
+import WalletConnectClient from '@walletconnect/client';
+import { ClientOptions, ClientTypes, SessionTypes } from '@walletconnect/types';
 import React from 'react';
-import rainbow_icon from '../assets/images/rainbow-icon.png';
-import rainbow from '../assets/images/rainbow.png';
-import ConnectButtonV1 from './components/button/ConnectButtonV1';
+import ConnectButton from './components/button/ConnectButton';
 import {
   SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAIN_IDS,
+  SUPPORTED_MAIN_CHAINS_EIP155,
+  SUPPORTED_TEST_CHAINS_EIP155,
 } from './constants';
-import { goToRainbow } from './utils';
+import {
+  getAddressAndChainIdFromAccount,
+  getClientPairings,
+  goToRainbow,
+} from './utils';
 
-export interface Props {
-  chainId: number | undefined;
-  connectorOptions: IWalletConnectOptions;
-  onConnectorInitialized: (client: WalletConnect) => void;
+export interface ExperimentalProps {
+  clientOptions: ClientOptions;
+  clientConnectParams: ClientTypes.ConnectParams;
+  onClientInitialized: (client: WalletConnectClient) => void;
+  onSessionStarted: (session: SessionTypes.Settled) => void;
   customButton?: any;
   animate?: boolean;
 }
 
 export const RainbowButton = ({
-  chainId,
-  connectorOptions,
-  onConnectorInitialized,
+  clientOptions,
+  clientConnectParams,
+  onClientInitialized,
+  onSessionStarted,
   customButton,
   animate,
-}: Props) => {
+}: ExperimentalProps) => {
   return (
-    <ConnectButtonV1
+    <ConnectButton
       animate={animate}
-      chainId={chainId}
-      connectorOptions={connectorOptions}
+      clientConnectParams={clientConnectParams}
+      clientOptions={clientOptions}
       customButton={customButton}
-      onConnectorInitialized={onConnectorInitialized}
+      onClientInitialized={onClientInitialized}
+      onSessionStarted={onSessionStarted}
     />
   );
 };
 
-export const assets = {
-  rainbow: rainbow,
-  rainbow_icon: rainbow_icon,
-};
-
 export const utils = {
+  getAddressAndChainIdFromAccount,
+  getClientPairings,
   goToRainbow,
 };
 
 export const constants = {
   SUPPORTED_MAIN_CHAIN_IDS,
-  SUPPORTED_TEST_CHAIN_IDS,
+  SUPPORTED_MAIN_CHAINS_EIP155,
+  SUPPORTED_TEST_CHAINS_EIP155,
 };

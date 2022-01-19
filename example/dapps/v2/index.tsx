@@ -36,6 +36,7 @@ const images = {
 const Dapp = () => {
   const { client, session, accounts, setSession, setClient, setPairings } =
     useWalletConnectState();
+
   const [selectedChain, setSelectedChain] = useState('');
 
   const currentSession = useMemo(
@@ -151,8 +152,13 @@ const Dapp = () => {
   }, [client, currentSession.address, currentSession.chainId, session]);
 
   const isConnected = useMemo(() => {
-    return Boolean(client) && Boolean(getClientPairings(client).length);
-  }, [client]);
+    console.log('client', client);
+    return (
+      Boolean(client) &&
+      Boolean(getClientPairings(client).length) &&
+      Boolean(currentSession.address)
+    );
+  }, [client, currentSession.address]);
 
   const disconnect = useCallback(async () => {
     const reason = {
@@ -165,9 +171,7 @@ const Dapp = () => {
   const renderNotConnected = useMemo(() => {
     return (
       <div>
-        <p className="text-center">
-          Trying RainbowButton experimental (Wallet Connect v2)
-        </p>
+        <p className="text-center">Trying Rainbow Button</p>
         <p className="text-center">
           {selectedChain
             ? `Selected chain: ${selectedChain}`
@@ -211,12 +215,12 @@ const Dapp = () => {
               }}
               clientOptions={{
                 metadata: {
-                  description: 'Rainbow example dapp',
+                  description: 'Rainbow Button Dapp',
                   icons: [
-                    'https://i0.wp.com/hipertextual.com/wp-content/uploads/2020/12/Evil-Toddler-Meme.jpg?fit=1500%2C1000&ssl=1',
+                    'https://raw.githubusercontent.com/rainbow-me/rainbow-button/master/assets/images/rainbow-og.png',
                   ],
-                  name: '🌈 Rainbow example dapp',
-                  url: 'https://best.dapp',
+                  name: '🌈 Rainbow Button Dapp',
+                  url: 'https://rainbow-me.github.io/rainbow-button/',
                 },
                 projectId: '35b6d81a08d1d098a6a0be761f00eea0',
               }}

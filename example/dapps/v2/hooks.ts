@@ -32,6 +32,7 @@ export default function useWalletConnectState() {
     dispatch(rawSetClient(client));
   const setPairings = (pairings: string[]) =>
     dispatch(rawSetPairings(pairings));
+
   return {
     accounts,
     chains,
